@@ -1579,11 +1579,63 @@
         <section class="py-12 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
-                <div class="mb-8">
-                    <h1 class="text-3xl font-bold text-navy mb-2">Coach Dashboard</h1>
-                    <p class="text-gray-600">Welcome back, Coach Anderson - University of California Soccer</p>
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-navy mb-2">Coach Dashboard</h1>
+                        <p class="text-gray-600">
+                            Welcome back, <span id="coachDashName" class="font-semibold"></span>
+                            <span id="coachDashSchool"></span>
+                            <span id="coachDashSport"></span>
+                        </p>
+                    </div>
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-gray-200 text-navy rounded-lg text-sm font-semibold hover:bg-gray-300 transition">
+                        Log Out
+                    </button>
+                </div>
+                    <!-- PLAYER DASHBOARD PAGE -->
+    <div id="playerdashboardPage" class="page-content hidden">
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header + Logout -->
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-navy mb-2">Player Dashboard</h1>
+                        <p class="text-gray-600">
+                            Welcome back, <span id="playerDashName" class="font-semibold"></span>
+                        </p>
+                    </div>
+                    <button onclick="handleLogout()" class="px-4 py-2 bg-gray-200 text-navy rounded-lg text-sm font-semibold hover:bg-gray-300 transition">
+                        Log Out
+                    </button>
                 </div>
 
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Profile Card -->
+                    <div class="bg-white rounded-xl shadow-md p-6 md:col-span-2">
+                        <h2 class="text-xl font-bold text-navy mb-4">Your Profile</h2>
+                        <div class="space-y-2 text-sm text-gray-700">
+                            <p><span class="font-semibold">Email:</span> <span id="playerDashEmail"></span></p>
+                            <p><span class="font-semibold">Primary Sport:</span> <span id="playerDashSport"></span></p>
+                            <p><span class="font-semibold">Graduation Year:</span> <span id="playerDashGradYear"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <h2 class="text-xl font-bold text-navy mb-4">Quick Actions</h2>
+                        <div class="space-y-3">
+                            <button onclick="showPage('database')" class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
+                                Browse Coach Database
+                            </button>
+                            <button class="w-full bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                Edit Profile (coming soon)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
                 <!-- Stats Cards -->
                 <div class="grid md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-md p-6">
@@ -2059,9 +2111,74 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const supabaseUrl = 'https://qgqihyhhfyicbxdsemku.supabase.co';
-        const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+                let currentUserRole = null;
 
+        async function handleLogout() {
+            try {
+                await supabaseClient.auth.signOut();
+            } catch (err) {
+                console.error('Logout error:', err);
+            } finally {
+                currentUserRole = null;
+                showPage('home');
+            }
+        }
+
+        async function loadPlayerDashboard() {
+            try {
+                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+                if (userError) throw userError;
+                if (!user) return;
+
+                const { data, error } = await supabaseClient
+                    .from('players')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .single();
+
+                if (error) throw error;
+
+                const nameEl = document.getElementById('playerDashName');
+                const emailEl = document.getElementById('playerDashEmail');
+                const sportEl = document.getElementById('playerDashSport');
+                const gradEl = document.getElementById('playerDashGradYear');
+
+                if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+                if (emailEl) emailEl.textContent = data.email || '';
+                if (sportEl) sportEl.textContent = data.sport || '';
+                if (gradEl) gradEl.textContent = data.grad_year || '';
+            } catch (err) {
+                console.error('Error loading player dashboard:', err);
+            }
+        }
+
+        async function loadCoachDashboard() {
+            try {
+                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+                if (userError) throw userError;
+                if (!user) return;
+
+                const { data, error } = await supabaseClient
+                    .from('coaches')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .single();
+
+                if (error) throw error;
+
+                const nameEl = document.getElementById('coachDashName');
+                const schoolEl = document.getElementById('coachDashSchool');
+                const sportEl = document.getElementById('coachDashSport');
+
+                if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+                if (schoolEl) schoolEl.textContent = data.school ? `- ${data.school}` : '';
+                if (sportEl) sportEl.textContent = data.sport ? ` (${data.sport})` : '';
+            } catch (err) {
+                console.error('Error loading coach dashboard:', err);
+            }
+        }
         function displayMessage(element, message, isError = false) {
             if (!element) return;
             element.textContent = message;
@@ -2083,6 +2200,7 @@
                 'coachsignup': 'coachsignupPage',
                 'coachlogin': 'coachloginPage',
                 'coachdashboard': 'coachdashboardPage',
+                'playerdashboard': 'playerdashboardPage',
                 'login': 'loginPage',
                 'signup': 'signupPage'
             };
@@ -2242,8 +2360,11 @@
             if (playerForm) {
                 playerForm.addEventListener('submit', async (event) => {
                     event.preventDefault();
-                    displayMessage(playerSignupMessage, '');
-
+                    displayMessage(playerSignupMessage, 'Account created! Redirecting...', false);
+                        currentUserRole = 'player';
+                        await loadPlayerDashboard();
+                        showPage('playerdashboard');
+                    
                     const firstName = document.getElementById('playerFirstName')?.value.trim();
                     const lastName = document.getElementById('playerLastName')?.value.trim();
                     const email = document.getElementById('playerEmail')?.value.trim();
@@ -2280,7 +2401,10 @@
 
             // COACH SIGNUP (shared handler)
             async function handleCoachSignup(formPrefix, messageElement) {
-                displayMessage(messageElement, '');
+                displayMessage(messageElement, 'Coach account created! Redirecting...', false);
+                    currentUserRole = 'coach';
+                    await loadCoachDashboard();
+                    showPage('coachdashboard');
 
                 const firstName = document.getElementById(`${formPrefix}FirstName`)?.value.trim();
                 const lastName = document.getElementById(`${formPrefix}LastName`)?.value.trim();
@@ -2343,7 +2467,10 @@
             if (playerLoginForm) {
                 playerLoginForm.addEventListener('submit', async (event) => {
                     event.preventDefault();
-                    displayMessage(playerLoginMessage, '');
+                    displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
+                        currentUserRole = 'player';
+                        await loadPlayerDashboard();
+                        showPage('playerdashboard');
 
                     const email = document.getElementById('playerLoginEmail')?.value.trim();
                     const password = document.getElementById('playerLoginPassword')?.value;
@@ -2366,8 +2493,11 @@
             if (coachLoginForm) {
                 coachLoginForm.addEventListener('submit', async (event) => {
                     event.preventDefault();
-                    displayMessage(coachLoginMessage, '');
-
+                    displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
+                        currentUserRole = 'coach';
+                        await loadCoachDashboard();
+                        showPage('coachdashboard');
+                    
                     const email = document.getElementById('coachLoginEmail')?.value.trim();
                     const password = document.getElementById('coachLoginPassword')?.value;
 
