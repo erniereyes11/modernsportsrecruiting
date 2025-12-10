@@ -2104,7 +2104,12 @@
             </div>
         </section>
     </div>
-
+<script>
+  // Global fallback so ANYTHING that references supabaseAnonKey will work
+  const supabaseUrl = 'https://qgqihyhhfyicbxdsemku.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
+  // we won't use these here, but this prevents "supabaseAnonKey is not defined" anywhere else
+</script>
    <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Supabase -->
