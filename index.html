@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Sports Recruiting - Connect with College Coaches</title>
+    <title>Next Level Recruiting - Connect with College Coaches</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -20,61 +19,15 @@
         }
     </script>
     <style>
-        /* Global input text visibility */
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="tel"],
-        input[type="number"],
-        textarea,
-        select {
-            color: #000000 !important;
-        }
-        
-        input[type="text"]::placeholder,
-        input[type="email"]::placeholder,
-        input[type="password"]::placeholder,
-        input[type="tel"]::placeholder,
-        input[type="number"]::placeholder,
-        textarea::placeholder {
-            color: #9CA3AF !important;
-        }
-        
-        select option {
+        .ai-email-select, .ai-email-textarea {
             color: #000000 !important;
             background-color: #ffffff !important;
         }
-
-        /* Enhanced specific fix for AI email composer fields with higher specificity */
-        #emailTypeSelect,
-        select#emailTypeSelect,
-        .ai-email-select {
+        .ai-email-select option {
             color: #000000 !important;
             background-color: #ffffff !important;
         }
-
-        #emailTypeSelect option,
-        select#emailTypeSelect option {
-            color: #000000 !important;
-            background-color: #ffffff !important;
-        }
-
-        #keyPointsTextarea,
-        textarea#keyPointsTextarea,
-        .ai-email-textarea {
-            color: #000000 !important;
-            background-color: #ffffff !important;
-        }
-
-        #keyPointsTextarea::placeholder,
-        textarea#keyPointsTextarea::placeholder {
-            color: #9CA3AF !important;
-            opacity: 0.6 !important;
-        }
-
-        /* Force text color on focus */
-        #emailTypeSelect:focus,
-        #keyPointsTextarea:focus {
+        select.ai-email-select {
             color: #000000 !important;
         }
     </style>
@@ -85,18 +38,18 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-8">
-                    <a href="#" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Modern Sports Recruiting</a>
+                    <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Next Level Recruiting</a>
                     <div class="hidden md:flex space-x-6">
-                        <a href="#" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition">Home</a>
-                        <a href="#" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition">How It Works</a>
-                        <a href="#" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition">Pricing</a>
-                        <a href="#" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition">Coach Database</a>
-                        <a href="#" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold">For College Coaches</a>
+                        <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
+                        <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
+                        <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
+                        <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
+                        <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
                     </div>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <a href="#" onclick="showPage('login')" class="text-navy hover:text-electric transition">Log In</a>
-                    <a href="#" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition">Get Started</a>
+                    <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">Log In</a>
+                    <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">Get Started</a>
                 </div>
             </div>
         </div>
@@ -112,8 +65,8 @@
                         <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Connect With College Coaches Across All Sports</h1>
                         <p class="text-xl text-gray-300 mb-8">Access verified contact information for thousands of college coaches. Build your recruiting network and take your athletic career to the next level.</p>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#" onclick="showPage('signup')" class="bg-electric text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition text-center">Start Recruiting Today</a>
-                            <a href="#" onclick="showPage('howitworks')" class="bg-white text-navy px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center">See How It Works</a>
+                            <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition text-center cursor-pointer">Start Recruiting Today</a>
+                            <a href="javascript:void(0)" onclick="showPage('howitworks')" class="bg-white text-navy px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center cursor-pointer">See How It Works</a>
                         </div>
                         <div class="mt-8 flex items-center space-x-6 text-sm">
                             <div class="flex items-center space-x-2">
@@ -149,27 +102,27 @@
                     <p class="text-xl text-gray-600">Access coach databases across multiple collegiate sports</p>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                    <a href="#" onclick="filterSportAndNavigate('soccer')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
+                    <a href="javascript:void(0)" onclick="filterSportAndNavigate('soccer')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
                         <i class="fas fa-futbol text-4xl text-electric mb-3"></i>
                         <h3 class="font-semibold text-navy">Soccer</h3>
                     </a>
-                    <a href="#" onclick="filterSportAndNavigate('football')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
+                    <a href="javascript:void(0)" onclick="filterSportAndNavigate('football')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
                         <i class="fas fa-football-ball text-4xl text-electric mb-3"></i>
                         <h3 class="font-semibold text-navy">Football</h3>
                     </a>
-                    <a href="#" onclick="filterSportAndNavigate('baseball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
+                    <a href="javascript:void(0)" onclick="filterSportAndNavigate('baseball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
                         <i class="fas fa-baseball-ball text-4xl text-electric mb-3"></i>
                         <h3 class="font-semibold text-navy">Baseball</h3>
                     </a>
-                    <a href="#" onclick="filterSportAndNavigate('basketball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
+                    <a href="javascript:void(0)" onclick="filterSportAndNavigate('basketball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
                         <i class="fas fa-basketball-ball text-4xl text-electric mb-3"></i>
                         <h3 class="font-semibold text-navy">Basketball</h3>
                     </a>
-                    <a href="#" onclick="filterSportAndNavigate('softball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
+                    <a href="javascript:void(0)" onclick="filterSportAndNavigate('softball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
                         <i class="fas fa-baseball-ball text-4xl text-electric mb-3"></i>
                         <h3 class="font-semibold text-navy">Softball</h3>
                     </a>
-                    <a href="#" onclick="filterSportAndNavigate('volleyball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
+                    <a href="javascript:void(0)" onclick="filterSportAndNavigate('volleyball')" class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition cursor-pointer text-center block">
                         <i class="fas fa-volleyball-ball text-4xl text-electric mb-3"></i>
                         <h3 class="font-semibold text-navy">Volleyball</h3>
                     </a>
@@ -182,7 +135,7 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to Start Your Recruiting Journey?</h2>
                 <p class="text-xl text-gray-300 mb-8">Join thousands of student athletes who have successfully connected with college coaches</p>
-                <a href="#" onclick="showPage('signup')" class="inline-block bg-electric text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition">Start Recruiting Today</a>
+                <a href="javascript:void(0)" onclick="showPage('signup')" class="inline-block bg-electric text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition cursor-pointer">Start Recruiting Today</a>
             </div>
         </section>
     </div>
@@ -192,7 +145,7 @@
         <!-- Hero Section -->
         <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-20">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-6">How Modern Sports Recruiting Works</h1>
+                <h1 class="text-4xl sm:text-5xl font-bold mb-6">How Next Level Recruiting Works</h1>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">A complete platform designed to streamline your college recruiting process with powerful tools and verified coach contacts</p>
             </div>
         </section>
@@ -262,17 +215,17 @@
                             <div class="space-y-4">
                                 <div>
                                     <label class="block text-sm font-semibold text-navy mb-2">Email Type</label>
-                                    <select id="emailTypeSelect" class="ai-email-select w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" style="color: #000000 !important; background-color: #ffffff !important;">
-                                        <option style="color: #000000 !important; background-color: #ffffff !important;">Initial Introduction</option>
-                                        <option style="color: #000000 !important; background-color: #ffffff !important;">Follow-Up Email</option>
-                                        <option style="color: #000000 !important; background-color: #ffffff !important;">Thank You Note</option>
-                                        <option style="color: #000000 !important; background-color: #ffffff !important;">Camp Interest</option>
-                                        <option style="color: #000000 !important; background-color: #ffffff !important;">Update on Progress</option>
+                                    <select class="ai-email-select w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" style="color: #000000 !important; background-color: #ffffff !important;">
+                                        <option style="color: #000000 !important;">Initial Introduction</option>
+                                        <option style="color: #000000 !important;">Follow-Up Email</option>
+                                        <option style="color: #000000 !important;">Thank You Note</option>
+                                        <option style="color: #000000 !important;">Camp Interest</option>
+                                        <option style="color: #000000 !important;">Update on Progress</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-navy mb-2">Key Points to Include</label>
-                                    <textarea id="keyPointsTextarea" class="ai-email-textarea w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" rows="4" placeholder="e.g., Recent tournament MVP, 3.8 GPA, team captain..." style="color: #000000 !important; background-color: #ffffff !important;"></textarea>
+                                    <textarea class="ai-email-textarea w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" rows="4" placeholder="e.g., Recent tournament MVP, 3.8 GPA, team captain..." style="color: #000000 !important; background-color: #ffffff !important;"></textarea>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-navy mb-2">Tone</label>
@@ -317,15 +270,1666 @@
             </div>
         </section>
 
-        <!-- Rest of How It Works content remains the same... -->
-        <!-- (Bulk Email Campaign, AI Reply Assistant, Dashboard Preview, etc.) -->
-        
+        <!-- Bulk Email Campaign Feature -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">One-Click Personalized Email Campaigns</h2>
+                    <p class="text-xl text-gray-600">Send personalized emails to multiple coaches simultaneously - each one uniquely tailored</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl shadow-xl p-8 border-2 border-gray-200">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy mb-4">Select Recipients</h3>
+                            <div class="bg-white rounded-xl p-6 border-2 border-gray-200">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-sm font-semibold text-navy">Selected Coaches</span>
+                                    <span class="text-sm text-gray-600">12 coaches</span>
+                                </div>
+                                <div class="space-y-3 max-h-64 overflow-y-auto">
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" checked class="w-4 h-4 text-electric rounded">
+                                            <div>
+                                                <div class="font-semibold text-navy text-sm">John Anderson</div>
+                                                <div class="text-xs text-gray-600">UC Berkeley - Soccer</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-user-circle text-electric text-2xl"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" checked class="w-4 h-4 text-electric rounded">
+                                            <div>
+                                                <div class="font-semibold text-navy text-sm">Sarah Mitchell</div>
+                                                <div class="text-xs text-gray-600">Stanford - Volleyball</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-user-circle text-electric text-2xl"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" checked class="w-4 h-4 text-electric rounded">
+                                            <div>
+                                                <div class="font-semibold text-navy text-sm">Mike Rodriguez</div>
+                                                <div class="text-xs text-gray-600">Duke - Baseball</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-user-circle text-electric text-2xl"></i>
+                                    </div>
+                                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                        <div class="flex items-center space-x-3">
+                                            <input type="checkbox" checked class="w-4 h-4 text-electric rounded">
+                                            <div>
+                                                <div class="font-semibold text-navy text-sm">Emily Thompson</div>
+                                                <div class="text-xs text-gray-600">UConn - Basketball</div>
+                                            </div>
+                                        </div>
+                                        <i class="fas fa-user-circle text-electric text-2xl"></i>
+                                    </div>
+                                </div>
+                                <button class="w-full mt-4 bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                    <i class="fas fa-plus mr-2"></i>Add More Coaches
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-navy mb-4">Campaign Settings</h3>
+                            <div class="bg-white rounded-xl p-6 border-2 border-gray-200 space-y-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-navy mb-2">Campaign Name</label>
+                                    <input type="text" class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="e.g., Initial Outreach - Soccer Coaches">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-navy mb-2">Personalization Level</label>
+                                    <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                        <option>High (Unique email per coach)</option>
+                                        <option>Medium (Template with custom fields)</option>
+                                        <option>Standard (Basic personalization)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-navy mb-2">Send Schedule</label>
+                                    <select class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                        <option>Send Immediately</option>
+                                        <option>Schedule for Later</option>
+                                        <option>Stagger Delivery (Recommended)</option>
+                                    </select>
+                                </div>
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                                        <div class="text-sm text-blue-800">
+                                            <div class="font-semibold mb-1">Staggered Delivery Recommended</div>
+                                            <div>Sending emails over 2-3 hours improves deliverability and reduces spam risk.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pt-4 border-t border-gray-200">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm font-semibold text-navy">Estimated Deliverability</span>
+                                        <span class="text-sm font-bold text-green-600">96%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full" style="width: 96%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-6 border-2 border-electric">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="text-lg font-bold text-navy mb-2">Ready to Send Campaign</h4>
+                                <p class="text-sm text-gray-600">12 personalized emails will be sent to selected coaches</p>
+                            </div>
+                            <button class="bg-gradient-to-r from-electric to-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition flex items-center space-x-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Campaign</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Reply Assistant -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">AI-Powered Reply Assistant</h2>
+                    <p class="text-xl text-gray-600">Get intelligent suggestions for responding to coach emails</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-200">
+                        <h3 class="text-xl font-bold text-navy mb-4">Coach's Email</h3>
+                        <div class="bg-gray-50 rounded-lg p-6 border border-gray-200 mb-6">
+                            <div class="text-sm text-gray-600 mb-2">From: coach.anderson@berkeley.edu</div>
+                            <div class="text-sm font-semibold text-navy mb-4">Subject: Re: Interested Student-Athlete</div>
+                            <div class="text-gray-700 space-y-3">
+                                <p>Hi [Your Name],</p>
+                                <p>Thank you for reaching out. I reviewed your highlight video and was impressed with your technical skills and field vision.</p>
+                                <p>We'd like to learn more about you. Are you available for a phone call next week? Also, do you have any upcoming tournaments we could attend?</p>
+                                <p>Looking forward to hearing from you.</p>
+                                <p>Coach Anderson</p>
+                            </div>
+                        </div>
+                        <button class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition flex items-center justify-center space-x-2">
+                            <i class="fas fa-sparkles"></i>
+                            <span>Generate Reply Suggestions</span>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-200">
+                        <h3 class="text-xl font-bold text-navy mb-4">AI Reply Suggestions</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-lg p-4 cursor-pointer hover:shadow-lg transition">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold uppercase">Professional & Enthusiastic</span>
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p class="text-sm leading-relaxed">Thank you for your response, Coach Anderson! I'm excited about the opportunity to speak with you. I'm available for a call next Tuesday or Thursday afternoon. Our team has a showcase tournament on March 15-17 in San Diego - I'd be honored if you could attend...</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-electric transition">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold uppercase text-navy">Formal & Detailed</span>
+                                    <i class="far fa-circle text-gray-400"></i>
+                                </div>
+                                <p class="text-sm text-gray-700 leading-relaxed">Dear Coach Anderson, I appreciate you taking the time to review my materials. I would be delighted to schedule a phone conversation at your convenience. Regarding upcoming tournaments, our team will be competing in...</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 cursor-pointer hover:border-electric transition">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-xs font-bold uppercase text-navy">Concise & Direct</span>
+                                    <i class="far fa-circle text-gray-400"></i>
+                                </div>
+                                <p class="text-sm text-gray-700 leading-relaxed">Hi Coach Anderson, Thanks for reaching out! I'm available next week - Tuesday or Thursday work best. We have a tournament March 15-17 in San Diego. I'll send you the details...</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex space-x-3">
+                            <button class="flex-1 bg-navy text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition">Use Selected Reply</button>
+                            <button class="px-6 bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Preview -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">Your Personal Recruiting Dashboard</h2>
+                    <p class="text-xl text-gray-600">Track your progress and manage your recruiting pipeline in one place</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-2xl p-8 mb-12">
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-xl p-6">
+                            <div class="text-3xl font-bold mb-2">47</div>
+                            <div class="text-blue-100">Coaches Contacted</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-navy to-blue-900 text-white rounded-xl p-6">
+                            <div class="text-3xl font-bold mb-2">12</div>
+                            <div class="text-blue-100">Email Responses</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6">
+                            <div class="text-3xl font-bold mb-2">23</div>
+                            <div class="text-green-100">Saved Schools</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl p-6">
+                            <div class="text-3xl font-bold mb-2">68%</div>
+                            <div class="text-purple-100">Open Rate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy mb-4">Saved Schools</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-12 h-12 bg-electric rounded-lg flex items-center justify-center text-white font-bold">UC</div>
+                                        <div>
+                                            <div class="font-semibold text-navy">University of California</div>
+                                            <div class="text-sm text-gray-600">Men's Soccer - NCAA D1</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">Contacted</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-12 h-12 bg-electric rounded-lg flex items-center justify-center text-white font-bold">SU</div>
+                                        <div>
+                                            <div class="font-semibold text-navy">Stanford University</div>
+                                            <div class="text-sm text-gray-600">Women's Volleyball - NCAA D1</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-navy mb-4">Recent Activity</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas fa-search text-electric"></i>
+                                        <span class="text-gray-700 text-sm">NCAA D1 Soccer Coaches</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">2h ago</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas fa-envelope text-electric"></i>
+                                        <span class="text-gray-700 text-sm">Sent 5 emails</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">1d ago</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-3">
+                                        <i class="fas fa-star text-electric"></i>
+                                        <span class="text-gray-700 text-sm">Saved 3 schools</span>
+                                    </div>
+                                    <span class="text-sm text-gray-500">2d ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Analytics Preview -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">Track Your Email Performance</h2>
+                    <p class="text-xl text-gray-600">Know exactly which coaches are interested in your athletic profile</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <div class="grid md:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-gray-600">Total Sent</div>
+                                <i class="fas fa-paper-plane text-electric text-xl"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-navy mb-2">247</div>
+                            <div class="text-sm text-green-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                12% from last month
+                            </div>
+                        </div>
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-gray-600">Open Rate</div>
+                                <i class="fas fa-envelope-open text-electric text-xl"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-navy mb-2">68%</div>
+                            <div class="text-sm text-green-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                5% from last month
+                            </div>
+                        </div>
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-gray-600">Reply Rate</div>
+                                <i class="fas fa-reply text-electric text-xl"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-navy mb-2">24%</div>
+                            <div class="text-sm text-green-600 flex items-center">
+                                <i class="fas fa-arrow-up mr-1"></i>
+                                8% from last month
+                            </div>
+                        </div>
+                        <div class="bg-white border-2 border-gray-200 rounded-xl p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="text-gray-600">Click Rate</div>
+                                <i class="fas fa-mouse-pointer text-electric text-xl"></i>
+                            </div>
+                            <div class="text-3xl font-bold text-navy mb-2">42%</div>
+                            <div class="text-sm text-red-600 flex items-center">
+                                <i class="fas fa-arrow-down mr-1"></i>
+                                3% from last month
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-navy mb-4">Email Opens Over Time</h3>
+                            <div class="h-64 overflow-hidden bg-gray-50 rounded-lg flex items-center justify-center">
+                                <canvas id="previewOpensChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-navy mb-4">Response Rate by Sport</h3>
+                            <div class="h-64 overflow-hidden bg-gray-50 rounded-lg flex items-center justify-center">
+                                <canvas id="previewSportChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coach Database Preview -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">Comprehensive Coach Database</h2>
+                    <p class="text-xl text-gray-600">Search and filter through 15,000+ verified college coaches</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-2xl p-8">
+                    <div class="grid md:grid-cols-5 gap-4 mb-8">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>All Sports</option>
+                                <option>Soccer</option>
+                                <option>Football</option>
+                                <option>Baseball</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Division</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>All Divisions</option>
+                                <option>NCAA D1</option>
+                                <option>NCAA D2</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Conference</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>All Conferences</option>
+                                <option>ACC</option>
+                                <option>Big Ten</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">School</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Search...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Coach</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Search...">
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">John Anderson</h3>
+                                    <p class="text-gray-600">Head Coach</p>
+                                </div>
+                                <i class="far fa-heart text-xl text-gray-400"></i>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>University of California</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-futbol text-electric"></i>
+                                    <span>Men's Soccer - NCAA D1</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Sarah Mitchell</h3>
+                                    <p class="text-gray-600">Assistant Coach</p>
+                                </div>
+                                <i class="far fa-heart text-xl text-gray-400"></i>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>Stanford University</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-volleyball-ball text-electric"></i>
+                                    <span>Women's Volleyball - NCAA D1</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Mike Rodriguez</h3>
+                                    <p class="text-gray-600">Head Coach</p>
+                                </div>
+                                <i class="far fa-heart text-xl text-gray-400"></i>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>Duke University</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-baseball-ball text-electric"></i>
+                                    <span>Baseball - NCAA D1</span>
+                                </div>
+                            </div>
+                            <button class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-20 bg-gradient-to-r from-navy to-blue-900 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to Get Started?</h2>
+                <p class="text-xl text-gray-300 mb-8">Create your account and start connecting with college coaches today</p>
+                <a href="javascript:void(0)" onclick="showPage('signup')" class="inline-block bg-electric text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition cursor-pointer">Create Your Account</a>
+            </div>
+        </section>
     </div>
 
-    <!-- All other pages remain the same... -->
-    
+    <!-- PRICING PAGE -->
+    <div id="pricingPage" class="page-content hidden">
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">Simple, Transparent Pricing</h2>
+                    <p class="text-xl text-gray-600">Choose the plan that fits your recruiting needs</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Starter Plan -->
+                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-navy mb-2">Starter</h3>
+                            <p class="text-gray-600 mb-4">Perfect for getting started</p>
+                            <div class="mb-4">
+                                <span class="text-5xl font-bold text-navy">$19</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Access to your primary sport database</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Up to 50 coach contacts per month</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Basic email tracking</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">AI email writer (10 emails/month)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Save up to 25 favorite schools</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Player profile page</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Export contact lists</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Priority support</span>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0)" onclick="showPage('signup')" class="block w-full bg-gray-200 text-navy text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition cursor-pointer">Get Started</a>
+                    </div>
+
+                    <!-- Pro Plan (Most Popular) -->
+                    <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-2xl p-8 transform scale-105 shadow-2xl relative">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-navy text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</div>
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                            <p class="text-blue-100 mb-4">For serious recruits</p>
+                            <div class="mb-4">
+                                <span class="text-5xl font-bold">$39</span>
+                                <span class="text-blue-100">/month</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Access to your primary sport database</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Unlimited coach contacts</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Advanced email analytics & tracking</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>AI email writer + reply assistant (unlimited)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Bulk email campaigns</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Unlimited saved schools</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Export contact lists (CSV/Excel)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Priority email support</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Enhanced player profile</span>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0)" onclick="showPage('signup')" class="block w-full bg-white text-electric text-center py-3 rounded-lg font-semibold hover:bg-gray-100 transition cursor-pointer">Get Started</a>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-navy mb-2">Premium</h3>
+                            <p class="text-gray-600 mb-4">Maximum recruiting power</p>
+                            <div class="mb-4">
+                                <span class="text-5xl font-bold text-navy">$69</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Access to ALL sports databases</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Unlimited coach contacts</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Advanced email analytics & tracking</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Full AI suite (unlimited)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Advanced bulk campaigns</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Unlimited saved schools</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Export contact lists (CSV/Excel)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Priority phone & email support</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Dedicated recruiting strategist</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Premium player profile</span>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0)" onclick="showPage('signup')" class="block w-full bg-gray-200 text-navy text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition cursor-pointer">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Money Back Guarantee -->
+                <div class="mt-16 text-center">
+                    <div class="inline-flex items-center space-x-3 bg-green-50 border-2 border-green-200 rounded-full px-6 py-3">
+                        <i class="fas fa-shield-check text-green-600 text-2xl"></i>
+                        <span class="text-green-800 font-semibold">30-Day Money-Back Guarantee</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- DATABASE PAGE -->
+    <div id="databasePage" class="page-content hidden">
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-navy mb-2">Coach Database</h2>
+                    <p class="text-gray-600">Search and filter through thousands of verified college coaches</p>
+                </div>
+                
+                <!-- Filters -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+                            <select id="sportFilter" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">All Sports</option>
+                                <option value="soccer">Soccer</option>
+                                <option value="football">Football</option>
+                                <option value="baseball">Baseball</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="softball">Softball</option>
+                                <option value="volleyball">Volleyball</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Division</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>All Divisions</option>
+                                <option>NCAA D1</option>
+                                <option>NCAA D2</option>
+                                <option>NCAA D3</option>
+                                <option>NAIA</option>
+                                <option>NJCAA</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Conference</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>All Conferences</option>
+                                <option>ACC</option>
+                                <option>Big Ten</option>
+                                <option>SEC</option>
+                                <option>Pac-12</option>
+                                <option>Big 12</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">School Name</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Search schools...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Coach Name</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Search coaches...">
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-between items-center">
+                        <div class="text-sm text-gray-600">Showing <span id="resultCount">1,247</span> results</div>
+                        <button class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition">Apply Filters</button>
+                    </div>
+                </div>
+
+                <!-- Preview Message -->
+                <div id="previewMessage" class="hidden bg-blue-50 border-2 border-electric rounded-xl p-6 mb-8">
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-info-circle text-electric text-2xl mt-1"></i>
+                        <div>
+                            <h3 class="text-lg font-bold text-navy mb-2">Preview Mode - 3 Coaches Shown</h3>
+                            <p class="text-gray-700 mb-3">You're viewing a preview of our coach database. Sign up to unlock full access to all coach profiles, contact information, and advanced features.</p>
+                            <a href="javascript:void(0)" onclick="showPage('signup')" class="inline-block bg-electric text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 transition cursor-pointer">Sign Up to View All</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coach Cards - Preview Section (First 3 cards, no blur) -->
+                <div id="previewCoaches" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6 border-2 border-electric">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-navy">John Anderson</h3>
+                                <p class="text-gray-600">Head Coach</p>
+                            </div>
+                            <button class="text-gray-400">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>University of California</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-futbol text-electric"></i>
+                                <span>Men's Soccer - NCAA D1</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-400">
+                                <i class="fas fa-lock text-gray-400"></i>
+                                <span>Sign up to view contact info</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="showSignupPrompt()" class="flex-1 bg-gray-300 text-gray-600 py-2 rounded-lg text-sm font-semibold cursor-not-allowed">View Profile - Sign Up Required</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 border-2 border-electric">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-navy">Sarah Mitchell</h3>
+                                <p class="text-gray-600">Assistant Coach</p>
+                            </div>
+                            <button class="text-gray-400">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>Stanford University</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-volleyball-ball text-electric"></i>
+                                <span>Women's Volleyball - NCAA D1</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-400">
+                                <i class="fas fa-lock text-gray-400"></i>
+                                <span>Sign up to view contact info</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="showSignupPrompt()" class="flex-1 bg-gray-300 text-gray-600 py-2 rounded-lg text-sm font-semibold cursor-not-allowed">View Profile - Sign Up Required</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md p-6 border-2 border-electric">
+                        <div class="flex items-start justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-navy">Michael Rodriguez</h3>
+                                <p class="text-gray-600">Head Coach</p>
+                            </div>
+                            <button class="text-gray-400">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>Duke University</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-baseball-ball text-electric"></i>
+                                <span>Baseball - NCAA D1</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-400">
+                                <i class="fas fa-lock text-gray-400"></i>
+                                <span>Sign up to view contact info</span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="showSignupPrompt()" class="flex-1 bg-gray-300 text-gray-600 py-2 rounded-lg text-sm font-semibold cursor-not-allowed">View Profile - Sign Up Required</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Remaining Coaches (Blurred) -->
+                <div class="relative">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 blur-sm pointer-events-none">
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Emily Thompson</h3>
+                                    <p class="text-gray-600">Head Coach</p>
+                                </div>
+                                <button class="text-gray-400">
+                                    <i class="far fa-heart text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>UConn</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-basketball-ball text-electric"></i>
+                                    <span>Women's Basketball - NCAA D1</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-envelope text-electric"></i>
+                                    <span>e.thompson@uconn.edu</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-phone text-electric"></i>
+                                    <span>(555) 456-7890</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                                <button class="px-4 bg-gray-100 text-navy rounded-lg">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">David Chen</h3>
+                                    <p class="text-gray-600">Recruiting Coordinator</p>
+                                </div>
+                                <button class="text-gray-400">
+                                    <i class="far fa-heart text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>Ohio State University</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-football-ball text-electric"></i>
+                                    <span>Football - NCAA D1</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-envelope text-electric"></i>
+                                    <span>d.chen@osu.edu</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-phone text-electric"></i>
+                                    <span>(555) 567-8901</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                                <button class="px-4 bg-gray-100 text-navy rounded-lg">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Jessica Williams</h3>
+                                    <p class="text-gray-600">Head Coach</p>
+                                </div>
+                                <button class="text-gray-400">
+                                    <i class="far fa-heart text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>UCLA</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-baseball-ball text-electric"></i>
+                                    <span>Softball - NCAA D1</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-envelope text-electric"></i>
+                                    <span>j.williams@ucla.edu</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-phone text-electric"></i>
+                                    <span>(555) 678-9012</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                                <button class="px-4 bg-gray-100 text-navy rounded-lg">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Robert Johnson</h3>
+                                    <p class="text-gray-600">Head Coach</p>
+                                </div>
+                                <button class="text-gray-400">
+                                    <i class="far fa-heart text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>Michigan State</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-football-ball text-electric"></i>
+                                    <span>Football - NCAA D1</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-envelope text-electric"></i>
+                                    <span>r.johnson@msu.edu</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-phone text-electric"></i>
+                                    <span>(555) 789-0123</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                                <button class="px-4 bg-gray-100 text-navy rounded-lg">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Amanda Davis</h3>
+                                    <p class="text-gray-600">Assistant Coach</p>
+                                </div>
+                                <button class="text-gray-400">
+                                    <i class="far fa-heart text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>Penn State</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-volleyball-ball text-electric"></i>
+                                    <span>Women's Volleyball - NCAA D1</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-envelope text-electric"></i>
+                                    <span>a.davis@psu.edu</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-phone text-electric"></i>
+                                    <span>(555) 890-1234</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                                <button class="px-4 bg-gray-100 text-navy rounded-lg">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-navy">Chris Martinez</h3>
+                                    <p class="text-gray-600">Head Coach</p>
+                                </div>
+                                <button class="text-gray-400">
+                                    <i class="far fa-heart text-xl"></i>
+                                </button>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-university text-electric"></i>
+                                    <span>Texas A&M</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-baseball-ball text-electric"></i>
+                                    <span>Baseball - NCAA D1</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-envelope text-electric"></i>
+                                    <span>c.martinez@tamu.edu</span>
+                                </div>
+                                <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                    <i class="fas fa-phone text-electric"></i>
+                                    <span>(555) 901-2345</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold">View Profile</button>
+                                <button class="px-4 bg-gray-100 text-navy rounded-lg">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Centered CTA Overlay -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md text-center pointer-events-auto">
+                            <i class="fas fa-lock text-electric text-5xl mb-4"></i>
+                            <h3 class="text-2xl font-bold text-navy mb-4">Sign Up to View Full Database</h3>
+                            <p class="text-gray-600 mb-6">Get instant access to verified contact information for thousands of college coaches</p>
+                            <a href="javascript:void(0)" onclick="showPage('signup')" class="inline-block bg-electric text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-500 transition mb-3 cursor-pointer">Create Account</a>
+                            <div class="text-sm text-gray-500">Plans start at $19/month</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- COACH PORTAL PAGE -->
+    <div id="coachportalPage" class="page-content hidden">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <div class="inline-block bg-electric text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            FOR COLLEGE COACHES
+                        </div>
+                        <h1 class="text-4xl sm:text-5xl font-bold mb-6 leading-tight">Find Your Next Star Athlete</h1>
+                        <p class="text-xl text-gray-300 mb-8">Access thousands of verified student-athlete profiles. Connect with talented prospects across all sports and build your championship team.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="javascript:void(0)" onclick="showPage('coachsignup')" class="bg-electric text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition text-center cursor-pointer">Create Coach Account</a>
+                            <a href="javascript:void(0)" onclick="showPage('coachlogin')" class="bg-white text-navy px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition text-center cursor-pointer">Coach Login</a>
+                        </div>
+                        <div class="mt-8 flex items-center space-x-6 text-sm">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-electric"></i>
+                                <span>Free for Coaches</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-electric"></i>
+                                <span>Verified Athletes</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-check-circle text-electric"></i>
+                                <span>Advanced Search</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&h=600&fit=crop" alt="Coach reviewing athlete profiles" class="rounded-2xl shadow-2xl">
+                        <div class="absolute -bottom-6 -left-6 bg-white text-navy p-6 rounded-xl shadow-xl">
+                            <div class="text-3xl font-bold text-electric">5,000+</div>
+                            <div class="text-gray-600">Active Athletes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features for Coaches -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">Everything You Need to Recruit Smarter</h2>
+                    <p class="text-xl text-gray-600">Powerful tools designed specifically for college coaches</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="bg-electric text-white w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-navy mb-4">Advanced Search</h3>
+                        <p class="text-gray-600">Filter by sport, position, graduation year, GPA, stats, location, and more to find the perfect prospects for your program.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="bg-electric text-white w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-navy mb-4">Highlight Videos</h3>
+                        <p class="text-gray-600">Watch athlete highlight reels, game footage, and skills videos directly from their profiles. Save time on initial evaluations.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="bg-electric text-white w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-bookmark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-navy mb-4">Save & Organize</h3>
+                        <p class="text-gray-600">Create custom lists, add notes, track communication history, and manage your entire recruiting pipeline in one place.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="bg-electric text-white w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-navy mb-4">Direct Messaging</h3>
+                        <p class="text-gray-600">Contact athletes directly through our platform. Track all communications and maintain compliance with NCAA regulations.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="bg-electric text-white w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-navy mb-4">Analytics Dashboard</h3>
+                        <p class="text-gray-600">Track your recruiting metrics, view engagement rates, and analyze which prospects are most interested in your program.</p>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-8">
+                        <div class="bg-electric text-white w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-navy mb-4">Verified Profiles</h3>
+                        <p class="text-gray-600">All athlete profiles are verified with academic records, stats, and contact information to ensure authenticity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="py-20 bg-gradient-to-r from-navy to-blue-900 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to Start Recruiting?</h2>
+                <p class="text-xl text-gray-300 mb-8">Create your free coach account and get instant access to thousands of verified student-athletes</p>
+                <a href="javascript:void(0)" onclick="showPage('coachsignup')" class="inline-block bg-electric text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition cursor-pointer">Create Free Coach Account</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- COACH SIGNUP PAGE -->
+    <div id="coachsignupPage" class="page-content hidden">
+        <section class="py-20 bg-white">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-100">
+                    <div class="text-center mb-8">
+                        <div class="inline-block bg-electric text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            COACH REGISTRATION
+                        </div>
+                        <h2 class="text-3xl font-bold text-navy mb-2">Create Your Coach Account</h2>
+                        <p class="text-gray-600">Free for all college coaches - start recruiting today</p>
+                    </div>
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="University of California">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Position</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your position</option>
+                                <option value="head">Head Coach</option>
+                                <option value="assistant">Assistant Coach</option>
+                                <option value="recruiting">Recruiting Coordinator</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your sport</option>
+                                <option value="soccer">Soccer</option>
+                                <option value="football">Football</option>
+                                <option value="baseball">Baseball</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="softball">Softball</option>
+                                <option value="volleyball">Volleyball</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
+                        </div>
+                        <div>
+                            <label class="flex items-start space-x-2">
+                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
+                                <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Coach Account</button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Already have an account? <a href="javascript:void(0)" onclick="showPage('coachlogin')" class="text-electric font-semibold hover:underline cursor-pointer">Log in</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- COACH LOGIN PAGE -->
+    <div id="coachloginPage" class="page-content hidden">
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="inline-block bg-electric text-white px-4 py-2 rounded-full text-sm font-bold mb-4">
+                            COACH LOGIN
+                        </div>
+                        <h2 class="text-3xl font-bold text-navy mb-2">Welcome Back, Coach</h2>
+                        <p class="text-gray-600">Log in to access your recruiting dashboard</p>
+                    </div>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Enter your password">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
+                                <span class="text-sm text-gray-600">Remember me</span>
+                            </label>
+                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
+                        </div>
+                        <button type="submit" onclick="showPage('coachdashboard'); return false;" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Log In</button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Don't have an account? <a href="javascript:void(0)" onclick="showPage('coachsignup')" class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- COACH DASHBOARD PAGE -->
+    <div id="coachdashboardPage" class="page-content hidden">
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-navy mb-2">Coach Dashboard</h1>
+                    <p class="text-gray-600">Welcome back, Coach Anderson - University of California Soccer</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-gray-600">Saved Athletes</div>
+                            <i class="fas fa-bookmark text-electric text-xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-navy mb-2">23</div>
+                        <div class="text-sm text-green-600 flex items-center">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            5 new this week
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-gray-600">Messages Sent</div>
+                            <i class="fas fa-envelope text-electric text-xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-navy mb-2">47</div>
+                        <div class="text-sm text-green-600 flex items-center">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            12 this week
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-gray-600">Profile Views</div>
+                            <i class="fas fa-eye text-electric text-xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-navy mb-2">156</div>
+                        <div class="text-sm text-gray-600">Athletes viewed your profile</div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-md p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="text-gray-600">Response Rate</div>
+                            <i class="fas fa-reply text-electric text-xl"></i>
+                        </div>
+                        <div class="text-3xl font-bold text-navy mb-2">72%</div>
+                        <div class="text-sm text-green-600 flex items-center">
+                            <i class="fas fa-arrow-up mr-1"></i>
+                            8% from last month
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Saved Athletes -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="text-2xl font-bold text-navy">Saved Athletes</h2>
+                                <button class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
+                                    <i class="fas fa-search mr-2"></i>Search Athletes
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=100&h=100&fit=crop" alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
+                                        <div>
+                                            <h3 class="font-bold text-navy">Michael Johnson</h3>
+                                            <p class="text-sm text-gray-600">Midfielder - Class of 2025</p>
+                                            <div class="flex items-center space-x-4 mt-1 text-xs text-gray-500">
+                                                <span><i class="fas fa-map-marker-alt mr-1"></i>Los Angeles, CA</span>
+                                                <span><i class="fas fa-graduation-cap mr-1"></i>3.8 GPA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-4 py-2 bg-electric text-white rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Profile</button>
+                                        <button class="px-3 py-2 bg-gray-200 text-navy rounded-lg hover:bg-gray-300 transition">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=100&h=100&fit=crop" alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
+                                        <div>
+                                            <h3 class="font-bold text-navy">Sarah Williams</h3>
+                                            <p class="text-sm text-gray-600">Forward - Class of 2025</p>
+                                            <div class="flex items-center space-x-4 mt-1 text-xs text-gray-500">
+                                                <span><i class="fas fa-map-marker-alt mr-1"></i>San Diego, CA</span>
+                                                <span><i class="fas fa-graduation-cap mr-1"></i>3.9 GPA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-4 py-2 bg-electric text-white rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Profile</button>
+                                        <button class="px-3 py-2 bg-gray-200 text-navy rounded-lg hover:bg-gray-300 transition">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                                    <div class="flex items-center space-x-4">
+                                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=100&h=100&fit=crop" alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
+                                        <div>
+                                            <h3 class="font-bold text-navy">David Chen</h3>
+                                            <p class="text-sm text-gray-600">Defender - Class of 2026</p>
+                                            <div class="flex items-center space-x-4 mt-1 text-xs text-gray-500">
+                                                <span><i class="fas fa-map-marker-alt mr-1"></i>San Francisco, CA</span>
+                                                <span><i class="fas fa-graduation-cap mr-1"></i>3.7 GPA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-4 py-2 bg-electric text-white rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Profile</button>
+                                        <button class="px-3 py-2 bg-gray-200 text-navy rounded-lg hover:bg-gray-300 transition">
+                                            <i class="fas fa-envelope"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h2 class="text-2xl font-bold text-navy mb-6">Recent Activity</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+                                    <div class="bg-electric text-white w-10 h-10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-bookmark"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-navy">Saved Michael Johnson's profile</p>
+                                        <p class="text-xs text-gray-500">2 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+                                    <div class="bg-electric text-white w-10 h-10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-navy">Sent message to Sarah Williams</p>
+                                        <p class="text-xs text-gray-500">5 hours ago</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
+                                    <div class="bg-electric text-white w-10 h-10 rounded-full flex items-center justify-center">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-sm font-semibold text-navy">Searched for Class of 2025 midfielders</p>
+                                        <p class="text-xs text-gray-500">1 day ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="space-y-8">
+                        <!-- Quick Actions -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-bold text-navy mb-4">Quick Actions</h3>
+                            <div class="space-y-3">
+                                <button class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-search"></i>
+                                    <span>Search Athletes</span>
+                                </button>
+                                <button class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>Messages</span>
+                                </button>
+                                <button class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-user-edit"></i>
+                                    <span>Edit Profile</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recruiting Lists -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-bold text-navy mb-4">My Lists</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                                    <div>
+                                        <p class="font-semibold text-navy text-sm">Top Prospects</p>
+                                        <p class="text-xs text-gray-500">12 athletes</p>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                                    <div>
+                                        <p class="font-semibold text-navy text-sm">Class of 2025</p>
+                                        <p class="text-xs text-gray-500">8 athletes</p>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
+                                    <div>
+                                        <p class="font-semibold text-navy text-sm">California Prospects</p>
+                                        <p class="text-xs text-gray-500">15 athletes</p>
+                                    </div>
+                                    <i class="fas fa-chevron-right text-gray-400"></i>
+                                </div>
+                                <button class="w-full bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                    <i class="fas fa-plus mr-2"></i>Create New List
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Profile Completion -->
+                        <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-2">Complete Your Profile</h3>
+                            <p class="text-sm text-blue-100 mb-4">85% complete - add more details to attract top athletes</p>
+                            <div class="w-full bg-white bg-opacity-20 rounded-full h-2 mb-4">
+                                <div class="bg-white h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <button class="w-full bg-white text-electric py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition">Complete Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- LOGIN PAGE -->
+    <div id="loginPage" class="page-content hidden">
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <h2 class="text-3xl font-bold text-navy mb-2 text-center">Welcome Back</h2>
+                    <p class="text-gray-600 text-center mb-8">Log in to access your dashboard</p>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Enter your password">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
+                                <span class="text-sm text-gray-600">Remember me</span>
+                            </label>
+                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Log In</button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')" class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a></p>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-gray-500">Are you a college coach? <a href="javascript:void(0)" onclick="showPage('coachlogin')" class="text-electric font-semibold hover:underline cursor-pointer">Coach Login</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SIGNUP PAGE -->
+    <div id="signupPage" class="page-content hidden">
+        <section class="py-20 bg-white">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-100">
+                    <h2 class="text-3xl font-bold text-navy mb-2 text-center">Create Your Account</h2>
+                    <p class="text-gray-600 text-center mb-6">Start connecting with college coaches today</p>
+                    
+                    <!-- Account Type Toggle -->
+                    <div class="flex items-center justify-center mb-8">
+                        <div class="bg-gray-100 rounded-lg p-1 inline-flex">
+                            <button id="playerToggle" onclick="toggleAccountType('player')" class="px-6 py-2 rounded-lg font-semibold transition bg-electric text-white">
+                                I am a Player
+                            </button>
+                            <button id="coachToggle" onclick="toggleAccountType('coach')" class="px-6 py-2 rounded-lg font-semibold transition text-navy">
+                                I am a College Coach
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Player Form -->
+                    <form id="playerForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Primary Sport</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your sport</option>
+                                <option value="soccer">Soccer</option>
+                                <option value="football">Football</option>
+                                <option value="baseball">Baseball</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="softball">Softball</option>
+                                <option value="volleyball">Volleyball</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Graduation Year</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>Select year</option>
+                                <option>2024</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="flex items-start space-x-2">
+                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
+                                <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Account</button>
+                    </form>
+
+                    <!-- Coach Form (Hidden by default) -->
+                    <form id="coachForm" class="space-y-6 hidden">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="University of California">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Position</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your position</option>
+                                <option value="head">Head Coach</option>
+                                <option value="assistant">Assistant Coach</option>
+                                <option value="recruiting">Recruiting Coordinator</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your sport</option>
+                                <option value="soccer">Soccer</option>
+                                <option value="football">Football</option>
+                                <option value="baseball">Baseball</option>
+                                <option value="basketball">Basketball</option>
+                                <option value="softball">Softball</option>
+                                <option value="volleyball">Volleyball</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
+                        </div>
+                        <div>
+                            <label class="flex items-start space-x-2">
+                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
+                                <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Coach Account</button>
+                    </form>
+
+                    <div class="mt-6 text-center">
+                        <p class="text-gray-600">Already have an account? <a href="javascript:void(0)" onclick="showPage('login')" class="text-electric font-semibold hover:underline cursor-pointer">Log in</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Page Navigation System
         function showPage(pageName) {
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => page.classList.add('hidden'));
@@ -335,7 +1939,6 @@
                 'howitworks': 'howitworksPage',
                 'pricing': 'pricingPage',
                 'database': 'databasePage',
-                'playerprofile': 'playerprofilePage',
                 'coachportal': 'coachportalPage',
                 'coachsignup': 'coachsignupPage',
                 'coachlogin': 'coachloginPage',
@@ -348,6 +1951,151 @@
             if (targetPage) {
                 targetPage.classList.remove('hidden');
                 window.scrollTo(0, 0);
+                
+                if (pageName === 'howitworks') {
+                    setTimeout(initPreviewCharts, 100);
+                }
+                
+                if (pageName === 'database') {
+                    const previewMessage = document.getElementById('previewMessage');
+                    if (previewMessage) {
+                        previewMessage.classList.add('hidden');
+                    }
+                }
+            }
+        }
+
+        function filterSportAndNavigate(sport) {
+            const sportFilter = document.getElementById('sportFilter');
+            const resultCount = document.getElementById('resultCount');
+            const previewMessage = document.getElementById('previewMessage');
+            
+            if (sportFilter) {
+                sportFilter.value = sport;
+            }
+            
+            const sportCounts = {
+                'soccer': '342',
+                'football': '289',
+                'baseball': '267',
+                'basketball': '198',
+                'softball': '156',
+                'volleyball': '195'
+            };
+            
+            if (resultCount && sportCounts[sport]) {
+                resultCount.textContent = sportCounts[sport];
+            }
+            
+            showPage('database');
+            
+            if (previewMessage) {
+                previewMessage.classList.remove('hidden');
+            }
+            
+            setTimeout(() => {
+                const previewCoaches = document.getElementById('previewCoaches');
+                if (previewCoaches) {
+                    previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
+
+        function showSignupPrompt() {
+            showPage('signup');
+        }
+
+        function toggleAccountType(type) {
+            const playerToggle = document.getElementById('playerToggle');
+            const coachToggle = document.getElementById('coachToggle');
+            const playerForm = document.getElementById('playerForm');
+            const coachForm = document.getElementById('coachForm');
+
+            if (type === 'player') {
+                playerToggle.classList.add('bg-electric', 'text-white');
+                playerToggle.classList.remove('text-navy');
+                coachToggle.classList.remove('bg-electric', 'text-white');
+                coachToggle.classList.add('text-navy');
+                playerForm.classList.remove('hidden');
+                coachForm.classList.add('hidden');
+            } else {
+                coachToggle.classList.add('bg-electric', 'text-white');
+                coachToggle.classList.remove('text-navy');
+                playerToggle.classList.remove('bg-electric', 'text-white');
+                playerToggle.classList.add('text-navy');
+                coachForm.classList.remove('hidden');
+                playerForm.classList.add('hidden');
+            }
+        }
+
+        function initPreviewCharts() {
+            const opensCtx = document.getElementById('previewOpensChart');
+            if (opensCtx && !opensCtx.chart) {
+                opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Email Opens',
+                            data: [45, 52, 61, 58, 72, 68],
+                            borderColor: '#00D4FF',
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            const sportCtx = document.getElementById('previewSportChart');
+            if (sportCtx && !sportCtx.chart) {
+                sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
+                        datasets: [{
+                            label: 'Response Rate (%)',
+                            data: [28, 22, 31, 19, 26, 24],
+                            backgroundColor: [
+                                '#00D4FF',
+                                '#0A1F44',
+                                '#00D4FF',
+                                '#0A1F44',
+                                '#00D4FF',
+                                '#0A1F44'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 40
+                            }
+                        }
+                    }
+                });
             }
         }
 
