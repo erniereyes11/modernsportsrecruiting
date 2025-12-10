@@ -2106,123 +2106,477 @@
     </div>
 
    <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+  // ===== Supabase init =====
   const supabaseUrl = 'https://qgqihyhhfyicbxdsemku.supabase.co';
   const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
 
   const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
-  window.supabaseClient = supabaseClient; // so you can play in the console
+  window.supabaseClient = supabaseClient;
 
-  function displayMessage(el, msg, isError = false) {
-    if (!el) return;
-    el.textContent = msg;
-    el.classList.toggle('text-red-600', isError);
-    el.classList.toggle('text-navy', !isError);
+  let currentUserRole = null;
+
+  // ===== Helpers =====
+  function displayMessage(element, message, isError = false) {
+    if (!element) return;
+    element.textContent = message;
+    element.classList.toggle('text-red-600', isError);
+    element.classList.toggle('text-navy', !isError);
   }
 
+  // Page Navigation System
   function showPage(pageName) {
+    console.log('showPage called with:', pageName);
     const pages = document.querySelectorAll('.page-content');
-    pages.forEach(p => p.classList.add('hidden'));
+    pages.forEach(page => page.classList.add('hidden'));
 
-    const map = {
-      home: 'homePage',
-      playerdashboard: 'playerdashboardPage',
+    const pageMap = {
+      'home': 'homePage',
+      'howitworks': 'howitworksPage',
+      'pricing': 'pricingPage',
+      'database': 'databasePage',
+      'coachportal': 'coachportalPage',
+      'coachsignup': 'coachsignupPage',
+      'coachlogin': 'coachloginPage',
+      'coachdashboard': 'coachdashboardPage',
+      'playerdashboard': 'playerdashboardPage',
+      'login': 'loginPage',
+      'signup': 'signupPage'
     };
 
-    const target = document.getElementById(map[pageName]);
-    if (target) target.classList.remove('hidden');
+    const targetPageId = pageMap[pageName];
+    const targetPage = document.getElementById(targetPageId);
+    if (targetPage) {
+      targetPage.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    } else {
+      console.warn('No page found for', pageName, 'with id', targetPageId);
+    }
   }
 
-  async function loadPlayerDashboard() {
-  try {
-    const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-    if (userError) throw userError;
-    if (!user) {
-      console.warn('No user in session');
-      return;
+  function filterSportAndNavigate(sport) {
+    const sportFilter = document.getElementById('sportFilter');
+    const resultCount = document.getElementById('resultCount');
+    const previewMessage = document.getElementById('previewMessage');
+
+    if (sportFilter) sportFilter.value = sport;
+
+    const sportCounts = {
+      'soccer': '342',
+      'football': '289',
+      'baseball': '267',
+      'basketball': '198',
+      'softball': '156',
+      'volleyball': '195'
+    };
+
+    if (resultCount && sportCounts[sport]) {
+      resultCount.textContent = sportCounts[sport];
     }
 
-    const { data, error } = await supabaseClient
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .eq('role', 'player')
-      .single();
+    showPage('database');
 
-    if (error) {
-      console.error('Select from profiles error:', error);
-      return;
+    if (previewMessage) {
+      previewMessage.classList.remove('hidden');
     }
 
-    console.log('Player profile:', data);
-
-    const nameEl = document.getElementById('playerDashName');
-    const emailEl = document.getElementById('playerDashEmail');
-    const sportEl = document.getElementById('playerDashSport');
-    const gradEl  = document.getElementById('playerDashGradYear');
-
-    if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
-    if (emailEl) emailEl.textContent = data.email || '';
-    if (sportEl) sportEl.textContent = data.sport || '';
-    if (gradEl) gradEl.textContent  = data.grad_year || '';
-  } catch (err) {
-    console.error('loadPlayerDashboard error:', err);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  showPage('home');
-
-  const playerForm = document.getElementById('playerForm');
-  const playerSignupMessage = document.getElementById('playerSignupMessage');
-
-  if (playerForm) {
-    playerForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const firstName = document.getElementById('playerFirstName')?.value.trim();
-      const lastName  = document.getElementById('playerLastName')?.value.trim();
-      const email     = document.getElementById('playerEmail')?.value.trim();
-      const password  = document.getElementById('playerPassword')?.value;
-      const sport     = document.getElementById('playerSport')?.value;
-      const gradYear  = document.getElementById('playerGradYear')?.value;
-
-      try {
-        displayMessage(playerSignupMessage, 'Creating account...', false);
-
-        const { data, error: authError } = await supabaseClient.auth.signUp({ email, password });
-        console.log('auth.signUp (player) result:', { data, authError });
-        if (authError) throw authError;
-
-        const userId = data.user?.id;
-        if (!userId) throw new Error('No user ID returned from signup');
-
-        const { error: insertError } = await supabaseClient
-          .from('profiles')
-          .insert([{
-            id: userId,
-            role: 'player',
-            plan: 'starter',
-            first_name: firstName,
-            last_name: lastName,
-            email,
-            sport,
-            grad_year: gradYear || null
-          }]);
-
-        console.log('profiles insert (player) result:', { insertError });
-        if (insertError) throw insertError;
-
-        displayMessage(playerSignupMessage, 'Account created! Loading dashboard...', false);
-
-        await loadPlayerDashboard();
-        showPage('playerdashboard');
-      } catch (err) {
-        console.error('Player signup full error:', err);
-        displayMessage(playerSignupMessage, err.message || 'Signup failed. See console.', true);
+    setTimeout(() => {
+      const previewCoaches = document.getElementById('previewCoaches');
+      if (previewCoaches) {
+        previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    });
+    }, 100);
   }
-});
+
+  function showSignupPrompt() {
+    showPage('signup');
+  }
+
+  function toggleAccountType(type) {
+    const playerToggle = document.getElementById('playerToggle');
+    const coachToggle = document.getElementById('coachToggle');
+    const playerForm = document.getElementById('playerForm');
+    const coachForm = document.getElementById('coachForm');
+
+    if (!playerToggle || !coachToggle || !playerForm || !coachForm) return;
+
+    if (type === 'player') {
+      playerToggle.classList.add('bg-electric', 'text-white');
+      playerToggle.classList.remove('text-navy');
+      coachToggle.classList.remove('bg-electric', 'text-white');
+      coachToggle.classList.add('text-navy');
+      playerForm.classList.remove('hidden');
+      coachForm.classList.add('hidden');
+    } else {
+      coachToggle.classList.add('bg-electric', 'text-white');
+      coachToggle.classList.remove('text-navy');
+      playerToggle.classList.remove('bg-electric', 'text-white');
+      playerToggle.classList.add('text-navy');
+      coachForm.classList.remove('hidden');
+      playerForm.classList.add('hidden');
+    }
+  }
+
+  async function handleLogout() {
+    try {
+      await supabaseClient.auth.signOut();
+    } catch (err) {
+      console.error('Logout error:', err);
+    } finally {
+      currentUserRole = null;
+      showPage('home');
+    }
+  }
+
+  // ===== Dashboards (profiles table) =====
+  async function loadPlayerDashboard() {
+    try {
+      const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+      if (userError) throw userError;
+      if (!user) {
+        console.warn('No user in session when loading player dashboard');
+        return;
+      }
+
+      const { data, error } = await supabaseClient
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .eq('role', 'player')
+        .single();
+
+      if (error) {
+        console.error('Select from profiles (player) error:', error);
+        return;
+      }
+
+      console.log('Loaded player profile:', data);
+
+      const nameEl = document.getElementById('playerDashName');
+      const emailEl = document.getElementById('playerDashEmail');
+      const sportEl = document.getElementById('playerDashSport');
+      const gradEl  = document.getElementById('playerDashGradYear');
+
+      if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+      if (emailEl) emailEl.textContent = data.email || '';
+      if (sportEl) sportEl.textContent = data.sport || '';
+      if (gradEl)  gradEl.textContent  = data.grad_year || '';
+    } catch (err) {
+      console.error('loadPlayerDashboard error:', err);
+    }
+  }
+
+  async function loadCoachDashboard() {
+    try {
+      const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+      if (userError) throw userError;
+      if (!user) return;
+
+      const { data, error } = await supabaseClient
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .eq('role', 'coach')
+        .single();
+
+      if (error) {
+        console.error('Select from profiles (coach) error:', error);
+        return;
+      }
+
+      console.log('Loaded coach profile:', data);
+
+      const nameEl   = document.getElementById('coachDashName');
+      const schoolEl = document.getElementById('coachDashSchool');
+      const sportEl  = document.getElementById('coachDashSport');
+
+      if (nameEl)   nameEl.textContent   = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+      if (schoolEl) schoolEl.textContent = data.school ? `- ${data.school}` : '';
+      if (sportEl)  sportEl.textContent  = data.sport ? ` (${data.sport})` : '';
+    } catch (err) {
+      console.error('loadCoachDashboard error:', err);
+    }
+  }
+
+  // ===== Charts (if you use them on how it works page) =====
+  function initPreviewCharts() {
+    const opensCtx = document.getElementById('previewOpensChart');
+    if (opensCtx && !opensCtx.chart) {
+      opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          datasets: [{
+            label: 'Email Opens',
+            data: [45, 52, 61, 58, 72, 68],
+            borderColor: '#00D4FF',
+            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+    }
+
+    const sportCtx = document.getElementById('previewSportChart');
+    if (sportCtx && !sportCtx.chart) {
+      sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
+          datasets: [{
+            label: 'Response Rate (%)',
+            data: [28, 22, 31, 19, 26, 24],
+            backgroundColor: ['#00D4FF', '#0A1F44', '#00D4FF', '#0A1F44', '#00D4FF', '#0A1F44']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, max: 40 }
+          }
+        }
+      });
+    }
+  }
+
+  // ===== Shared Coach Signup Handler (profiles table) =====
+  async function handleCoachSignup(formPrefix, messageElement) {
+    const firstName = document.getElementById(`${formPrefix}FirstName`)?.value.trim();
+    const lastName  = document.getElementById(`${formPrefix}LastName`)?.value.trim();
+    const school    = document.getElementById(`${formPrefix}School`)?.value.trim();
+    const title     = document.getElementById(`${formPrefix}Title`)?.value;
+    const sport     = document.getElementById(`${formPrefix}Sport`)?.value;
+    const email     = document.getElementById(`${formPrefix}Email`)?.value.trim();
+    const password  = document.getElementById(`${formPrefix}Password`)?.value;
+
+    try {
+      displayMessage(messageElement, 'Creating coach account...', false);
+
+      const { data, error: authError } = await supabaseClient.auth.signUp({ email, password });
+      console.log('auth.signUp (coach) result:', { data, authError });
+      if (authError) throw authError;
+
+      const userId = data.user?.id;
+      if (!userId) throw new Error('No user ID returned from signup');
+
+      const { error: insertError } = await supabaseClient
+        .from('profiles')
+        .insert([{
+          id: userId,
+          role: 'coach',
+          plan: 'starter',
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          school,
+          title,
+          sport
+        }]);
+
+      console.log('profiles insert (coach) result:', { insertError });
+      if (insertError) throw insertError;
+
+      currentUserRole = 'coach';
+      await loadCoachDashboard();
+
+      displayMessage(messageElement, 'Coach account created! Redirecting...', false);
+      showPage('coachdashboard');
+    } catch (err) {
+      console.error('Coach signup error:', err);
+      displayMessage(messageElement, err.message || 'Signup failed. Please try again.', true);
+    }
+  }
+
+  // ===== MAIN INIT =====
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, init script running');
+
+    showPage('home');
+
+    // PLAYER SIGNUP (main form on signup page)
+    const playerForm = document.getElementById('playerForm');
+    const playerSignupMessage = document.getElementById('playerSignupMessage');
+
+    if (playerForm) {
+      console.log('playerForm found, wiring submit handler');
+
+      playerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        console.log('PLAYER SIGNUP HANDLER FIRED');
+
+        const firstName = document.getElementById('playerFirstName')?.value.trim();
+        const lastName  = document.getElementById('playerLastName')?.value.trim();
+        const email     = document.getElementById('playerEmail')?.value.trim();
+        const password  = document.getElementById('playerPassword')?.value;
+        const sport     = document.getElementById('playerSport')?.value;
+        const gradYear  = document.getElementById('playerGradYear')?.value;
+
+        console.log('Signup form values:', { firstName, lastName, email, sport, gradYear });
+
+        try {
+          displayMessage(playerSignupMessage, 'Creating account...', false);
+
+          const { data, error: authError } = await supabaseClient.auth.signUp({ email, password });
+          console.log('auth.signUp (player) result:', { data, authError });
+          if (authError) throw authError;
+
+          const userId = data.user?.id;
+          if (!userId) throw new Error('No user ID returned from signup');
+
+          const { error: insertError } = await supabaseClient
+            .from('profiles')
+            .insert([{
+              id: userId,
+              role: 'player',
+              plan: 'starter',
+              first_name: firstName,
+              last_name: lastName,
+              email,
+              sport,
+              grad_year: gradYear || null
+            }]);
+
+          console.log('profiles insert (player) result:', { insertError });
+          if (insertError) throw insertError;
+
+          currentUserRole = 'player';
+
+          displayMessage(playerSignupMessage, 'Account created! Loading dashboard...', false);
+
+          await loadPlayerDashboard();
+          showPage('playerdashboard');
+        } catch (err) {
+          console.error('Player signup full error:', err);
+          displayMessage(playerSignupMessage, err.message || 'Signup failed. See console.', true);
+        }
+      });
+    } else {
+      console.warn('playerForm not found – check id="playerForm" on your player form.');
+    }
+
+    // COACH SIGNUP TOGGLE FORM
+    const coachForm = document.getElementById('coachForm');
+    const coachSignupMessage = document.getElementById('coachSignupMessage');
+    if (coachForm && coachSignupMessage) {
+      coachForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        await handleCoachSignup('coach', coachSignupMessage);
+      });
+    }
+
+    // COACH SIGNUP PAGE FORM
+    const coachSignupPageForm = document.getElementById('coachSignupPageForm');
+    const coachSignupPageMessage = document.getElementById('coachSignupPageMessage');
+    if (coachSignupPageForm && coachSignupPageMessage) {
+      coachSignupPageForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        await handleCoachSignup('coachPage', coachSignupPageMessage);
+      });
+    }
+
+    // PLAYER LOGIN
+    const playerLoginForm = document.getElementById('playerLoginForm');
+    const playerLoginMessage = document.getElementById('playerLoginMessage');
+    if (playerLoginForm && playerLoginMessage) {
+      playerLoginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('playerLoginEmail')?.value.trim();
+        const password = document.getElementById('playerLoginPassword')?.value;
+
+        try {
+          displayMessage(playerLoginMessage, 'Logging in...', false);
+
+          const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+
+          const { data: { user } } = await supabaseClient.auth.getUser();
+          if (!user) throw new Error('No user after login');
+
+          const { data: profile, error: profileError } = await supabaseClient
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+
+          if (profileError) throw profileError;
+
+          if (profile.role === 'coach') {
+            currentUserRole = 'coach';
+            await loadCoachDashboard();
+            displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
+            showPage('coachdashboard');
+          } else {
+            currentUserRole = 'player';
+            await loadPlayerDashboard();
+            displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
+            showPage('playerdashboard');
+          }
+        } catch (err) {
+          console.error('Player login error:', err);
+          displayMessage(playerLoginMessage, err.message || 'Login failed. Please try again.', true);
+        }
+      });
+    }
+
+    // COACH LOGIN
+    const coachLoginForm = document.getElementById('coachLoginForm');
+    const coachLoginMessage = document.getElementById('coachLoginMessage');
+    if (coachLoginForm && coachLoginMessage) {
+      coachLoginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById('coachLoginEmail')?.value.trim();
+        const password = document.getElementById('coachLoginPassword')?.value;
+
+        try {
+          displayMessage(coachLoginMessage, 'Logging in...', false);
+
+          const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+
+          const { data: { user } } = await supabaseClient.auth.getUser();
+          if (!user) throw new Error('No user after login');
+
+          const { data: profile, error: profileError } = await supabaseClient
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+
+          if (profileError) throw profileError;
+
+          if (profile.role === 'coach') {
+            currentUserRole = 'coach';
+            await loadCoachDashboard();
+            displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
+            showPage('coachdashboard');
+          } else {
+            currentUserRole = 'player';
+            await loadPlayerDashboard();
+            displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
+            showPage('playerdashboard');
+          }
+        } catch (err) {
+          console.error('Coach login error:', err);
+          displayMessage(coachLoginMessage, err.message || 'Login failed. Please try again.', true);
+        }
+      });
+    }
+  });
 </script>
+</body>
+</html>
