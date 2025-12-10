@@ -1757,150 +1757,69 @@
         </section>
     </div>
 
-    <!-- LOGIN PAGE -->
-    <div id="loginPage" class="page-content hidden">
-        <section class="py-20 bg-gray-50">
-            <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white rounded-2xl shadow-xl p-8">
-                    <h2 class="text-3xl font-bold text-navy mb-2 text-center">Welcome Back</h2>
-                    <p class="text-gray-600 text-center mb-8">Log in to access your dashboard</p>
-                    <form class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Enter your password">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
-                                <span class="text-sm text-gray-600">Remember me</span>
-                            </label>
-                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
-                        </div>
-                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Log In</button>
-                    </form>
-                    <div class="mt-6 text-center">
-                        <p class="text-gray-600">Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')" class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a></p>
-                    </div>
-                    <div class="mt-4 text-center">
-                        <p class="text-sm text-gray-500">Are you a college coach? <a href="javascript:void(0)" onclick="showPage('coachlogin')" class="text-electric font-semibold hover:underline cursor-pointer">Coach Login</a></p>
+    <!-- SIGNUP PAGE (NEW) -->
+<div id="signupPage" class="page-content hidden">
+    <section class="py-20 bg-white">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-100">
+                <h2 class="text-3xl font-bold text-navy mb-2 text-center">Create Your Account</h2>
+                <p class="text-gray-600 text-center mb-6">Start connecting with college coaches today</p>
+                
+                <!-- Account Type Toggle -->
+                <div class="flex items-center justify-center mb-8">
+                    <div class="bg-gray-100 rounded-lg p-1 inline-flex">
+                        <button id="playerToggle" onclick="toggleAccountType('player')" class="px-6 py-2 rounded-lg font-semibold transition bg-electric text-white">
+                            I am a Player
+                        </button>
+                        <button id="coachToggle" onclick="toggleAccountType('coach')" class="px-6 py-2 rounded-lg font-semibold transition text-navy">
+                            I am a College Coach
+                        </button>
                     </div>
                 </div>
-            </div>
-        </section>
-    </div>
 
-    <!-- SIGNUP PAGE -->
-    <div id="signupPage" class="page-content hidden">
-        <section class="py-20 bg-white">
-            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white rounded-2xl shadow-xl p-8 border-2 border-gray-100">
-                    <h2 class="text-3xl font-bold text-navy mb-2 text-center">Create Your Account</h2>
-                    <p class="text-gray-600 text-center mb-6">Start connecting with college coaches today</p>
-                    
-                    <!-- Account Type Toggle -->
-                    <div class="flex items-center justify-center mb-8">
-                        <div class="bg-gray-100 rounded-lg p-1 inline-flex">
-                            <button id="playerToggle" onclick="toggleAccountType('player')" class="px-6 py-2 rounded-lg font-semibold transition bg-electric text-white">
-                                I am a Player
-                            </button>
-                            <button id="coachToggle" onclick="toggleAccountType('coach')" class="px-6 py-2 rounded-lg font-semibold transition text-navy">
-                                I am a College Coach
-                            </button>
+                <!-- Player Form -->
+                <form id="playerForm" class="space-y-6" onsubmit="return false;">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
                         </div>
                     </div>
 
-                    <!-- Player Form -->
-                    <form id="playerForm" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Primary Sport</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select your sport</option>
-                                <option value="soccer">Soccer</option>
-                                <option value="football">Football</option>
-                                <option value="baseball">Baseball</option>
-                                <option value="basketball">Basketball</option>
-                                <option value="softball">Softball</option>
-                                <option value="volleyball">Volleyball</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Graduation Year</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option>Select year</option>
-                                <option>2024</option>
-                                <option>2025</option>
-                                <option>2026</option>
-                                <option>2027</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="flex items-start space-x-2">
-                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
-                                <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
-                            </label>
-                        </div>
-                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Account</button>
-                    </form>
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+                        <input id="signup-email" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
+                    </div>
 
-                    <!-- Coach Form (Hidden by default) -->
-                    <form id="coachForm" class="space-y-6 hidden">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
-                            </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+                        <input id="signup-password" type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
+                    </div>
+
+                    <button type="button" onclick="signUpUser()" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
+                        Create Account
+                    </button>
+                </form>
+
+                <!-- Coach Form -->
+                <form id="coachForm" class="space-y-6 hidden" onsubmit="return false;">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
-                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="University of California">
+                            <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
                         </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Position</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select your position</option>
-                                <option value="head">Head Coach</option>
-                                <option value="assistant">Assistant Coach</option>
-                                <option value="recruiting">Recruiting Coordinator</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select your sport</option>
-                                <option value="soccer">Soccer</option>
-                                <option value="football">Football</option>
-                                <option value="baseball">Baseball</option>
-                                <option value="basketball">Basketball</option>
-                                <option value="softball">Softball</option>
-                                <option value="volleyball">Volleyball</option>
-                            </select>
-                        </div>
+                    </div>
+
+                    <button type="button" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
+
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
                             <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
