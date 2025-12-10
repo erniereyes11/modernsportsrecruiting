@@ -2102,6 +2102,38 @@
         document.addEventListener('DOMContentLoaded', function() {
             showPage('home');
         });
+        <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = "https://qgqihyhhfyicbxdsemku.supabase.co";
+  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0";
+
+  const db = supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+  async function signUpUser() {
+    const email = document.getElementById("signup-email").value;
+    const password = document.getElementById("signup-password").value;
+
+    const { data, error } = await db.auth.signUp({
+      email,
+      password
+    });
+
+    if (error) {
+      alert("Signup failed: " + error.message);
+      return;
+    }
+
+    await db
+      .from("profiles")
+      .insert({
+        id: data.user.id,
+        role: "player",
+        plan: "starter"
+      });
+
+    alert("Account created! Check your email to confirm.");
+  }
+</script>
     </script>
 </body>
 </html>
