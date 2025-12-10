@@ -2105,414 +2105,426 @@
         </section>
     </div>
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        const supabaseUrl = 'https://qgqihyhhfyicbxdsemku.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
-        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
-                let currentUserRole = null;
+   <!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const supabaseUrl = 'https://qgqihyhhfyicbxdsemku.supabase.co';
+    // 🔑 This is your ANON key (OK to use in frontend, but NEVER use service_role keys here)
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
 
-        async function handleLogout() {
-            try {
-                await supabaseClient.auth.signOut();
-            } catch (err) {
-                console.error('Logout error:', err);
-            } finally {
-                currentUserRole = null;
-                showPage('home');
-            }
-        }
+    // ✅ Correct Supabase client creation
+    const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-        async function loadPlayerDashboard() {
-            try {
-                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-                if (userError) throw userError;
-                if (!user) return;
+    let currentUserRole = null;
 
-                const { data, error } = await supabaseClient
-                    .from('players')
-                    .select('*')
-                    .eq('user_id', user.id)
-                    .single();
-
-                if (error) throw error;
-
-                const nameEl = document.getElementById('playerDashName');
-                const emailEl = document.getElementById('playerDashEmail');
-                const sportEl = document.getElementById('playerDashSport');
-                const gradEl = document.getElementById('playerDashGradYear');
-
-                if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
-                if (emailEl) emailEl.textContent = data.email || '';
-                if (sportEl) sportEl.textContent = data.sport || '';
-                if (gradEl) gradEl.textContent = data.grad_year || '';
-            } catch (err) {
-                console.error('Error loading player dashboard:', err);
-            }
-        }
-
-        async function loadCoachDashboard() {
-            try {
-                const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-                if (userError) throw userError;
-                if (!user) return;
-
-                const { data, error } = await supabaseClient
-                    .from('coaches')
-                    .select('*')
-                    .eq('user_id', user.id)
-                    .single();
-
-                if (error) throw error;
-
-                const nameEl = document.getElementById('coachDashName');
-                const schoolEl = document.getElementById('coachDashSchool');
-                const sportEl = document.getElementById('coachDashSport');
-
-                if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
-                if (schoolEl) schoolEl.textContent = data.school ? `- ${data.school}` : '';
-                if (sportEl) sportEl.textContent = data.sport ? ` (${data.sport})` : '';
-            } catch (err) {
-                console.error('Error loading coach dashboard:', err);
-            }
-        }
-        function displayMessage(element, message, isError = false) {
-            if (!element) return;
-            element.textContent = message;
-            element.classList.toggle('text-red-600', isError);
-            element.classList.toggle('text-navy', !isError);
-        }
-
-        // Page Navigation System
-        function showPage(pageName) {
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.classList.add('hidden'));
-
-            const pageMap = {
-                'home': 'homePage',
-                'howitworks': 'howitworksPage',
-                'pricing': 'pricingPage',
-                'database': 'databasePage',
-                'coachportal': 'coachportalPage',
-                'coachsignup': 'coachsignupPage',
-                'coachlogin': 'coachloginPage',
-                'coachdashboard': 'coachdashboardPage',
-                'playerdashboard': 'playerdashboardPage',
-                'login': 'loginPage',
-                'signup': 'signupPage'
-            };
-
-            const targetPage = document.getElementById(pageMap[pageName]);
-            if (targetPage) {
-                targetPage.classList.remove('hidden');
-                window.scrollTo(0, 0);
-
-                if (pageName === 'howitworks') {
-                    setTimeout(initPreviewCharts, 100);
-                }
-
-                if (pageName === 'database') {
-                    const previewMessage = document.getElementById('previewMessage');
-                    if (previewMessage) {
-                        previewMessage.classList.add('hidden');
-                    }
-                }
-            }
-        }
-
-        function filterSportAndNavigate(sport) {
-            const sportFilter = document.getElementById('sportFilter');
-            const resultCount = document.getElementById('resultCount');
-            const previewMessage = document.getElementById('previewMessage');
-
-            if (sportFilter) {
-                sportFilter.value = sport;
-            }
-
-            const sportCounts = {
-                'soccer': '342',
-                'football': '289',
-                'baseball': '267',
-                'basketball': '198',
-                'softball': '156',
-                'volleyball': '195'
-            };
-
-            if (resultCount && sportCounts[sport]) {
-                resultCount.textContent = sportCounts[sport];
-            }
-
-            showPage('database');
-
-            if (previewMessage) {
-                previewMessage.classList.remove('hidden');
-            }
-
-            setTimeout(() => {
-                const previewCoaches = document.getElementById('previewCoaches');
-                if (previewCoaches) {
-                    previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 100);
-        }
-
-        function showSignupPrompt() {
-            showPage('signup');
-        }
-
-        function toggleAccountType(type) {
-            const playerToggle = document.getElementById('playerToggle');
-            const coachToggle = document.getElementById('coachToggle');
-            const playerForm = document.getElementById('playerForm');
-            const coachForm = document.getElementById('coachForm');
-
-            if (type === 'player') {
-                playerToggle.classList.add('bg-electric', 'text-white');
-                playerToggle.classList.remove('text-navy');
-                coachToggle.classList.remove('bg-electric', 'text-white');
-                coachToggle.classList.add('text-navy');
-                playerForm.classList.remove('hidden');
-                coachForm.classList.add('hidden');
-            } else {
-                coachToggle.classList.add('bg-electric', 'text-white');
-                coachToggle.classList.remove('text-navy');
-                playerToggle.classList.remove('bg-electric', 'text-white');
-                playerToggle.classList.add('text-navy');
-                coachForm.classList.remove('hidden');
-                playerForm.classList.add('hidden');
-            }
-        }
-
-        function initPreviewCharts() {
-            const opensCtx = document.getElementById('previewOpensChart');
-            if (opensCtx && !opensCtx.chart) {
-                opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{
-                            label: 'Email Opens',
-                            data: [45, 52, 61, 58, 72, 68],
-                            borderColor: '#00D4FF',
-                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: { beginAtZero: true }
-                        }
-                    }
-                });
-            }
-
-            const sportCtx = document.getElementById('previewSportChart');
-            if (sportCtx && !sportCtx.chart) {
-                sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
-                        datasets: [{
-                            label: 'Response Rate (%)',
-                            data: [28, 22, 31, 19, 26, 24],
-                            backgroundColor: [
-                                '#00D4FF',
-                                '#0A1F44',
-                                '#00D4FF',
-                                '#0A1F44',
-                                '#00D4FF',
-                                '#0A1F44'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 40
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
+    async function handleLogout() {
+        try {
+            await supabaseClient.auth.signOut();
+        } catch (err) {
+            console.error('Logout error:', err);
+        } finally {
+            currentUserRole = null;
             showPage('home');
+        }
+    }
 
-            // PLAYER SIGNUP
-            const playerForm = document.getElementById('playerForm');
-            const playerSignupMessage = document.getElementById('playerSignupMessage');
-            if (playerForm) {
-                playerForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    displayMessage(playerSignupMessage, 'Account created! Redirecting...', false);
-                        currentUserRole = 'player';
-                        await loadPlayerDashboard();
-                        showPage('playerdashboard');
-                    
-                    const firstName = document.getElementById('playerFirstName')?.value.trim();
-                    const lastName = document.getElementById('playerLastName')?.value.trim();
-                    const email = document.getElementById('playerEmail')?.value.trim();
-                    const password = document.getElementById('playerPassword')?.value;
-                    const sport = document.getElementById('playerSport')?.value;
-                    const gradYear = document.getElementById('playerGradYear')?.value;
+    async function loadPlayerDashboard() {
+        try {
+            const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+            if (userError) throw userError;
+            if (!user) return;
 
-                    try {
-                        const { data, error } = await supabaseClient.auth.signUp({ email, password });
-                        if (error) throw error;
+            const { data, error } = await supabaseClient
+                .from('players')
+                .select('*')
+                .eq('user_id', user.id)
+                .single();
 
-                        const userId = data.user?.id;
-                        if (userId) {
-                            const { error: insertError } = await supabaseClient
-                                .from('players')
-                                .insert([{
-                                    user_id: userId,
-                                    first_name: firstName,
-                                    last_name: lastName,
-                                    email,
-                                    sport,
-                                    grad_year: gradYear
-                                }]);
-                            if (insertError) throw insertError;
-                        }
+            if (error) throw error;
 
-                        displayMessage(playerSignupMessage, 'Account created! Redirecting...', false);
-                        showPage('database');
-                    } catch (err) {
-                        displayMessage(playerSignupMessage, err.message || 'Signup failed. Please try again.', true);
-                    }
-                });
+            const nameEl = document.getElementById('playerDashName');
+            const emailEl = document.getElementById('playerDashEmail');
+            const sportEl = document.getElementById('playerDashSport');
+            const gradEl = document.getElementById('playerDashGradYear');
+
+            if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+            if (emailEl) emailEl.textContent = data.email || '';
+            if (sportEl) sportEl.textContent = data.sport || '';
+            if (gradEl) gradEl.textContent = data.grad_year || '';
+        } catch (err) {
+            console.error('Error loading player dashboard:', err);
+        }
+    }
+
+    async function loadCoachDashboard() {
+        try {
+            const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
+            if (userError) throw userError;
+            if (!user) return;
+
+            const { data, error } = await supabaseClient
+                .from('coaches')
+                .select('*')
+                .eq('user_id', user.id)
+                .single();
+
+            if (error) throw error;
+
+            const nameEl = document.getElementById('coachDashName');
+            const schoolEl = document.getElementById('coachDashSchool');
+            const sportEl = document.getElementById('coachDashSport');
+
+            if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+            if (schoolEl) schoolEl.textContent = data.school ? `- ${data.school}` : '';
+            if (sportEl) sportEl.textContent = data.sport ? ` (${data.sport})` : '';
+        } catch (err) {
+            console.error('Error loading coach dashboard:', err);
+        }
+    }
+
+    function displayMessage(element, message, isError = false) {
+        if (!element) return;
+        element.textContent = message;
+        element.classList.toggle('text-red-600', isError);
+        element.classList.toggle('text-navy', !isError);
+    }
+
+    // Page Navigation System
+    function showPage(pageName) {
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => page.classList.add('hidden'));
+
+        const pageMap = {
+            'home': 'homePage',
+            'howitworks': 'howitworksPage',
+            'pricing': 'pricingPage',
+            'database': 'databasePage',
+            'coachportal': 'coachportalPage',
+            'coachsignup': 'coachsignupPage',
+            'coachlogin': 'coachloginPage',
+            'coachdashboard': 'coachdashboardPage',
+            'playerdashboard': 'playerdashboardPage',
+            'login': 'loginPage',
+            'signup': 'signupPage'
+        };
+
+        const targetPage = document.getElementById(pageMap[pageName]);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+
+            if (pageName === 'howitworks') {
+                setTimeout(initPreviewCharts, 100);
             }
 
-            // COACH SIGNUP (shared handler)
-            async function handleCoachSignup(formPrefix, messageElement) {
-                displayMessage(messageElement, 'Coach account created! Redirecting...', false);
-                    currentUserRole = 'coach';
-                    await loadCoachDashboard();
-                    showPage('coachdashboard');
+            if (pageName === 'database') {
+                const previewMessage = document.getElementById('previewMessage');
+                if (previewMessage) {
+                    previewMessage.classList.add('hidden');
+                }
+            }
+        }
+    }
 
-                const firstName = document.getElementById(`${formPrefix}FirstName`)?.value.trim();
-                const lastName = document.getElementById(`${formPrefix}LastName`)?.value.trim();
-                const school = document.getElementById(`${formPrefix}School`)?.value.trim();
-                const title = document.getElementById(`${formPrefix}Title`)?.value;
-                const sport = document.getElementById(`${formPrefix}Sport`)?.value;
-                const email = document.getElementById(`${formPrefix}Email`)?.value.trim();
-                const password = document.getElementById(`${formPrefix}Password`)?.value;
+    function filterSportAndNavigate(sport) {
+        const sportFilter = document.getElementById('sportFilter');
+        const resultCount = document.getElementById('resultCount');
+        const previewMessage = document.getElementById('previewMessage');
+
+        if (sportFilter) {
+            sportFilter.value = sport;
+        }
+
+        const sportCounts = {
+            'soccer': '342',
+            'football': '289',
+            'baseball': '267',
+            'basketball': '198',
+            'softball': '156',
+            'volleyball': '195'
+        };
+
+        if (resultCount && sportCounts[sport]) {
+            resultCount.textContent = sportCounts[sport];
+        }
+
+        showPage('database');
+
+        if (previewMessage) {
+            previewMessage.classList.remove('hidden');
+        }
+
+        setTimeout(() => {
+            const previewCoaches = document.getElementById('previewCoaches');
+            if (previewCoaches) {
+                previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100);
+    }
+
+    function showSignupPrompt() {
+        showPage('signup');
+    }
+
+    function toggleAccountType(type) {
+        const playerToggle = document.getElementById('playerToggle');
+        const coachToggle = document.getElementById('coachToggle');
+        const playerForm = document.getElementById('playerForm');
+        const coachForm = document.getElementById('coachForm');
+
+        if (type === 'player') {
+            playerToggle.classList.add('bg-electric', 'text-white');
+            playerToggle.classList.remove('text-navy');
+            coachToggle.classList.remove('bg-electric', 'text-white');
+            coachToggle.classList.add('text-navy');
+            playerForm.classList.remove('hidden');
+            coachForm.classList.add('hidden');
+        } else {
+            coachToggle.classList.add('bg-electric', 'text-white');
+            coachToggle.classList.remove('text-navy');
+            playerToggle.classList.remove('bg-electric', 'text-white');
+            playerToggle.classList.add('text-navy');
+            coachForm.classList.remove('hidden');
+            playerForm.classList.add('hidden');
+        }
+    }
+
+    function initPreviewCharts() {
+        const opensCtx = document.getElementById('previewOpensChart');
+        if (opensCtx && !opensCtx.chart) {
+            opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Email Opens',
+                        data: [45, 52, 61, 58, 72, 68],
+                        borderColor: '#00D4FF',
+                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        const sportCtx = document.getElementById('previewSportChart');
+        if (sportCtx && !sportCtx.chart) {
+            sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
+                    datasets: [{
+                        label: 'Response Rate (%)',
+                        data: [28, 22, 31, 19, 26, 24],
+                        backgroundColor: [
+                            '#00D4FF',
+                            '#0A1F44',
+                            '#00D4FF',
+                            '#0A1F44',
+                            '#00D4FF',
+                            '#0A1F44'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 40
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        showPage('home');
+
+        // PLAYER SIGNUP
+        const playerForm = document.getElementById('playerForm');
+        const playerSignupMessage = document.getElementById('playerSignupMessage');
+        if (playerForm) {
+            playerForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const firstName = document.getElementById('playerFirstName')?.value.trim();
+                const lastName = document.getElementById('playerLastName')?.value.trim();
+                const email = document.getElementById('playerEmail')?.value.trim();
+                const password = document.getElementById('playerPassword')?.value;
+                const sport = document.getElementById('playerSport')?.value;
+                const gradYear = document.getElementById('playerGradYear')?.value;
 
                 try {
+                    displayMessage(playerSignupMessage, 'Creating account...', false);
+
                     const { data, error } = await supabaseClient.auth.signUp({ email, password });
                     if (error) throw error;
 
                     const userId = data.user?.id;
                     if (userId) {
                         const { error: insertError } = await supabaseClient
-                            .from('coaches')
+                            .from('players')
                             .insert([{
                                 user_id: userId,
                                 first_name: firstName,
                                 last_name: lastName,
-                                school,
-                                title,
+                                email,
                                 sport,
-                                email
+                                grad_year: gradYear
                             }]);
                         if (insertError) throw insertError;
                     }
 
-                    displayMessage(messageElement, 'Coach account created! Redirecting...', false);
+                    currentUserRole = 'player';
+                    await loadPlayerDashboard();
+
+                    displayMessage(playerSignupMessage, 'Account created! Redirecting...', false);
+                    showPage('playerdashboard');
+                } catch (err) {
+                    console.error(err);
+                    displayMessage(playerSignupMessage, err.message || 'Signup failed. Please try again.', true);
+                }
+            });
+        }
+
+        // COACH SIGNUP (shared handler)
+        async function handleCoachSignup(formPrefix, messageElement) {
+            const firstName = document.getElementById(`${formPrefix}FirstName`)?.value.trim();
+            const lastName = document.getElementById(`${formPrefix}LastName`)?.value.trim();
+            const school = document.getElementById(`${formPrefix}School`)?.value.trim();
+            const title = document.getElementById(`${formPrefix}Title`)?.value;
+            const sport = document.getElementById(`${formPrefix}Sport`)?.value;
+            const email = document.getElementById(`${formPrefix}Email`)?.value.trim();
+            const password = document.getElementById(`${formPrefix}Password`)?.value;
+
+            try {
+                displayMessage(messageElement, 'Creating coach account...', false);
+
+                const { data, error } = await supabaseClient.auth.signUp({ email, password });
+                if (error) throw error;
+
+                const userId = data.user?.id;
+                if (userId) {
+                    const { error: insertError } = await supabaseClient
+                        .from('coaches')
+                        .insert([{
+                            user_id: userId,
+                            first_name: firstName,
+                            last_name: lastName,
+                            school,
+                            title,
+                            sport,
+                            email
+                        }]);
+                    if (insertError) throw insertError;
+                }
+
+                currentUserRole = 'coach';
+                await loadCoachDashboard();
+
+                displayMessage(messageElement, 'Coach account created! Redirecting...', false);
+                showPage('coachdashboard');
+            } catch (err) {
+                console.error(err);
+                displayMessage(messageElement, err.message || 'Signup failed. Please try again.', true);
+            }
+        }
+
+        // COACH SIGNUP (toggle form)
+        const coachForm = document.getElementById('coachForm');
+        const coachSignupMessage = document.getElementById('coachSignupMessage');
+        if (coachForm) {
+            coachForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                await handleCoachSignup('coach', coachSignupMessage);
+            });
+        }
+
+        // COACH SIGNUP (separate coach signup page)
+        const coachSignupPageForm = document.getElementById('coachSignupPageForm');
+        const coachSignupPageMessage = document.getElementById('coachSignupPageMessage');
+        if (coachSignupPageForm) {
+            coachSignupPageForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                await handleCoachSignup('coachPage', coachSignupPageMessage);
+            });
+        }
+
+        // PLAYER LOGIN
+        const playerLoginForm = document.getElementById('playerLoginForm');
+        const playerLoginMessage = document.getElementById('playerLoginMessage');
+        if (playerLoginForm) {
+            playerLoginForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById('playerLoginEmail')?.value.trim();
+                const password = document.getElementById('playerLoginPassword')?.value;
+
+                try {
+                    displayMessage(playerLoginMessage, 'Logging in...', false);
+
+                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+
+                    currentUserRole = 'player';
+                    await loadPlayerDashboard();
+
+                    displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
+                    showPage('playerdashboard');
+                } catch (err) {
+                    console.error(err);
+                    displayMessage(playerLoginMessage, err.message || 'Login failed. Please try again.', true);
+                }
+            });
+        }
+
+        // COACH LOGIN
+        const coachLoginForm = document.getElementById('coachLoginForm');
+        const coachLoginMessage = document.getElementById('coachLoginMessage');
+        if (coachLoginForm) {
+            coachLoginForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById('coachLoginEmail')?.value.trim();
+                const password = document.getElementById('coachLoginPassword')?.value;
+
+                try {
+                    displayMessage(coachLoginMessage, 'Logging in...', false);
+
+                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+
+                    currentUserRole = 'coach';
+                    await loadCoachDashboard();
+
+                    displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
                     showPage('coachdashboard');
                 } catch (err) {
-                    displayMessage(messageElement, err.message || 'Signup failed. Please try again.', true);
+                    console.error(err);
+                    displayMessage(coachLoginMessage, err.message || 'Login failed. Please try again.', true);
                 }
-            }
-
-            // COACH SIGNUP (toggle form)
-            const coachForm = document.getElementById('coachForm');
-            const coachSignupMessage = document.getElementById('coachSignupMessage');
-            if (coachForm) {
-                coachForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    await handleCoachSignup('coach', coachSignupMessage);
-                });
-            }
-
-            // COACH SIGNUP (separate coach signup page)
-            const coachSignupPageForm = document.getElementById('coachSignupPageForm');
-            const coachSignupPageMessage = document.getElementById('coachSignupPageMessage');
-            if (coachSignupPageForm) {
-                coachSignupPageForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    await handleCoachSignup('coachPage', coachSignupPageMessage);
-                });
-            }
-
-            // PLAYER LOGIN
-            const playerLoginForm = document.getElementById('playerLoginForm');
-            const playerLoginMessage = document.getElementById('playerLoginMessage');
-            if (playerLoginForm) {
-                playerLoginForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
-                        currentUserRole = 'player';
-                        await loadPlayerDashboard();
-                        showPage('playerdashboard');
-
-                    const email = document.getElementById('playerLoginEmail')?.value.trim();
-                    const password = document.getElementById('playerLoginPassword')?.value;
-
-                    try {
-                        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                        if (error) throw error;
-
-                        displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
-                        showPage('database');
-                    } catch (err) {
-                        displayMessage(playerLoginMessage, err.message || 'Login failed. Please try again.', true);
-                    }
-                });
-            }
-
-            // COACH LOGIN
-            const coachLoginForm = document.getElementById('coachLoginForm');
-            const coachLoginMessage = document.getElementById('coachLoginMessage');
-            if (coachLoginForm) {
-                coachLoginForm.addEventListener('submit', async (event) => {
-                    event.preventDefault();
-                    displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
-                        currentUserRole = 'coach';
-                        await loadCoachDashboard();
-                        showPage('coachdashboard');
-                    
-                    const email = document.getElementById('coachLoginEmail')?.value.trim();
-                    const password = document.getElementById('coachLoginPassword')?.value;
-
-                    try {
-                        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                        if (error) throw error;
-
-                        displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
-                        showPage('coachdashboard');
-                    } catch (err) {
-                        displayMessage(coachLoginMessage, err.message || 'Login failed. Please try again.', true);
-                    }
-                });
-            }
-        });
-    </script>
+            });
+        }
+    });
+</script>
 </body>
 </html>
