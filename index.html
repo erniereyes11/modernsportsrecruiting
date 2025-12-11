@@ -1309,69 +1309,118 @@
         }
     }
 
-    // REAL Supabase handler for coach applications
-    async function handleCoachApplication() {
-        const form = document.getElementById('coachSignupForm');
-        const msg  = document.getElementById('coachSignupMessage');
+    // REAL Supabase handler for Coach Marketplace Application
+async function handleCoachApplication() {
+    const form = document.getElementById("coachSignupForm");
+    const msg = document.getElementById("coachSignupMessage");
 
-        if (!form) {
-            console.error("⚠️ coachSignupForm not found");
+    if (!form) {
+        console.error("❌ coachSignupForm not found in DOM");
+        return;
+    }
+
+    // Reset / show submitting state
+    if (msg) {
+        msg.textContent = "Submitting your application...";
+        msg.classList.remove("text-gray-500", "text-green-600", "text-red-600");
+        msg.classList.add("text-navy", "font-semibold");
+    }
+
+    const formData = new FormData(form);
+
+    const coachName = (formData.get("coachName") || "").toString().trim();
+    const school    = (formData.get("school") || "").toString().trim();
+    const sport     = (formData.get("sport") || "").toString();
+    const division  = (formData.get("division") || "").toString();
+    const role      = (formData.get("role") || "").toString();
+    const email     = (formData.get("email") || "").toString().trim();
+    const bioLink   = (formData.get("bioLink") || "").toString().trim();
+    const notes     = (formData.get("notes") || "").toString().trim();
+
+    // Basic front-end validation so we don't even hit Supabase with bad data
+    if (!coachName || !school || !sport || !division || !role || !email) {
+        if (msg) {
+            msg.textContent = "Please fill out all required fields before submitting.";
+            msg.classList.remove("text-gray-500", "text-green-600", "text-navy");
+            msg.classList.add("text-red-600", "font-semibold");
+        }
+        return;
+    }
+
+    try {
+        // Optional: attach current auth user id if logged in
+        let userId = null;
+        try {
+            const { data: userData, error: userError } = await supabaseClient.auth.getUser();
+            if (userError) {
+                console.warn("⚠️ Could not fetch current user for coach application:", userError);
+            } else {
+                userId = userData?.user?.id || null;
+            }
+        } catch (err) {
+            console.warn("⚠️ auth.getUser threw an error:", err);
+        }
+
+        // 🔥 INSERT INTO YOUR TABLE
+        // This assumes a table called `coach_applications` with columns:
+        //  user_id (uuid, nullable)
+        //  coach_name (text)
+        //  school (text)
+        //  sport (text)
+        //  division (text)
+        //  role (text)
+        //  email (text)
+        //  bio_link (text, nullable)
+        //  notes (text, nullable)
+        //  status (text, default 'pending')
+        const { data, error } = await supabaseClient
+            .from("coach_applications")
+            .insert([
+                {
+                    user_id: userId,
+                    coach_name: coachName,
+                    school: school,
+                    sport: sport,
+                    division: division,
+                    role: role,
+                    email: email,
+                    bio_link: bioLink || null,
+                    notes: notes || null,
+                    status: "pending"
+                }
+            ])
+            .select()
+            .single();
+
+        if (error) {
+            console.error("❌ Error inserting coach application:", error);
+            if (msg) {
+                msg.textContent = "Something went wrong submitting your application. Please try again.";
+                msg.classList.remove("text-gray-500", "text-green-600", "text-navy");
+                msg.classList.add("text-red-600", "font-semibold");
+            }
             return;
         }
 
-        const formData = new FormData(form);
+        console.log("✅ Coach application stored:", data);
 
-        const payload = {
-            full_name: (formData.get('coachName') || '').toString().trim() || null,
-            school:    (formData.get('school') || '').toString().trim() || null,
-            sport:     (formData.get('sport') || '').toString() || null,
-            level:     (formData.get('level') || '').toString() || null,
-            email:     (formData.get('email') || '').toString().trim().toLowerCase() || null,
-            bio_link:  (formData.get('bioLink') || '').toString().trim() || null,
-            notes:     (formData.get('notes') || '').toString().trim() || null,
-            status:    'pending'
-        };
+        // Clear the form
+        form.reset();
 
-        try {
-            if (msg) {
-                msg.textContent = 'Submitting your application...';
-                msg.classList.remove('text-gray-500', 'text-green-600', 'text-red-600');
-                msg.classList.add('text-blue-600');
-            }
-
-            const { data, error } = await supabaseClient
-                .from('coach_applications')
-                .insert(payload);
-
-            if (error) {
-                console.error('❌ Supabase insert error:', error);
-                if (msg) {
-                    msg.textContent = 'Something went wrong submitting your application. Please try again.';
-                    msg.classList.remove('text-blue-600');
-                    msg.classList.add('text-red-600');
-                }
-                return;
-            }
-
-            // Success
-            form.reset();
-            if (msg) {
-                msg.textContent = 'Application received! We’ll review and follow up by email.';
-                msg.classList.remove('text-blue-600', 'text-gray-500', 'text-red-600');
-                msg.classList.add('text-green-600', 'font-semibold');
-            }
-
-            console.log('✅ Coach application saved:', data);
-        } catch (err) {
-            console.error('❌ Unexpected error submitting coach application:', err);
-            if (msg) {
-                msg.textContent = 'Unexpected error. Please try again later.';
-                msg.classList.remove('text-blue-600');
-                msg.classList.add('text-red-600');
-            }
+        if (msg) {
+            msg.textContent = "Thanks for applying! We’ll review your info and email you with next steps.";
+            msg.classList.remove("text-gray-500", "text-red-600", "text-navy");
+            msg.classList.add("text-green-600", "font-semibold");
+        }
+    } catch (err) {
+        console.error("❌ Unexpected error while submitting coach application:", err);
+        if (msg) {
+            msg.textContent = "Something went wrong submitting your application. Please try again.";
+            msg.classList.remove("text-gray-500", "text-green-600", "text-navy");
+            msg.classList.add("text-red-600", "font-semibold");
         }
     }
-</script>
+}
 
     <!-- COACH SERVICE PROFILE PAGE -->
     <div id="coachServicePage" class="page-content hidden">
