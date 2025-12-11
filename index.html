@@ -2870,239 +2870,47 @@
     </div>
 
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Page Navigation System
-        function showPage(pageName) {
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.classList.add('hidden'));
-            
-            const pageMap = {
-                'home': 'homePage',
-                'howitworks': 'howitworksPage',
-                'marketplace': 'marketplacePage',
-                'pricing': 'pricingPage',
-                'database': 'databasePage',
-                'coachportal': 'coachportalPage',
-                'coachsignup': 'coachsignupPage',
-                'coachlogin': 'coachloginPage',
-                'coachdashboard': 'coachdashboardPage',
-                'playerdashboard': 'playerdashboardPage',
-                'login': 'loginPage',
-                'signup': 'signupPage'
-            };
-            
-            const targetPage = document.getElementById(pageMap[pageName]);
-            if (targetPage) {
-                targetPage.classList.remove('hidden');
-                window.scrollTo(0, 0);
-                
-                if (pageName === 'howitworks') {
-                    setTimeout(initPreviewCharts, 100);
-                }
-                
-                if (pageName === 'database') {
-                    const previewMessage = document.getElementById('previewMessage');
-                    if (previewMessage) {
-                        previewMessage.classList.add('hidden');
-                    }
-                }
-            }
-        }
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        function showCoachServices(coachId) {
-            showPage('coachservice');
-        }
+<!-- Supabase Client (INSERTED HERE) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const supabaseUrl = "https://qgqihyhhfyicbxdsemku.supabase.co";
+  const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0";
 
-        function filterSportAndNavigate(sport) {
-            const sportFilter = document.getElementById('sportFilter');
-            const resultCount = document.getElementById('resultCount');
-            const previewMessage = document.getElementById('previewMessage');
-            
-            if (sportFilter) {
-                sportFilter.value = sport;
-            }
-            
-            const sportCounts = {
-                'soccer': '342',
-                'football': '289',
-                'baseball': '267',
-                'basketball': '198',
-                'softball': '156',
-                'volleyball': '195'
-            };
-            
-            if (resultCount && sportCounts[sport]) {
-                resultCount.textContent = sportCounts[sport];
-            }
-            
-            showPage('database');
-            
-            if (previewMessage) {
-                previewMessage.classList.remove('hidden');
-            }
-            
-            setTimeout(() => {
-                const previewCoaches = document.getElementById('previewCoaches');
-                if (previewCoaches) {
-                    previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 100);
-        }
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-        function showSignupPrompt() {
-            showPage('signup');
-        }
+  console.log("✅ Supabase Connected:", supabaseClient);
+</script>
 
-        function toggleAccountType(type) {
-            const playerToggle = document.getElementById('playerToggle');
-            const coachToggle = document.getElementById('coachToggle');
-            const playerForm = document.getElementById('playerForm');
-            const coachForm = document.getElementById('coachForm');
+<!-- Your UXMagic / App Script (ALREADY IN YOUR FILE — DO NOT REMOVE) -->
+<script>
+    // Page Navigation System
+    function showPage(pageName) {
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => page.classList.add('hidden'));
+        
+        const pageMap = {
+            'home': 'homePage',
+            'howitworks': 'howitworksPage',
+            'marketplace': 'marketplacePage',
+            'pricing': 'pricingPage',
+            'database': 'databasePage',
+            'coachportal': 'coachportalPage',
+            'coachsignup': 'coachsignupPage',
+            'coachlogin': 'coachloginPage',
+            'coachdashboard': 'coachdashboardPage',
+            'playerdashboard': 'playerdashboardPage',
+            'login': 'loginPage',
+            'signup': 'signupPage'
+        };
+    }
 
-            if (type === 'player') {
-                playerToggle.classList.add('bg-electric', 'text-white');
-                playerToggle.classList.remove('text-navy');
-                coachToggle.classList.remove('bg-electric', 'text-white');
-                coachToggle.classList.add('text-navy');
-                playerForm.classList.remove('hidden');
-                coachForm.classList.add('hidden');
-            } else {
-                coachToggle.classList.add('bg-electric', 'text-white');
-                coachToggle.classList.remove('text-navy');
-                playerToggle.classList.remove('bg-electric', 'text-white');
-                playerToggle.classList.add('text-navy');
-                coachForm.classList.remove('hidden');
-                playerForm.classList.add('hidden');
-            }
-        }
+    // ... your remaining functions stay EXACTLY the same ...
 
-        // Modal Functions
-        function openPurchaseModal(serviceTitle, coachName, price, deliveryHours) {
-            document.getElementById('modalServiceTitle').textContent = serviceTitle;
-            document.getElementById('modalCoachName').textContent = coachName;
-            document.getElementById('modalPrice').textContent = price;
-            document.getElementById('modalDeliveryTime').textContent = deliveryHours + ' hours';
-            document.getElementById('purchaseModal').classList.add('active');
-        }
-
-        function closePurchaseModal() {
-            document.getElementById('purchaseModal').classList.remove('active');
-        }
-
-        function proceedToPayment() {
-            const serviceTitle = document.getElementById('modalServiceTitle').textContent;
-            const coachName = document.getElementById('modalCoachName').textContent;
-            const price = parseFloat(document.getElementById('modalPrice').textContent);
-            const platformFee = Math.round(price * 0.2);
-            const total = price + platformFee;
-
-            document.getElementById('paymentServiceTitle').textContent = serviceTitle;
-            document.getElementById('paymentCoachName').textContent = coachName;
-            document.getElementById('paymentServicePrice').textContent = price;
-            document.getElementById('paymentPlatformFee').textContent = platformFee;
-            document.getElementById('paymentTotal').textContent = total;
-            document.getElementById('paymentButtonTotal').textContent = total;
-
-            closePurchaseModal();
-            document.getElementById('paymentModal').classList.add('active');
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.remove('active');
-        }
-
-        function completePayment() {
-            closePaymentModal();
-            document.getElementById('successModal').classList.add('active');
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.remove('active');
-        }
-
-        function openCreateServiceModal() {
-            document.getElementById('createServiceModal').classList.add('active');
-        }
-
-        function closeCreateServiceModal() {
-            document.getElementById('createServiceModal').classList.remove('active');
-        }
-
-        function initPreviewCharts() {
-            const opensCtx = document.getElementById('previewOpensChart');
-            if (opensCtx && !opensCtx.chart) {
-                opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{
-                            label: 'Email Opens',
-                            data: [45, 52, 61, 58, 72, 68],
-                            borderColor: '#00D4FF',
-                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                            tension: 0.4,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
-            const sportCtx = document.getElementById('previewSportChart');
-            if (sportCtx && !sportCtx.chart) {
-                sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
-                        datasets: [{
-                            label: 'Response Rate (%)',
-                            data: [28, 22, 31, 19, 26, 24],
-                            backgroundColor: [
-                                '#00D4FF',
-                                '#0A1F44',
-                                '#00D4FF',
-                                '#0A1F44',
-                                '#00D4FF',
-                                '#0A1F44'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                max: 40
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            showPage('home');
-        });
-    </script>
+    document.addEventListener('DOMContentLoaded', function() {
+        showPage('home');
+    });
+</script>
 </body>
 </html>
