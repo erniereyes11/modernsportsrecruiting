@@ -4,15 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Sports Recruiting - Connect with College Coaches</title>
-    </script>
-
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -37,31 +30,51 @@
         select.ai-email-select {
             color: #000000 !important;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body class="bg-white" style="height: auto; min-height: 100%;">
     <!-- Navigation -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-8">
-                    <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Modern Sports Recruiting</a>
-                    <div class="hidden md:flex space-x-6">
-                        <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
-                        <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
-                        <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
-                        <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
-                        <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">Log In</a>
-                    <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">Get Started</a>
-                </div>
-            </div>
+  <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center space-x-8">
+        <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">
+          Modern Sports Recruiting
+        </a>
+        <div class="hidden md:flex space-x-6">
+          <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
+          <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
+          <!-- 👇 NEW MARKETPLACE LINK -->
+          <a href="javascript:void(0)" onclick="showPage('marketplace')" class="text-gray-700 hover:text-navy transition cursor-pointer">Marketplace</a>
+          <!-- 👆 -->
+          <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
+          <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
+          <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
         </div>
-    </nav>
-
+      </div>
+      <div class="flex items-center space-x-4">
+        <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">Log In</a>
+        <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
     <!-- HOME PAGE -->
     <div id="homePage" class="page-content">
         <!-- Hero Section -->
@@ -156,6 +169,132 @@
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">A complete platform designed to streamline your college recruiting process with powerful tools and verified coach contacts</p>
             </div>
         </section>
+<!-- MARKETPLACE PAGE -->
+<div id="marketplacePage" class="page-content hidden">
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-6">Coach Marketplace</h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Get personalized recruiting services from verified college coaches. Film reviews, recruiting evaluations,
+        and expert guidance to elevate your game.
+      </p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="py-8 bg-white border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-5 gap-4">
+        <div>
+          <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+            <option>All Sports</option>
+            <option>Soccer</option>
+            <option>Football</option>
+            <option>Baseball</option>
+            <option>Basketball</option>
+            <option>Softball</option>
+            <option>Volleyball</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-navy mb-2">Division</label>
+          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+            <option>All Levels</option>
+            <option>NCAA D1</option>
+            <option>NCAA D2</option>
+            <option>NCAA D3</option>
+            <option>NAIA</option>
+            <option>JUCO</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-navy mb-2">Service Type</label>
+          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+            <option>All Services</option>
+            <option>Film Review</option>
+            <option>Recruiting Evaluation</option>
+            <option>Email Review</option>
+            <option>Q&A Session</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-navy mb-2">Price</label>
+          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+            <option>Any Price</option>
+            <option>Under $50</option>
+            <option>$50 - $100</option>
+            <option>$100 - $200</option>
+            <option>$200+</option>
+          </select>
+        </div>
+        <div class="flex items-end">
+          <button class="w-full bg-electric text-white py-2 rounded-lg font-semibold hover:bg-blue-500 transition">
+            Apply Filters
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coach Cards -->
+  <section class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-2xl font-bold text-navy mb-2">Featured Coach Services</h2>
+          <p class="text-gray-600">Book 1-on-1 services directly with college coaches. Limited spots per month.</p>
+        </div>
+        <div class="text-sm text-gray-600">
+          <span class="font-semibold">24</span> coaches currently offering services
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Example Coach Card -->
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+          <div class="p-6">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 rounded-full bg-navy text-white flex items-center justify-center font-semibold text-lg mr-4">
+                CA
+              </div>
+              <div>
+                <div class="font-bold text-navy">Coach Anderson</div>
+                <div class="text-sm text-gray-500">Head Coach - University of California</div>
+                <div class="text-xs text-gray-400">NCAA Division I - Soccer</div>
+              </div>
+            </div>
+
+            <div class="space-y-3 mb-4">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-gray-600">Film Review + Evaluation</span>
+                <span class="font-semibold text-navy">$75</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500 space-x-2">
+                <i class="fas fa-clock text-electric"></i>
+                <span>7 day turnaround</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500 space-x-2">
+                <i class="fas fa-users text-electric"></i>
+                <span>12/20 spots left this month</span>
+              </div>
+            </div>
+
+            <div class="border-t border-gray-200 pt-4">
+              <button class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
+                View Details & Book
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- You can duplicate/change these cards for more sample coaches -->
+        <!-- ... -->
+      </div>
+    </div>
+  </section>
+</div>
 
         <!-- Three Steps -->
         <section class="py-20 bg-white">
@@ -744,6 +883,625 @@
                 <a href="javascript:void(0)" onclick="showPage('signup')" class="inline-block bg-electric text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 transition cursor-pointer">Create Your Account</a>
             </div>
         </section>
+    </div>
+
+    <!-- MARKETPLACE PAGE -->
+    <div id="marketplacePage" class="page-content hidden">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-6">Coach Marketplace</h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Get personalized recruiting services from verified college coaches. Film reviews, recruiting evaluations, and expert guidance to elevate your game.</p>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="py-8 bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <option>All Sports</option>
+                            <option>Soccer</option>
+                            <option>Football</option>
+                            <option>Baseball</option>
+                            <option>Basketball</option>
+                            <option>Softball</option>
+                            <option>Volleyball</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Division</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <option>All Divisions</option>
+                            <option>NCAA D1</option>
+                            <option>NCAA D2</option>
+                            <option>NCAA D3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Price Range</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <option>Any Price</option>
+                            <option>Under $50</option>
+                            <option>$50 - $100</option>
+                            <option>$100 - $200</option>
+                            <option>$200+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">School Name</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Search schools...">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Service Type</label>
+                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <option>All Services</option>
+                            <option>Film Review</option>
+                            <option>Email Feedback</option>
+                            <option>Recruiting Evaluation</option>
+                            <option>Call Session</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coach Cards -->
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-navy">Available Coaches</h2>
+                    <p class="text-gray-600">Browse verified college coaches offering recruiting services</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Coach Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-electric rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                                JA
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-navy">John Anderson</h3>
+                                <p class="text-sm text-gray-600">Head Coach</p>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-xs text-gray-600 ml-1">(47)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>University of California</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-futbol text-electric"></i>
+                                <span>Men's Soccer - NCAA D1</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">15+ years coaching experience. Specialized in midfielder development and tactical analysis. Former professional player.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-sm text-gray-600">From <span class="text-lg font-bold text-navy">$75</span></div>
+                            <button onclick="showCoachServices('john-anderson')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Services</button>
+                        </div>
+                    </div>
+
+                    <!-- Coach Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-electric rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                                SM
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-navy">Sarah Mitchell</h3>
+                                <p class="text-sm text-gray-600">Assistant Coach</p>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-xs text-gray-600 ml-1">(32)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>Stanford University</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-volleyball-ball text-electric"></i>
+                                <span>Women's Volleyball - NCAA D1</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Olympic coach with 10+ years experience. Expert in setter training and team dynamics. Proven track record of player development.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-sm text-gray-600">From <span class="text-lg font-bold text-navy">$50</span></div>
+                            <button onclick="showCoachServices('sarah-mitchell')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Services</button>
+                        </div>
+                    </div>
+
+                    <!-- Coach Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-electric rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                                MR
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-navy">Mike Rodriguez</h3>
+                                <p class="text-sm text-gray-600">Head Coach</p>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star-half-alt text-yellow-400 text-xs"></i>
+                                    <span class="text-xs text-gray-600 ml-1">(28)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>Duke University</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-baseball-ball text-electric"></i>
+                                <span>Baseball - NCAA D1</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Former MLB scout. 20+ years coaching at D1 level. Specialized in pitching mechanics and hitting analysis.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-sm text-gray-600">From <span class="text-lg font-bold text-navy">$100</span></div>
+                            <button onclick="showCoachServices('mike-rodriguez')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Services</button>
+                        </div>
+                    </div>
+
+                    <!-- Coach Card 4 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-electric rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                                ET
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-navy">Emily Thompson</h3>
+                                <p class="text-sm text-gray-600">Head Coach</p>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-xs text-gray-600 ml-1">(41)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>UConn</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-basketball-ball text-electric"></i>
+                                <span>Women's Basketball - NCAA D1</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">National championship winning coach. Expert in guard development and offensive systems. 12+ years D1 experience.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-sm text-gray-600">From <span class="text-lg font-bold text-navy">$85</span></div>
+                            <button onclick="showCoachServices('emily-thompson')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Services</button>
+                        </div>
+                    </div>
+
+                    <!-- Coach Card 5 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-electric rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                                DC
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-navy">David Chen</h3>
+                                <p class="text-sm text-gray-600">Recruiting Coordinator</p>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-xs text-gray-600 ml-1">(56)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>Ohio State University</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-football-ball text-electric"></i>
+                                <span>Football - NCAA D1</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Top-ranked recruiting coordinator. Expert in film breakdown and recruiting process navigation. 8+ years experience.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-sm text-gray-600">From <span class="text-lg font-bold text-navy">$60</span></div>
+                            <button onclick="showCoachServices('david-chen')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Services</button>
+                        </div>
+                    </div>
+
+                    <!-- Coach Card 6 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="flex items-start space-x-4 mb-4">
+                            <div class="w-16 h-16 bg-electric rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                                JW
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-bold text-navy">Jessica Williams</h3>
+                                <p class="text-sm text-gray-600">Head Coach</p>
+                                <div class="flex items-center space-x-1 mt-1">
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    <span class="text-xs text-gray-600 ml-1">(39)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-university text-electric"></i>
+                                <span>UCLA</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600">
+                                <i class="fas fa-baseball-ball text-electric"></i>
+                                <span>Softball - NCAA D1</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Multiple national championships. Expert in pitching and hitting mechanics. 15+ years coaching at elite level.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-sm text-gray-600">From <span class="text-lg font-bold text-navy">$70</span></div>
+                            <button onclick="showCoachServices('jessica-williams')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Services</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- COACH SERVICE PROFILE PAGE -->
+    <div id="coachServicePage" class="page-content hidden">
+        <!-- Coach Header -->
+        <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-start space-x-6">
+                    <div class="w-24 h-24 bg-electric rounded-xl flex items-center justify-center text-white font-bold text-3xl">
+                        JA
+                    </div>
+                    <div class="flex-1">
+                        <h1 class="text-3xl font-bold mb-2">John Anderson</h1>
+                        <p class="text-lg text-gray-300 mb-3">Head Coach - University of California | Men's Soccer - NCAA D1</p>
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="flex items-center space-x-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <span class="text-sm ml-2">5.0 (47 reviews)</span>
+                            </div>
+                            <span class="text-sm">•</span>
+                            <span class="text-sm">156 orders completed</span>
+                        </div>
+                        <p class="text-gray-300 max-w-3xl">15+ years coaching experience at the Division 1 level. Former professional player with extensive experience in midfielder development, tactical analysis, and recruiting evaluation. Passionate about helping athletes reach their full potential.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services List -->
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-2xl font-bold text-navy mb-8">Available Services</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service Card 1 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-navy mb-2">Highlight Film Review</h3>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <i class="fas fa-video text-electric"></i>
+                                <span>Film Review</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Comprehensive analysis of your highlight film with detailed feedback on technical skills, positioning, decision-making, and areas for improvement. Includes written report and video annotations.</p>
+                        <div class="space-y-2 mb-4 text-sm">
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-clock text-electric"></i>
+                                <span>Delivery: 48 hours</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-file-alt text-electric"></i>
+                                <span>Detailed written report</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-video text-electric"></i>
+                                <span>Video annotations</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-2xl font-bold text-navy">$75</div>
+                            <button onclick="openPurchaseModal('Highlight Film Review', 'John Anderson', 75, 48)" class="bg-electric text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Purchase</button>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-navy mb-2">Recruiting Email Feedback</h3>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <i class="fas fa-envelope text-electric"></i>
+                                <span>Email Feedback</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Review and improve your recruiting emails. Get feedback on tone, content, structure, and effectiveness. Learn what coaches want to see and how to stand out in their inbox.</p>
+                        <div class="space-y-2 mb-4 text-sm">
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-clock text-electric"></i>
+                                <span>Delivery: 24 hours</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-check text-electric"></i>
+                                <span>Up to 3 email reviews</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-lightbulb text-electric"></i>
+                                <span>Improvement suggestions</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-2xl font-bold text-navy">$50</div>
+                            <button onclick="openPurchaseModal('Recruiting Email Feedback', 'John Anderson', 50, 24)" class="bg-electric text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Purchase</button>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-navy mb-2">Complete Recruiting Evaluation</h3>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <i class="fas fa-clipboard-check text-electric"></i>
+                                <span>Recruiting Evaluation</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">Comprehensive evaluation of your recruiting profile, highlight film, academic standing, and recruiting strategy. Includes personalized recommendations and target school list.</p>
+                        <div class="space-y-2 mb-4 text-sm">
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-clock text-electric"></i>
+                                <span>Delivery: 72 hours</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-file-pdf text-electric"></i>
+                                <span>Detailed PDF report</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-list text-electric"></i>
+                                <span>Target school recommendations</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-2xl font-bold text-navy">$150</div>
+                            <button onclick="openPurchaseModal('Complete Recruiting Evaluation', 'John Anderson', 150, 72)" class="bg-electric text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Purchase</button>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 4 -->
+                    <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6 border border-gray-200">
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-navy mb-2">30-Minute Strategy Call</h3>
+                            <div class="flex items-center space-x-2 text-sm text-gray-600 mb-3">
+                                <i class="fas fa-phone text-electric"></i>
+                                <span>Call Session</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-700 mb-4">One-on-one phone consultation to discuss your recruiting journey, answer questions, and develop a personalized strategy. Perfect for getting expert guidance on your specific situation.</p>
+                        <div class="space-y-2 mb-4 text-sm">
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-clock text-electric"></i>
+                                <span>Delivery: Schedule within 1 week</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-phone text-electric"></i>
+                                <span>30-minute call</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-gray-600">
+                                <i class="fas fa-file-alt text-electric"></i>
+                                <span>Follow-up summary</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="text-2xl font-bold text-navy">$100</div>
+                            <button onclick="openPurchaseModal('30-Minute Strategy Call', 'John Anderson', 100, 168)" class="bg-electric text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 transition">Purchase</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-navy">Purchase Service</h2>
+                    <button onclick="closePurchaseModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Service Details -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                    <h3 id="modalServiceTitle" class="text-xl font-bold text-navy mb-2">Highlight Film Review</h3>
+                    <p class="text-sm text-gray-600 mb-4">Coach: <span id="modalCoachName" class="font-semibold">John Anderson</span></p>
+                    <div class="flex items-center justify-between">
+                        <div class="space-y-1 text-sm text-gray-600">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-clock text-electric"></i>
+                                <span>Delivery: <span id="modalDeliveryTime">48 hours</span></span>
+                            </div>
+                        </div>
+                        <div class="text-3xl font-bold text-navy">$<span id="modalPrice">75</span></div>
+                    </div>
+                </div>
+
+                <!-- Player Submission Form -->
+                <form id="purchaseForm" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Highlight Video Link <span class="text-red-500">*</span></label>
+                        <input type="url" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="https://youtube.com/...">
+                        <p class="text-xs text-gray-500 mt-1">YouTube, Hudl, or other video platform link</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">GPA</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="3.8">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Graduation Year <span class="text-red-500">*</span></label>
+                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select year</option>
+                                <option>2024</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Position <span class="text-red-500">*</span></label>
+                        <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="e.g., Midfielder, Forward, Defender">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Additional Notes for Coach</label>
+                        <textarea rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Any specific areas you'd like the coach to focus on..."></textarea>
+                    </div>
+
+                    <button type="button" onclick="proceedToPayment()" class="w-full bg-electric text-white py-4 rounded-lg font-semibold hover:bg-blue-500 transition text-lg">
+                        Proceed to Payment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-navy">Payment</h2>
+                    <button onclick="closePaymentModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                    <h3 class="text-lg font-bold text-navy mb-4">Order Summary</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Service</span>
+                            <span id="paymentServiceTitle" class="font-semibold text-navy">Highlight Film Review</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Coach</span>
+                            <span id="paymentCoachName" class="font-semibold text-navy">John Anderson</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-300">
+                            <span class="text-gray-700">Service Price</span>
+                            <span class="font-semibold text-navy">$<span id="paymentServicePrice">75</span></span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-700">Platform Fee (20%)</span>
+                            <span class="font-semibold text-navy">$<span id="paymentPlatformFee">15</span></span>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-gray-300 text-lg">
+                            <span class="font-bold text-navy">Total</span>
+                            <span class="font-bold text-navy">$<span id="paymentTotal">90</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Card Number</label>
+                        <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="1234 5678 9012 3456">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Expiry Date</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="MM/YY">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">CVV</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="123">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Cardholder Name</label>
+                        <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John Smith">
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-lock text-blue-600 mt-1"></i>
+                            <div class="text-sm text-blue-800">
+                                <div class="font-semibold mb-1">Secure Payment</div>
+                                <div>Your payment information is encrypted and secure. We use industry-standard security measures.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="completePayment()" class="w-full bg-electric text-white py-4 rounded-lg font-semibold hover:bg-blue-500 transition text-lg">
+                        Pay Now - $<span id="paymentButtonTotal">90</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-8 text-center">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-check text-green-600 text-4xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-navy mb-4">Payment Successful!</h2>
+            <p class="text-gray-600 mb-6">Your order has been placed successfully. The coach will begin working on your request and deliver within the specified timeframe.</p>
+            <div class="space-y-3">
+                <button onclick="closeSuccessModal(); showPage('playerdashboard');" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
+                    View My Orders
+                </button>
+                <button onclick="closeSuccessModal(); showPage('marketplace');" class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                    Browse More Services
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- PRICING PAGE -->
@@ -1425,7 +2183,7 @@
         </section>
     </div>
 
-        <!-- COACH SIGNUP PAGE -->
+    <!-- COACH SIGNUP PAGE -->
     <div id="coachsignupPage" class="page-content hidden">
         <section class="py-20 bg-white">
             <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1437,46 +2195,33 @@
                         <h2 class="text-3xl font-bold text-navy mb-2">Create Your Coach Account</h2>
                         <p class="text-gray-600">Free for all college coaches - start recruiting today</p>
                     </div>
-
-                    <!-- Coach signup form (standalone coach page) -->
-                    <form id="coachSignupPageForm" class="space-y-6">
+                    <form class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-                                <input id="coachPageFirstName" type="text"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                       placeholder="John">
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-                                <input id="coachPageLastName" type="text"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                       placeholder="Smith">
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
-                            <input id="coachPageSchool" type="text"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="University of California">
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="University of California">
                         </div>
-
                         <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Title</label>
-                            <select id="coachPageTitle"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select your title</option>
-                                <option value="Head Coach">Head Coach</option>
-                                <option value="Assistant Coach">Assistant Coach</option>
-                                <option value="Recruiting Coordinator">Recruiting Coordinator</option>
+                            <label class="block text-sm font-semibold text-navy mb-2">Position</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your position</option>
+                                <option value="head">Head Coach</option>
+                                <option value="assistant">Assistant Coach</option>
+                                <option value="recruiting">Recruiting Coordinator</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
-                            <select id="coachPageSport"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
                                 <option value="">Select your sport</option>
                                 <option value="soccer">Soccer</option>
                                 <option value="football">Football</option>
@@ -1486,41 +2231,24 @@
                                 <option value="volleyball">Volleyball</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input id="coachPageEmail" type="email"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="coach@university.edu">
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input id="coachPagePassword" type="password"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="Create a strong password">
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
                         </div>
-
                         <div>
                             <label class="flex items-start space-x-2">
                                 <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
                                 <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
                             </label>
                         </div>
-
-                        <button type="submit"
-                                class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
-                            Create Coach Account
-                        </button>
-                        <p id="coachSignupPageMessage" class="text-sm text-center text-navy"></p>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Coach Account</button>
                     </form>
-
                     <div class="mt-6 text-center">
-                        <p class="text-gray-600">
-                            Already have an account?
-                            <a href="javascript:void(0)" onclick="showPage('coachlogin')"
-                               class="text-electric font-semibold hover:underline cursor-pointer">Log in</a>
-                        </p>
+                        <p class="text-gray-600">Already have an account? <a href="javascript:void(0)" onclick="showPage('coachlogin')" class="text-electric font-semibold hover:underline cursor-pointer">Log in</a></p>
                     </div>
                 </div>
             </div>
@@ -1539,42 +2267,26 @@
                         <h2 class="text-3xl font-bold text-navy mb-2">Welcome Back, Coach</h2>
                         <p class="text-gray-600">Log in to access your recruiting dashboard</p>
                     </div>
-
-                    <form id="coachLoginForm" class="space-y-6">
+                    <form class="space-y-6">
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input id="coachLoginEmail" type="email"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="coach@university.edu">
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input id="coachLoginPassword" type="password"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="Enter your password">
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Enter your password">
                         </div>
                         <div class="flex items-center justify-between">
                             <label class="flex items-center space-x-2">
                                 <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
                                 <span class="text-sm text-gray-600">Remember me</span>
                             </label>
-                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">
-                                Forgot password?
-                            </a>
+                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
                         </div>
-                        <button type="submit"
-                                class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
-                            Log In
-                        </button>
-                        <p id="coachLoginMessage" class="text-sm text-center text-navy"></p>
+                        <button type="submit" onclick="showPage('coachdashboard'); return false;" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Log In</button>
                     </form>
-
                     <div class="mt-6 text-center">
-                        <p class="text-gray-600">
-                            Don't have an account?
-                            <a href="javascript:void(0)" onclick="showPage('coachsignup')"
-                               class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a>
-                        </p>
+                        <p class="text-gray-600">Don't have an account? <a href="javascript:void(0)" onclick="showPage('coachsignup')" class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a></p>
                     </div>
                 </div>
             </div>
@@ -1586,63 +2298,11 @@
         <section class="py-12 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Header -->
-                <div class="flex items-center justify-between mb-8">
-                    <div>
-                        <h1 class="text-3xl font-bold text-navy mb-2">Coach Dashboard</h1>
-                        <p class="text-gray-600">
-                            Welcome back, <span id="coachDashName" class="font-semibold"></span>
-                            <span id="coachDashSchool"></span>
-                            <span id="coachDashSport"></span>
-                        </p>
-                    </div>
-                    <button onclick="handleLogout()" class="px-4 py-2 bg-gray-200 text-navy rounded-lg text-sm font-semibold hover:bg-gray-300 transition">
-                        Log Out
-                    </button>
-                </div>
-                    <!-- PLAYER DASHBOARD PAGE -->
-    <div id="playerdashboardPage" class="page-content hidden">
-        <section class="py-12 bg-gray-50">
-            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Header + Logout -->
-                <div class="flex items-center justify-between mb-8">
-                    <div>
-                        <h1 class="text-3xl font-bold text-navy mb-2">Player Dashboard</h1>
-                        <p class="text-gray-600">
-                            Welcome back, <span id="playerDashName" class="font-semibold"></span>
-                        </p>
-                    </div>
-                    <button onclick="handleLogout()" class="px-4 py-2 bg-gray-200 text-navy rounded-lg text-sm font-semibold hover:bg-gray-300 transition">
-                        Log Out
-                    </button>
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-navy mb-2">Coach Dashboard</h1>
+                    <p class="text-gray-600">Welcome back, Coach Anderson - University of California Soccer</p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Profile Card -->
-                    <div class="bg-white rounded-xl shadow-md p-6 md:col-span-2">
-                        <h2 class="text-xl font-bold text-navy mb-4">Your Profile</h2>
-                        <div class="space-y-2 text-sm text-gray-700">
-                            <p><span class="font-semibold">Email:</span> <span id="playerDashEmail"></span></p>
-                            <p><span class="font-semibold">Primary Sport:</span> <span id="playerDashSport"></span></p>
-                            <p><span class="font-semibold">Graduation Year:</span> <span id="playerDashGradYear"></span></p>
-                        </div>
-                    </div>
-
-                    <!-- Quick Actions -->
-                    <div class="bg-white rounded-xl shadow-md p-6">
-                        <h2 class="text-xl font-bold text-navy mb-4">Quick Actions</h2>
-                        <div class="space-y-3">
-                            <button onclick="showPage('database')" class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
-                                Browse Coach Database
-                            </button>
-                            <button class="w-full bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
-                                Edit Profile (coming soon)
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
                 <!-- Stats Cards -->
                 <div class="grid md:grid-cols-4 gap-6 mb-8">
                     <div class="bg-white rounded-xl shadow-md p-6">
@@ -1656,7 +2316,6 @@
                             5 new this week
                         </div>
                     </div>
-
                     <div class="bg-white rounded-xl shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
                             <div class="text-gray-600">Messages Sent</div>
@@ -1668,34 +2327,147 @@
                             12 this week
                         </div>
                     </div>
-
                     <div class="bg-white rounded-xl shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <div class="text-gray-600">Profile Views</div>
-                            <i class="fas fa-eye text-electric text-xl"></i>
+                            <div class="text-gray-600">Service Orders</div>
+                            <i class="fas fa-shopping-cart text-electric text-xl"></i>
                         </div>
-                        <div class="text-3xl font-bold text-navy mb-2">156</div>
-                        <div class="text-sm text-gray-600">Athletes viewed your profile</div>
+                        <div class="text-3xl font-bold text-navy mb-2">8</div>
+                        <div class="text-sm text-gray-600">3 pending delivery</div>
                     </div>
-
                     <div class="bg-white rounded-xl shadow-md p-6">
                         <div class="flex items-center justify-between mb-4">
-                            <div class="text-gray-600">Response Rate</div>
-                            <i class="fas fa-reply text-electric text-xl"></i>
+                            <div class="text-gray-600">Marketplace Earnings</div>
+                            <i class="fas fa-dollar-sign text-electric text-xl"></i>
                         </div>
-                        <div class="text-3xl font-bold text-navy mb-2">72%</div>
+                        <div class="text-3xl font-bold text-navy mb-2">$640</div>
                         <div class="text-sm text-green-600 flex items-center">
                             <i class="fas fa-arrow-up mr-1"></i>
-                            8% from last month
+                            This month
                         </div>
                     </div>
                 </div>
 
                 <!-- Main Content Grid -->
                 <div class="grid lg:grid-cols-3 gap-8">
-                    <!-- Saved Athletes -->
-                    <div class="lg:col-span-2">
-                        <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <!-- Main Content -->
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- My Services Section -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="text-2xl font-bold text-navy">My Services</h2>
+                                <button onclick="openCreateServiceModal()" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
+                                    <i class="fas fa-plus mr-2"></i>Add New Service
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-navy">Highlight Film Review</h3>
+                                        <p class="text-sm text-gray-600 mt-1">Comprehensive film analysis with detailed feedback</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-sm text-gray-600">
+                                            <span><i class="fas fa-dollar-sign text-electric mr-1"></i>$75</span>
+                                            <span><i class="fas fa-clock text-electric mr-1"></i>48 hours</span>
+                                            <span><i class="fas fa-shopping-cart text-electric mr-1"></i>23 orders</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-2 bg-gray-200 text-navy rounded-lg hover:bg-gray-300 transition text-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="px-3 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition text-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-navy">Recruiting Email Feedback</h3>
+                                        <p class="text-sm text-gray-600 mt-1">Review and improve recruiting emails</p>
+                                        <div class="flex items-center space-x-4 mt-2 text-sm text-gray-600">
+                                            <span><i class="fas fa-dollar-sign text-electric mr-1"></i>$50</span>
+                                            <span><i class="fas fa-clock text-electric mr-1"></i>24 hours</span>
+                                            <span><i class="fas fa-shopping-cart text-electric mr-1"></i>18 orders</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <button class="px-3 py-2 bg-gray-200 text-navy rounded-lg hover:bg-gray-300 transition text-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="px-3 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition text-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Service Orders Section -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h2 class="text-2xl font-bold text-navy mb-6">Service Orders</h2>
+                            <div class="space-y-4">
+                                <div class="border-2 border-electric rounded-lg p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-navy">Highlight Film Review</h3>
+                                            <p class="text-sm text-gray-600">Player: Michael Johnson</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold">In Progress</span>
+                                    </div>
+                                    <div class="bg-gray-50 rounded-lg p-3 mb-3 text-sm">
+                                        <p class="text-gray-700 mb-2"><strong>Highlight Link:</strong> <a href="#" class="text-electric hover:underline">youtube.com/watch?v=...</a></p>
+                                        <p class="text-gray-700 mb-2"><strong>Position:</strong> Midfielder</p>
+                                        <p class="text-gray-700 mb-2"><strong>Graduation Year:</strong> 2025</p>
+                                        <p class="text-gray-700"><strong>Notes:</strong> Please focus on defensive positioning and transition play</p>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-sm text-gray-600">
+                                            <i class="fas fa-clock text-electric mr-1"></i>
+                                            Deliver within: <span class="font-semibold">36 hours</span>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button class="px-4 py-2 bg-gray-100 text-navy rounded-lg hover:bg-gray-200 transition text-sm font-semibold">
+                                                <i class="fas fa-upload mr-1"></i>Upload Deliverable
+                                            </button>
+                                            <button class="px-4 py-2 bg-electric text-white rounded-lg hover:bg-blue-500 transition text-sm font-semibold">
+                                                Mark Complete
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-navy">Recruiting Email Feedback</h3>
+                                            <p class="text-sm text-gray-600">Player: Sarah Williams</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">Completed</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                                        Delivered 2 days ago
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-navy">30-Minute Strategy Call</h3>
+                                            <p class="text-sm text-gray-600">Player: David Chen</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">Submitted</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        <i class="fas fa-clock text-electric mr-1"></i>
+                                        Deliver within: <span class="font-semibold">5 days</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Saved Athletes -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
                             <div class="flex items-center justify-between mb-6">
                                 <h2 class="text-2xl font-bold text-navy">Saved Athletes</h2>
                                 <button class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
@@ -1705,8 +2477,7 @@
                             <div class="space-y-4">
                                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                                     <div class="flex items-center space-x-4">
-                                        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=100&h=100&fit=crop"
-                                             alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
+                                        <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?w=100&h=100&fit=crop" alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
                                         <div>
                                             <h3 class="font-bold text-navy">Michael Johnson</h3>
                                             <p class="text-sm text-gray-600">Midfielder - Class of 2025</p>
@@ -1723,11 +2494,9 @@
                                         </button>
                                     </div>
                                 </div>
-
                                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                                     <div class="flex items-center space-x-4">
-                                        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=100&h=100&fit=crop"
-                                             alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
+                                        <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=100&h=100&fit=crop" alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
                                         <div>
                                             <h3 class="font-bold text-navy">Sarah Williams</h3>
                                             <p class="text-sm text-gray-600">Forward - Class of 2025</p>
@@ -1744,61 +2513,6 @@
                                         </button>
                                     </div>
                                 </div>
-
-                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
-                                    <div class="flex items-center space-x-4">
-                                        <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=100&h=100&fit=crop"
-                                             alt="Athlete" class="w-16 h-16 rounded-lg object-cover">
-                                        <div>
-                                            <h3 class="font-bold text-navy">David Chen</h3>
-                                            <p class="text-sm text-gray-600">Defender - Class of 2026</p>
-                                            <div class="flex items-center space-x-4 mt-1 text-xs text-gray-500">
-                                                <span><i class="fas fa-map-marker-alt mr-1"></i>San Francisco, CA</span>
-                                                <span><i class="fas fa-graduation-cap mr-1"></i>3.7 GPA</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center space-x-2">
-                                        <button class="px-4 py-2 bg-electric text-white rounded-lg text-sm font-semibold hover:bg-blue-500 transition">View Profile</button>
-                                        <button class="px-3 py-2 bg-gray-200 text-navy rounded-lg hover:bg-gray-300 transition">
-                                            <i class="fas fa-envelope"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recent Activity -->
-                        <div class="bg-white rounded-xl shadow-md p-6">
-                            <h2 class="text-2xl font-bold text-navy mb-6">Recent Activity</h2>
-                            <div class="space-y-4">
-                                <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
-                                    <div class="bg-electric text-white w-10 h-10 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-bookmark"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-semibold text-navy">Saved Michael Johnson's profile</p>
-                                        <p class="text-xs text-gray-500">2 hours ago</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
-                                    <div class="bg-electric text-white w-10 h-10 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-envelope"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-semibold text-navy">Sent message to Sarah Williams</p>
-                                        <p class="text-xs text-gray-500">5 hours ago</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center space-x-4 p-3 bg-gray-50 rounded-lg">
-                                    <div class="bg-electric text-white w-10 h-10 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-search"></i>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-sm font-semibold text-navy">Searched for Class of 2025 midfielders</p>
-                                        <p class="text-xs text-gray-500">1 day ago</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -1813,15 +2527,37 @@
                                     <i class="fas fa-search"></i>
                                     <span>Search Athletes</span>
                                 </button>
+                                <button onclick="showPage('marketplace')" class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-store"></i>
+                                    <span>View Marketplace</span>
+                                </button>
                                 <button class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
                                     <i class="fas fa-envelope"></i>
                                     <span>Messages</span>
                                 </button>
-                                <button class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
-                                    <i class="fas fa-user-edit"></i>
-                                    <span>Edit Profile</span>
-                                </button>
                             </div>
+                        </div>
+
+                        <!-- Marketplace Stats -->
+                        <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-4">Marketplace Performance</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Total Orders</span>
+                                    <span class="text-xl font-bold">41</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Avg. Rating</span>
+                                    <span class="text-xl font-bold">5.0 ⭐</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm">Total Earnings</span>
+                                    <span class="text-xl font-bold">$2,840</span>
+                                </div>
+                            </div>
+                            <button onclick="openCreateServiceModal()" class="w-full bg-white text-electric py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition mt-4">
+                                Create New Service
+                            </button>
                         </div>
 
                         <!-- Recruiting Lists -->
@@ -1842,28 +2578,249 @@
                                     </div>
                                     <i class="fas fa-chevron-right text-gray-400"></i>
                                 </div>
-                                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition cursor-pointer">
-                                    <div>
-                                        <p class="font-semibold text-navy text-sm">California Prospects</p>
-                                        <p class="text-xs text-gray-500">15 athletes</p>
-                                    </div>
-                                    <i class="fas fa-chevron-right text-gray-400"></i>
-                                </div>
                                 <button class="w-full bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
                                     <i class="fas fa-plus mr-2"></i>Create New List
                                 </button>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-                        <!-- Profile Completion -->
-                        <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-xl p-6">
-                            <h3 class="text-lg font-bold mb-2">Complete Your Profile</h3>
-                            <p class="text-sm text-blue-100 mb-4">85% complete - add more details to attract top athletes</p>
-                            <div class="w-full bg-white bg-opacity-20 rounded-full h-2 mb-4">
-                                <div class="bg-white h-2 rounded-full" style="width: 85%"></div>
+    <!-- Create Service Modal -->
+    <div id="createServiceModal" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-screen overflow-y-auto">
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-navy">Create New Service</h2>
+                    <button onclick="closeCreateServiceModal()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Service Title <span class="text-red-500">*</span></label>
+                        <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="e.g., Highlight Film Review">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Description <span class="text-red-500">*</span></label>
+                        <textarea required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Describe what's included in this service..."></textarea>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Price (USD) <span class="text-red-500">*</span></label>
+                            <input type="number" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="75">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">Delivery Time <span class="text-red-500">*</span></label>
+                            <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select delivery time</option>
+                                <option value="24">24 hours</option>
+                                <option value="48">48 hours</option>
+                                <option value="72">72 hours</option>
+                                <option value="168">1 week</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Category <span class="text-red-500">*</span></label>
+                        <select required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <option value="">Select category</option>
+                            <option value="film">Film Review</option>
+                            <option value="email">Email Feedback</option>
+                            <option value="evaluation">Recruiting Evaluation</option>
+                            <option value="call">Call Session</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-navy mb-2">Requirements From Player</label>
+                        <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="What information do you need from the player? (e.g., highlight link, GPA, position)"></textarea>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                            <div class="text-sm text-blue-800">
+                                <div class="font-semibold mb-1">Platform Fee</div>
+                                <div>Modern Sports Recruiting charges a 20% platform fee on all service sales. You'll receive 80% of the listed price.</div>
                             </div>
-                            <button class="w-full bg-white text-electric py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition">
-                                Complete Profile
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-electric text-white py-4 rounded-lg font-semibold hover:bg-blue-500 transition text-lg">
+                        Create Service
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLAYER DASHBOARD PAGE (with My Orders) -->
+    <div id="playerdashboardPage" class="page-content hidden">
+        <section class="py-12 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-navy mb-2">Player Dashboard</h1>
+                    <p class="text-gray-600">Welcome back, Michael Johnson - Class of 2025 Soccer</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">47</div>
+                        <div class="text-blue-100">Coaches Contacted</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-navy to-blue-900 text-white rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">12</div>
+                        <div class="text-blue-100">Email Responses</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-green-500 to-green-600 text-white rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">23</div>
+                        <div class="text-green-100">Saved Schools</div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-xl p-6">
+                        <div class="text-3xl font-bold mb-2">3</div>
+                        <div class="text-purple-100">Active Orders</div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2 space-y-8">
+                        <!-- My Orders Section -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h2 class="text-2xl font-bold text-navy">My Orders</h2>
+                                <button onclick="showPage('marketplace')" class="bg-electric text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
+                                    <i class="fas fa-store mr-2"></i>Browse Services
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="border-2 border-electric rounded-lg p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-navy">Highlight Film Review</h3>
+                                            <p class="text-sm text-gray-600">Coach: John Anderson - UC Berkeley</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold">In Progress</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600 mb-3">
+                                        <i class="fas fa-clock text-electric mr-1"></i>
+                                        Expected delivery: <span class="font-semibold">Within 36 hours</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                            <i class="fas fa-comment mr-1"></i>Message Coach
+                                        </button>
+                                        <button class="px-4 bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                            <i class="fas fa-info-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-navy">Recruiting Email Feedback</h3>
+                                            <p class="text-sm text-gray-600">Coach: Sarah Mitchell - Stanford</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">Completed</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600 mb-3">
+                                        <i class="fas fa-check-circle text-green-600 mr-1"></i>
+                                        Delivered 2 days ago
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-electric text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
+                                            <i class="fas fa-download mr-1"></i>Download Results
+                                        </button>
+                                        <button class="px-4 bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                            <i class="fas fa-comment"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="border border-gray-200 rounded-lg p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div>
+                                            <h3 class="font-bold text-navy">30-Minute Strategy Call</h3>
+                                            <p class="text-sm text-gray-600">Coach: Mike Rodriguez - Duke</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold">Submitted</span>
+                                    </div>
+                                    <div class="text-sm text-gray-600 mb-3">
+                                        <i class="fas fa-clock text-electric mr-1"></i>
+                                        Expected delivery: <span class="font-semibold">Within 5 days</span>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="flex-1 bg-gray-100 text-navy py-2 rounded-lg text-sm font-semibold hover:bg-gray-200 transition">
+                                            <i class="fas fa-comment mr-1"></i>Message Coach
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Saved Schools -->
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h2 class="text-2xl font-bold text-navy mb-6">Saved Schools</h2>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-12 h-12 bg-electric rounded-lg flex items-center justify-center text-white font-bold">UC</div>
+                                        <div>
+                                            <div class="font-semibold text-navy">University of California</div>
+                                            <div class="text-sm text-gray-600">Men's Soccer - NCAA D1</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold">Contacted</span>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="w-12 h-12 bg-electric rounded-lg flex items-center justify-center text-white font-bold">SU</div>
+                                        <div>
+                                            <div class="font-semibold text-navy">Stanford University</div>
+                                            <div class="text-sm text-gray-600">Men's Soccer - NCAA D1</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold">Pending</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <div class="space-y-8">
+                        <div class="bg-white rounded-xl shadow-md p-6">
+                            <h3 class="text-xl font-bold text-navy mb-4">Quick Actions</h3>
+                            <div class="space-y-3">
+                                <button onclick="showPage('database')" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-search"></i>
+                                    <span>Find Coaches</span>
+                                </button>
+                                <button onclick="showPage('marketplace')" class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-store"></i>
+                                    <span>Browse Services</span>
+                                </button>
+                                <button class="w-full bg-gray-100 text-navy py-3 rounded-lg font-semibold hover:bg-gray-200 transition flex items-center justify-center space-x-2">
+                                    <i class="fas fa-user-edit"></i>
+                                    <span>Edit Profile</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-2">Get Expert Help</h3>
+                            <p class="text-sm text-blue-100 mb-4">Purchase services from verified college coaches to improve your recruiting strategy</p>
+                            <button onclick="showPage('marketplace')" class="w-full bg-white text-electric py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition">
+                                Explore Marketplace
                             </button>
                         </div>
                     </div>
@@ -1872,63 +2829,43 @@
         </section>
     </div>
 
-    <!-- PLAYER LOGIN PAGE -->
+    <!-- LOGIN PAGE -->
     <div id="loginPage" class="page-content hidden">
         <section class="py-20 bg-gray-50">
             <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white rounded-2xl shadow-xl p-8">
                     <h2 class="text-3xl font-bold text-navy mb-2 text-center">Welcome Back</h2>
                     <p class="text-gray-600 text-center mb-8">Log in to access your dashboard</p>
-
-                    <form id="playerLoginForm" class="space-y-6">
+                    <form class="space-y-6">
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input id="playerLoginEmail" type="email"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="you@example.com">
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
                         </div>
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input id="playerLoginPassword" type="password"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="Enter your password">
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Enter your password">
                         </div>
                         <div class="flex items-center justify-between">
                             <label class="flex items-center space-x-2">
                                 <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
                                 <span class="text-sm text-gray-600">Remember me</span>
                             </label>
-                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">
-                                Forgot password?
-                            </a>
+                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
                         </div>
-                        <button type="submit"
-                                class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
-                            Log In
-                        </button>
-                        <p id="playerLoginMessage" class="text-sm text-center text-navy"></p>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Log In</button>
                     </form>
-
                     <div class="mt-6 text-center">
-                        <p class="text-gray-600">
-                            Don't have an account?
-                            <a href="javascript:void(0)" onclick="showPage('signup')"
-                               class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a>
-                        </p>
+                        <p class="text-gray-600">Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')" class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a></p>
                     </div>
                     <div class="mt-4 text-center">
-                        <p class="text-sm text-gray-500">
-                            Are you a college coach?
-                            <a href="javascript:void(0)" onclick="showPage('coachlogin')"
-                               class="text-electric font-semibold hover:underline cursor-pointer">Coach Login</a>
-                        </p>
+                        <p class="text-sm text-gray-500">Are you a college coach? <a href="javascript:void(0)" onclick="showPage('coachlogin')" class="text-electric font-semibold hover:underline cursor-pointer">Coach Login</a></p>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- SIGNUP PAGE (PLAYER + COACH TOGGLE) -->
+    <!-- SIGNUP PAGE -->
     <div id="signupPage" class="page-content hidden">
         <section class="py-20 bg-white">
             <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1939,54 +2876,38 @@
                     <!-- Account Type Toggle -->
                     <div class="flex items-center justify-center mb-8">
                         <div class="bg-gray-100 rounded-lg p-1 inline-flex">
-                            <button id="playerToggle" type="button"
-                                    onclick="toggleAccountType('player')"
-                                    class="px-6 py-2 rounded-lg font-semibold transition bg-electric text-white">
+                            <button id="playerToggle" onclick="toggleAccountType('player')" class="px-6 py-2 rounded-lg font-semibold transition bg-electric text-white">
                                 I am a Player
                             </button>
-                            <button id="coachToggle" type="button"
-                                    onclick="toggleAccountType('coach')"
-                                    class="px-6 py-2 rounded-lg font-semibold transition text-navy">
+                            <button id="coachToggle" onclick="toggleAccountType('coach')" class="px-6 py-2 rounded-lg font-semibold transition text-navy">
                                 I am a College Coach
                             </button>
                         </div>
                     </div>
 
-                    <!-- Player Signup Form -->
+                    <!-- Player Form -->
                     <form id="playerForm" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-                                <input id="playerFirstName" type="text"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                       placeholder="John">
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-                                <input id="playerLastName" type="text"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                       placeholder="Smith">
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input id="playerEmail" type="email"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="you@example.com">
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input id="playerPassword" type="password"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="Create a strong password">
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Primary Sport</label>
-                            <select id="playerSport"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
                                 <option value="">Select your sport</option>
                                 <option value="soccer">Soccer</option>
                                 <option value="football">Football</option>
@@ -1996,72 +2917,53 @@
                                 <option value="volleyball">Volleyball</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Graduation Year</label>
-                            <select id="playerGradYear"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select year</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option>Select year</option>
+                                <option>2024</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="flex items-start space-x-2">
                                 <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
                                 <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
                             </label>
                         </div>
-
-                        <button type="submit"
-                                class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
-                            Create Account
-                        </button>
-                        <p id="playerSignupMessage" class="text-sm text-center text-navy"></p>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Account</button>
                     </form>
 
-                    <!-- Coach Signup Form (toggle) -->
+                    <!-- Coach Form (Hidden by default) -->
                     <form id="coachForm" class="space-y-6 hidden">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-                                <input id="coachFirstName" type="text"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                       placeholder="John">
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-                                <input id="coachLastName" type="text"
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                       placeholder="Smith">
+                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
                             </div>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
-                            <input id="coachSchool" type="text"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="University of California">
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="University of California">
                         </div>
-
                         <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Title</label>
-                            <select id="coachTitle"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select your title</option>
-                                <option value="Head Coach">Head Coach</option>
-                                <option value="Assistant Coach">Assistant Coach</option>
-                                <option value="Recruiting Coordinator">Recruiting Coordinator</option>
+                            <label class="block text-sm font-semibold text-navy mb-2">Position</label>
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                                <option value="">Select your position</option>
+                                <option value="head">Head Coach</option>
+                                <option value="assistant">Assistant Coach</option>
+                                <option value="recruiting">Recruiting Coordinator</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
-                            <select id="coachSport"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
+                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
                                 <option value="">Select your sport</option>
                                 <option value="soccer">Soccer</option>
                                 <option value="football">Football</option>
@@ -2071,521 +2973,264 @@
                                 <option value="volleyball">Volleyball</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input id="coachEmail" type="email"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="coach@university.edu">
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="coach@university.edu">
                         </div>
-
                         <div>
                             <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input id="coachPassword" type="password"
-                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                                   placeholder="Create a strong password">
+                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
                         </div>
-
                         <div>
                             <label class="flex items-start space-x-2">
                                 <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
                                 <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
                             </label>
                         </div>
-
-                        <button type="submit"
-                                class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">
-                            Create Coach Account
-                        </button>
-                        <p id="coachSignupMessage" class="text-sm text-center text-navy"></p>
+                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Coach Account</button>
                     </form>
 
                     <div class="mt-6 text-center">
-                        <p class="text-gray-600">
-                            Already have an account?
-                            <a href="javascript:void(0)" onclick="showPage('login')"
-                               class="text-electric font-semibold hover:underline cursor-pointer">Log in</a>
-                        </p>
+                        <p class="text-gray-600">Already have an account? <a href="javascript:void(0)" onclick="showPage('login')" class="text-electric font-semibold hover:underline cursor-pointer">Log in</a></p>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-<script>
-   <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-  // ===== Supabase init (same keys as your working test file) =====
-const SUPABASE_URL = 'https://qgqihyhhfyicbxdsemku.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....';
-
-// 🔁 Backwards-compat: make sure old code that uses `supabaseAnonKey` doesn't break
-var supabaseAnonKey = SUPABASE_ANON_KEY;
-
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-window.supabaseClient = supabaseClient;
-  // ===== Helper: messages =====
-  function displayMessage(element, message, isError = false) {
-    if (!element) return;
-    element.textContent = message;
-    element.classList.toggle('text-red-600', isError);
-    element.classList.toggle('text-navy', !isError);
-  }
-
-  // ===== Page Navigation =====
-  function showPage(pageName) {
-    console.log('showPage:', pageName);
-    const pages = document.querySelectorAll('.page-content');
-    pages.forEach(page => page.classList.add('hidden'));
-
-    const pageMap = {
-      home:           'homePage',
-      howitworks:     'howitworksPage',
-      pricing:        'pricingPage',
-      database:       'databasePage',
-      coachportal:    'coachportalPage',
-      coachsignup:    'coachsignupPage',
-      coachlogin:     'coachloginPage',
-      coachdashboard: 'coachdashboardPage',
-      playerdashboard:'playerdashboardPage',
-      login:          'loginPage',
-      signup:         'signupPage'
-    };
-
-    const targetPageId = pageMap[pageName];
-    const targetPage   = targetPageId && document.getElementById(targetPageId);
-
-    if (targetPage) {
-      targetPage.classList.remove('hidden');
-      window.scrollTo(0, 0);
-
-      if (pageName === 'howitworks') {
-        setTimeout(initPreviewCharts, 100);
-      }
-
-      if (pageName === 'database') {
-        const previewMessage = document.getElementById('previewMessage');
-        if (previewMessage) previewMessage.classList.add('hidden');
-      }
-    } else {
-      console.warn('No page for', pageName, 'with id', targetPageId);
-    }
-  }
-
-  function filterSportAndNavigate(sport) {
-    const sportFilter   = document.getElementById('sportFilter');
-    const resultCount   = document.getElementById('resultCount');
-    const previewMessage= document.getElementById('previewMessage');
-
-    if (sportFilter) sportFilter.value = sport;
-
-    const sportCounts = {
-      soccer:     '342',
-      football:   '289',
-      baseball:   '267',
-      basketball: '198',
-      softball:   '156',
-      volleyball: '195'
-    };
-
-    if (resultCount && sportCounts[sport]) {
-      resultCount.textContent = sportCounts[sport];
-    }
-
-    showPage('database');
-
-    if (previewMessage) previewMessage.classList.remove('hidden');
-
-    setTimeout(() => {
-      const previewCoaches = document.getElementById('previewCoaches');
-      if (previewCoaches) {
-        previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
-  }
-
-  function showSignupPrompt() {
-    showPage('signup');
-  }
-
-  function toggleAccountType(type) {
-    const playerToggle = document.getElementById('playerToggle');
-    const coachToggle  = document.getElementById('coachToggle');
-    const playerForm   = document.getElementById('playerForm');
-    const coachForm    = document.getElementById('coachForm');
-
-    if (!playerToggle || !coachToggle || !playerForm || !coachForm) return;
-
-    if (type === 'player') {
-      playerToggle.classList.add('bg-electric', 'text-white');
-      playerToggle.classList.remove('text-navy');
-      coachToggle.classList.remove('bg-electric', 'text-white');
-      coachToggle.classList.add('text-navy');
-      playerForm.classList.remove('hidden');
-      coachForm.classList.add('hidden');
-    } else {
-      coachToggle.classList.add('bg-electric', 'text-white');
-      coachToggle.classList.remove('text-navy');
-      playerToggle.classList.remove('bg-electric', 'text-white');
-      playerToggle.classList.add('text-navy');
-      coachForm.classList.remove('hidden');
-      playerForm.classList.add('hidden');
-    }
-  }
-
-  async function handleLogout() {
-    try {
-      await supabaseClient.auth.signOut();
-    } catch (err) {
-      console.error('Logout error:', err);
-    } finally {
-      currentUserRole = null;
-      showPage('home');
-    }
-  }
-
-  // ===== Dashboards (profiles table) =====
-  async function loadPlayerDashboard() {
-    try {
-      const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-      if (userError) throw userError;
-      if (!user) {
-        console.warn('No user in session (player dashboard)');
-        return;
-      }
-
-      const { data, error } = await supabaseClient
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .eq('role', 'player')
-        .single();
-
-      if (error) {
-        console.error('profiles (player) select error:', error);
-        return;
-      }
-
-      console.log('Loaded player profile:', data);
-
-      const nameEl  = document.getElementById('playerDashName');
-      const emailEl = document.getElementById('playerDashEmail');
-      const sportEl = document.getElementById('playerDashSport');
-      const gradEl  = document.getElementById('playerDashGradYear');
-
-      if (nameEl)  nameEl.textContent  = `${data.first_name || ''} ${data.last_name || ''}`.trim();
-      if (emailEl) emailEl.textContent = data.email || '';
-      if (sportEl) sportEl.textContent = data.sport || '';
-      if (gradEl)  gradEl.textContent  = data.grad_year || '';
-    } catch (err) {
-      console.error('loadPlayerDashboard error:', err);
-    }
-  }
-
-  async function loadCoachDashboard() {
-    try {
-      const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
-      if (userError) throw userError;
-      if (!user) {
-        console.warn('No user in session (coach dashboard)');
-        return;
-      }
-
-      const { data, error } = await supabaseClient
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .eq('role', 'coach')
-        .single();
-
-      if (error) {
-        console.error('profiles (coach) select error:', error);
-        return;
-      }
-
-      console.log('Loaded coach profile:', data);
-
-      const nameEl   = document.getElementById('coachDashName');
-      const schoolEl = document.getElementById('coachDashSchool');
-      const sportEl  = document.getElementById('coachDashSport');
-
-      if (nameEl)   nameEl.textContent   = `${data.first_name || ''} ${data.last_name || ''}`.trim();
-      if (schoolEl) schoolEl.textContent = data.school ? `- ${data.school}` : '';
-      if (sportEl)  sportEl.textContent  = data.sport ? ` (${data.sport})` : '';
-    } catch (err) {
-      console.error('loadCoachDashboard error:', err);
-    }
-  }
-
-  // ===== Charts on "How It Works" page =====
-  function initPreviewCharts() {
-    const opensCtx = document.getElementById('previewOpensChart');
-    if (opensCtx && !opensCtx.chart) {
-      opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-          datasets: [{
-            label: 'Email Opens',
-            data: [45, 52, 61, 58, 72, 68],
-            borderColor: '#00D4FF',
-            backgroundColor: 'rgba(0, 212, 255, 0.1)',
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true } }
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Page Navigation System
+        function showPage(pageName) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.add('hidden'));
+            
+              const pageMap = {
+    'home': 'homePage',
+    'howitworks': 'howitworksPage',
+    'marketplace': 'marketplacePage',   // 👈 NEW
+    'pricing': 'pricingPage',
+    'database': 'databasePage',
+    'coachportal': 'coachportalPage',
+    'coachsignup': 'coachsignupPage',
+    'coachlogin': 'coachloginPage',
+    'coachdashboard': 'coachdashboardPage',
+    'playerdashboard': 'playerdashboardPage',
+    'login': 'loginPage',
+    'signup': 'signupPage'
+  };      
+            const targetPage = document.getElementById(pageMap[pageName]);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                window.scrollTo(0, 0);
+                
+                if (pageName === 'howitworks') {
+                    setTimeout(initPreviewCharts, 100);
+                }
+                
+                if (pageName === 'database') {
+                    const previewMessage = document.getElementById('previewMessage');
+                    if (previewMessage) {
+                        previewMessage.classList.add('hidden');
+                    }
+                }
+            }
         }
-      });
-    }
 
-    const sportCtx = document.getElementById('previewSportChart');
-    if (sportCtx && !sportCtx.chart) {
-      sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
-        type: 'bar',
-        data: {
-          labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
-          datasets: [{
-            label: 'Response Rate (%)',
-            data: [28, 22, 31, 19, 26, 24],
-            backgroundColor: ['#00D4FF','#0A1F44','#00D4FF','#0A1F44','#00D4FF','#0A1F44']
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, max: 40 } }
+        function showCoachServices(coachId) {
+            showPage('coachservice');
         }
-      });
-    }
-  }
 
-  // ===== Shared Coach Signup (profiles) =====
-  async function handleCoachSignup(formPrefix, messageElement) {
-    const firstName = document.getElementById(`${formPrefix}FirstName`)?.value.trim();
-    const lastName  = document.getElementById(`${formPrefix}LastName`)?.value.trim();
-    const school    = document.getElementById(`${formPrefix}School`)?.value.trim();
-    const title     = document.getElementById(`${formPrefix}Title`)?.value;
-    const sport     = document.getElementById(`${formPrefix}Sport`)?.value;
-    const email     = document.getElementById(`${formPrefix}Email`)?.value.trim();
-    const password  = document.getElementById(`${formPrefix}Password`)?.value;
-
-    try {
-      displayMessage(messageElement, 'Creating coach account...', false);
-
-      const { data, error: authError } = await supabaseClient.auth.signUp({ email, password });
-      console.log('auth.signUp (coach) result:', { data, authError });
-      if (authError) throw authError;
-
-      const userId = data.user?.id;
-      if (!userId) throw new Error('No user ID returned from signup');
-
-      const { error: insertError } = await supabaseClient
-        .from('profiles')
-        .insert([{
-          id: userId,
-          role: 'coach',
-          plan: 'starter',
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          school,
-          title,
-          sport
-        }]);
-
-      console.log('profiles insert (coach) result:', { insertError });
-      if (insertError) throw insertError;
-
-      currentUserRole = 'coach';
-      await loadCoachDashboard();
-
-      displayMessage(messageElement, 'Coach account created! Redirecting...', false);
-      showPage('coachdashboard');
-    } catch (err) {
-      console.error('Coach signup error:', err);
-      displayMessage(messageElement, err.message || 'Signup failed. Please try again.', true);
-    }
-  }
-
-  // ===== MAIN INIT =====
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded – MSR main app init');
-    showPage('home');
-
-    // PLAYER SIGNUP
-    const playerForm          = document.getElementById('playerForm');
-    const playerSignupMessage = document.getElementById('playerSignupMessage');
-
-    if (playerForm && playerSignupMessage) {
-      playerForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        console.log('PLAYER SIGNUP HANDLER FIRED');
-
-        const firstName = document.getElementById('playerFirstName')?.value.trim();
-        const lastName  = document.getElementById('playerLastName')?.value.trim();
-        const email     = document.getElementById('playerEmail')?.value.trim();
-        const password  = document.getElementById('playerPassword')?.value;
-        const sport     = document.getElementById('playerSport')?.value;
-        const gradYear  = document.getElementById('playerGradYear')?.value;
-
-        console.log('Signup form values:', { firstName, lastName, email, sport, gradYear });
-
-        try {
-          displayMessage(playerSignupMessage, 'Creating account...', false);
-
-          const { data, error: authError } = await supabaseClient.auth.signUp({ email, password });
-          console.log('auth.signUp (player) result:', { data, authError });
-          if (authError) throw authError;
-
-          const userId = data.user?.id;
-          if (!userId) throw new Error('No user ID returned from signup');
-
-          const { error: insertError } = await supabaseClient
-            .from('profiles')
-            .insert([{
-              id: userId,
-              role: 'player',
-              plan: 'starter',
-              first_name: firstName,
-              last_name: lastName,
-              email,
-              sport,
-              grad_year: gradYear || null
-            }]);
-
-          console.log('profiles insert (player) result:', { insertError });
-          if (insertError) throw insertError;
-
-          currentUserRole = 'player';
-
-          displayMessage(playerSignupMessage, 'Account created! Loading dashboard...', false);
-
-          await loadPlayerDashboard();
-          showPage('playerdashboard');
-        } catch (err) {
-          console.error('Player signup full error:', err);
-          displayMessage(playerSignupMessage, err.message || 'Signup failed. See console.', true);
+        function filterSportAndNavigate(sport) {
+            const sportFilter = document.getElementById('sportFilter');
+            const resultCount = document.getElementById('resultCount');
+            const previewMessage = document.getElementById('previewMessage');
+            
+            if (sportFilter) {
+                sportFilter.value = sport;
+            }
+            
+            const sportCounts = {
+                'soccer': '342',
+                'football': '289',
+                'baseball': '267',
+                'basketball': '198',
+                'softball': '156',
+                'volleyball': '195'
+            };
+            
+            if (resultCount && sportCounts[sport]) {
+                resultCount.textContent = sportCounts[sport];
+            }
+            
+            showPage('database');
+            
+            if (previewMessage) {
+                previewMessage.classList.remove('hidden');
+            }
+            
+            setTimeout(() => {
+                const previewCoaches = document.getElementById('previewCoaches');
+                if (previewCoaches) {
+                    previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
         }
-      });
-    }
 
-    // COACH SIGNUP (toggle form)
-    const coachForm          = document.getElementById('coachForm');
-    const coachSignupMessage = document.getElementById('coachSignupMessage');
-    if (coachForm && coachSignupMessage) {
-      coachForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        await handleCoachSignup('coach', coachSignupMessage);
-      });
-    }
-
-    // COACH SIGNUP (separate page)
-    const coachSignupPageForm    = document.getElementById('coachSignupPageForm');
-    const coachSignupPageMessage = document.getElementById('coachSignupPageMessage');
-    if (coachSignupPageForm && coachSignupPageMessage) {
-      coachSignupPageForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        await handleCoachSignup('coachPage', coachSignupPageMessage);
-      });
-    }
-
-    // PLAYER LOGIN
-    const playerLoginForm    = document.getElementById('playerLoginForm');
-    const playerLoginMessage = document.getElementById('playerLoginMessage');
-    if (playerLoginForm && playerLoginMessage) {
-      playerLoginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const email    = document.getElementById('playerLoginEmail')?.value.trim();
-        const password = document.getElementById('playerLoginPassword')?.value;
-
-        try {
-          displayMessage(playerLoginMessage, 'Logging in...', false);
-
-          const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-          if (error) throw error;
-
-          const { data: { user } } = await supabaseClient.auth.getUser();
-          if (!user) throw new Error('No user after login');
-
-          const { data: profile, error: profileError } = await supabaseClient
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .single();
-
-          if (profileError) throw profileError;
-
-          if (profile.role === 'coach') {
-            currentUserRole = 'coach';
-            await loadCoachDashboard();
-            displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
-            showPage('coachdashboard');
-          } else {
-            currentUserRole = 'player';
-            await loadPlayerDashboard();
-            displayMessage(playerLoginMessage, 'Login successful! Redirecting...', false);
-            showPage('playerdashboard');
-          }
-        } catch (err) {
-          console.error('Player login error:', err);
-          displayMessage(playerLoginMessage, err.message || 'Login failed. Please try again.', true);
+        function showSignupPrompt() {
+            showPage('signup');
         }
-      });
-    }
 
-    // COACH LOGIN
-    const coachLoginForm    = document.getElementById('coachLoginForm');
-    const coachLoginMessage = document.getElementById('coachLoginMessage');
-    if (coachLoginForm && coachLoginMessage) {
-      coachLoginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
+        function toggleAccountType(type) {
+            const playerToggle = document.getElementById('playerToggle');
+            const coachToggle = document.getElementById('coachToggle');
+            const playerForm = document.getElementById('playerForm');
+            const coachForm = document.getElementById('coachForm');
 
-        const email    = document.getElementById('coachLoginEmail')?.value.trim();
-        const password = document.getElementById('coachLoginPassword')?.value;
-
-        try {
-          displayMessage(coachLoginMessage, 'Logging in...', false);
-
-          const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-          if (error) throw error;
-
-          const { data: { user } } = await supabaseClient.auth.getUser();
-          if (!user) throw new Error('No user after login');
-
-          const { data: profile, error: profileError } = await supabaseClient
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .single();
-
-          if (profileError) throw profileError;
-
-          if (profile.role === 'coach') {
-            currentUserRole = 'coach';
-            await loadCoachDashboard();
-            displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
-            showPage('coachdashboard');
-          } else {
-            currentUserRole = 'player';
-            await loadPlayerDashboard();
-            displayMessage(coachLoginMessage, 'Login successful! Redirecting...', false);
-            showPage('playerdashboard');
-          }
-        } catch (err) {
-          console.error('Coach login error:', err);
-          displayMessage(coachLoginMessage, err.message || 'Login failed. Please try again.', true);
+            if (type === 'player') {
+                playerToggle.classList.add('bg-electric', 'text-white');
+                playerToggle.classList.remove('text-navy');
+                coachToggle.classList.remove('bg-electric', 'text-white');
+                coachToggle.classList.add('text-navy');
+                playerForm.classList.remove('hidden');
+                coachForm.classList.add('hidden');
+            } else {
+                coachToggle.classList.add('bg-electric', 'text-white');
+                coachToggle.classList.remove('text-navy');
+                playerToggle.classList.remove('bg-electric', 'text-white');
+                playerToggle.classList.add('text-navy');
+                coachForm.classList.remove('hidden');
+                playerForm.classList.add('hidden');
+            }
         }
-      });
-    }
-  });
-</script>
+
+        // Modal Functions
+        function openPurchaseModal(serviceTitle, coachName, price, deliveryHours) {
+            document.getElementById('modalServiceTitle').textContent = serviceTitle;
+            document.getElementById('modalCoachName').textContent = coachName;
+            document.getElementById('modalPrice').textContent = price;
+            document.getElementById('modalDeliveryTime').textContent = deliveryHours + ' hours';
+            document.getElementById('purchaseModal').classList.add('active');
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').classList.remove('active');
+        }
+
+        function proceedToPayment() {
+            const serviceTitle = document.getElementById('modalServiceTitle').textContent;
+            const coachName = document.getElementById('modalCoachName').textContent;
+            const price = parseFloat(document.getElementById('modalPrice').textContent);
+            const platformFee = Math.round(price * 0.2);
+            const total = price + platformFee;
+
+            document.getElementById('paymentServiceTitle').textContent = serviceTitle;
+            document.getElementById('paymentCoachName').textContent = coachName;
+            document.getElementById('paymentServicePrice').textContent = price;
+            document.getElementById('paymentPlatformFee').textContent = platformFee;
+            document.getElementById('paymentTotal').textContent = total;
+            document.getElementById('paymentButtonTotal').textContent = total;
+
+            closePurchaseModal();
+            document.getElementById('paymentModal').classList.add('active');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+        }
+
+        function completePayment() {
+            closePaymentModal();
+            document.getElementById('successModal').classList.add('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        function openCreateServiceModal() {
+            document.getElementById('createServiceModal').classList.add('active');
+        }
+
+        function closeCreateServiceModal() {
+            document.getElementById('createServiceModal').classList.remove('active');
+        }
+
+        function initPreviewCharts() {
+            const opensCtx = document.getElementById('previewOpensChart');
+            if (opensCtx && !opensCtx.chart) {
+                opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Email Opens',
+                            data: [45, 52, 61, 58, 72, 68],
+                            borderColor: '#00D4FF',
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            }
+
+            const sportCtx = document.getElementById('previewSportChart');
+            if (sportCtx && !sportCtx.chart) {
+                sportCtx.chart = new Chart(sportCtx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Soccer', 'Football', 'Baseball', 'Basketball', 'Softball', 'Volleyball'],
+                        datasets: [{
+                            label: 'Response Rate (%)',
+                            data: [28, 22, 31, 19, 26, 24],
+                            backgroundColor: [
+                                '#00D4FF',
+                                '#0A1F44',
+                                '#00D4FF',
+                                '#0A1F44',
+                                '#00D4FF',
+                                '#0A1F44'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 40
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+    </script>
+</body>
+</html>
