@@ -3229,51 +3229,47 @@
         }
     }
 
-    /* -------------------------------------------------------------
-/* -------------------------------------------------------------
-   SHOW PAGE (EXPLICIT MAP)
+   /* -------------------------------------------------------------
+   SHOW PAGE (FULL MAPPING VERSION)
 ------------------------------------------------------------- */
 function showPage(pageName) {
-    // Hide all "pages"
+    // Hide all pages
     const pages = document.querySelectorAll('.page-content');
-    pages.forEach(page => page.classList.add('hidden'));
+    pages.forEach(p => p.classList.add('hidden'));
 
-    // Map friendly names -> actual DOM ids
-    const pageMap = {
-        home: 'homePage',
-        howitworks: 'howitworksPage',
-        marketplace: 'marketplacePage',
-        pricing: 'pricingPage',
-        database: 'databasePage',
+    // Map pageName → correct DOM id
+    const map = {
+        home: "homePage",
+        howitworks: "howitworksPage",
+        marketplace: "marketplacePage",
+        pricing: "pricingPage",
+        database: "databasePage",
 
-        coachportal: 'coachportalPage',
-        coachService: 'coachServicePage',
-        coachsignup: 'coachsignupPage',
-        coachlogin: 'loginPage',          // your coach login reuses loginPage
+        signup: "signupPage",
+        login: "loginPage",
 
-        login: 'loginPage',
-        signup: 'signupPage',
-
-        playerdashboard: 'playerdashboardPage',
-        coachdashboard: 'coachdashboardPage'
+        coachsignup: "coachsignupPage",
+        coachportal: "coachportalPage",
+        coachdashboard: "coachdashboardPage",
+        playerdashboard: "playerdashboardPage"
     };
 
-    const targetId = pageMap[pageName];
+    const id = map[pageName];
 
-    if (!targetId) {
-        console.warn('showPage: unknown pageName:', pageName);
+    if (!id) {
+        console.warn("❌ Unknown page:", pageName);
         return;
     }
 
-    const targetPage = document.getElementById(targetId);
-    if (targetPage) {
-        targetPage.classList.remove('hidden');
-        window.scrollTo(0, 0);
-    } else {
-        console.warn('showPage: element not found for id:', targetId);
+    const el = document.getElementById(id);
+    if (!el) {
+        console.warn("❌ Element not found:", id);
+        return;
     }
-}
 
+    el.classList.remove('hidden');
+    window.scrollTo(0, 0);
+}
     /* -------------------------------------------------------------
        LOGIN FUNCTION
     ------------------------------------------------------------- */
