@@ -4,15 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modern Sports Recruiting - Connect with College Coaches</title>
-
-    <!-- ✅ Supabase global variables (REAL globals with var) -->
-    <script>
-        var supabaseUrl = 'https://qgqihyhhfyicbxdsemku.supabase.co';
-        var supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
-
-        // Optional: also available on window if needed
-        window.supabaseUrl = supabaseUrl;
-        window.supabaseAnonKey = supabaseAnonKey;
     </script>
 
     <!-- Tailwind -->
@@ -2127,16 +2118,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  // ===== Supabase init =====
-const SUPABASE_URL = 'https://qgqihyhhfyicbxdsemku.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
+  // ===== Supabase init (same keys as your working test file) =====
+  const SUPABASE_URL = 'https://qgqihyhhfyicbxdsemku.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
 
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-window.supabaseClient = supabaseClient;
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  window.supabaseClient = supabaseClient;
 
   let currentUserRole = null;
 
-  // ===== Helpers =====
+  // ===== Helper: messages =====
   function displayMessage(element, message, isError = false) {
     if (!element) return;
     element.textContent = message;
@@ -2144,50 +2135,60 @@ window.supabaseClient = supabaseClient;
     element.classList.toggle('text-navy', !isError);
   }
 
-  // Page Navigation System
+  // ===== Page Navigation =====
   function showPage(pageName) {
-    console.log('showPage called with:', pageName);
+    console.log('showPage:', pageName);
     const pages = document.querySelectorAll('.page-content');
     pages.forEach(page => page.classList.add('hidden'));
 
     const pageMap = {
-      'home': 'homePage',
-      'howitworks': 'howitworksPage',
-      'pricing': 'pricingPage',
-      'database': 'databasePage',
-      'coachportal': 'coachportalPage',
-      'coachsignup': 'coachsignupPage',
-      'coachlogin': 'coachloginPage',
-      'coachdashboard': 'coachdashboardPage',
-      'playerdashboard': 'playerdashboardPage',
-      'login': 'loginPage',
-      'signup': 'signupPage'
+      home:           'homePage',
+      howitworks:     'howitworksPage',
+      pricing:        'pricingPage',
+      database:       'databasePage',
+      coachportal:    'coachportalPage',
+      coachsignup:    'coachsignupPage',
+      coachlogin:     'coachloginPage',
+      coachdashboard: 'coachdashboardPage',
+      playerdashboard:'playerdashboardPage',
+      login:          'loginPage',
+      signup:         'signupPage'
     };
 
     const targetPageId = pageMap[pageName];
-    const targetPage = document.getElementById(targetPageId);
+    const targetPage   = targetPageId && document.getElementById(targetPageId);
+
     if (targetPage) {
       targetPage.classList.remove('hidden');
       window.scrollTo(0, 0);
+
+      if (pageName === 'howitworks') {
+        setTimeout(initPreviewCharts, 100);
+      }
+
+      if (pageName === 'database') {
+        const previewMessage = document.getElementById('previewMessage');
+        if (previewMessage) previewMessage.classList.add('hidden');
+      }
     } else {
-      console.warn('No page found for', pageName, 'with id', targetPageId);
+      console.warn('No page for', pageName, 'with id', targetPageId);
     }
   }
 
   function filterSportAndNavigate(sport) {
-    const sportFilter = document.getElementById('sportFilter');
-    const resultCount = document.getElementById('resultCount');
-    const previewMessage = document.getElementById('previewMessage');
+    const sportFilter   = document.getElementById('sportFilter');
+    const resultCount   = document.getElementById('resultCount');
+    const previewMessage= document.getElementById('previewMessage');
 
     if (sportFilter) sportFilter.value = sport;
 
     const sportCounts = {
-      'soccer': '342',
-      'football': '289',
-      'baseball': '267',
-      'basketball': '198',
-      'softball': '156',
-      'volleyball': '195'
+      soccer:     '342',
+      football:   '289',
+      baseball:   '267',
+      basketball: '198',
+      softball:   '156',
+      volleyball: '195'
     };
 
     if (resultCount && sportCounts[sport]) {
@@ -2196,9 +2197,7 @@ window.supabaseClient = supabaseClient;
 
     showPage('database');
 
-    if (previewMessage) {
-      previewMessage.classList.remove('hidden');
-    }
+    if (previewMessage) previewMessage.classList.remove('hidden');
 
     setTimeout(() => {
       const previewCoaches = document.getElementById('previewCoaches');
@@ -2214,9 +2213,9 @@ window.supabaseClient = supabaseClient;
 
   function toggleAccountType(type) {
     const playerToggle = document.getElementById('playerToggle');
-    const coachToggle = document.getElementById('coachToggle');
-    const playerForm = document.getElementById('playerForm');
-    const coachForm = document.getElementById('coachForm');
+    const coachToggle  = document.getElementById('coachToggle');
+    const playerForm   = document.getElementById('playerForm');
+    const coachForm    = document.getElementById('coachForm');
 
     if (!playerToggle || !coachToggle || !playerForm || !coachForm) return;
 
@@ -2254,7 +2253,7 @@ window.supabaseClient = supabaseClient;
       const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
       if (userError) throw userError;
       if (!user) {
-        console.warn('No user in session when loading player dashboard');
+        console.warn('No user in session (player dashboard)');
         return;
       }
 
@@ -2266,18 +2265,18 @@ window.supabaseClient = supabaseClient;
         .single();
 
       if (error) {
-        console.error('Select from profiles (player) error:', error);
+        console.error('profiles (player) select error:', error);
         return;
       }
 
       console.log('Loaded player profile:', data);
 
-      const nameEl = document.getElementById('playerDashName');
+      const nameEl  = document.getElementById('playerDashName');
       const emailEl = document.getElementById('playerDashEmail');
       const sportEl = document.getElementById('playerDashSport');
       const gradEl  = document.getElementById('playerDashGradYear');
 
-      if (nameEl) nameEl.textContent = `${data.first_name || ''} ${data.last_name || ''}`.trim();
+      if (nameEl)  nameEl.textContent  = `${data.first_name || ''} ${data.last_name || ''}`.trim();
       if (emailEl) emailEl.textContent = data.email || '';
       if (sportEl) sportEl.textContent = data.sport || '';
       if (gradEl)  gradEl.textContent  = data.grad_year || '';
@@ -2290,7 +2289,10 @@ window.supabaseClient = supabaseClient;
     try {
       const { data: { user }, error: userError } = await supabaseClient.auth.getUser();
       if (userError) throw userError;
-      if (!user) return;
+      if (!user) {
+        console.warn('No user in session (coach dashboard)');
+        return;
+      }
 
       const { data, error } = await supabaseClient
         .from('profiles')
@@ -2300,7 +2302,7 @@ window.supabaseClient = supabaseClient;
         .single();
 
       if (error) {
-        console.error('Select from profiles (coach) error:', error);
+        console.error('profiles (coach) select error:', error);
         return;
       }
 
@@ -2318,7 +2320,7 @@ window.supabaseClient = supabaseClient;
     }
   }
 
-  // ===== Charts (if you use them on how it works page) =====
+  // ===== Charts on "How It Works" page =====
   function initPreviewCharts() {
     const opensCtx = document.getElementById('previewOpensChart');
     if (opensCtx && !opensCtx.chart) {
@@ -2353,22 +2355,20 @@ window.supabaseClient = supabaseClient;
           datasets: [{
             label: 'Response Rate (%)',
             data: [28, 22, 31, 19, 26, 24],
-            backgroundColor: ['#00D4FF', '#0A1F44', '#00D4FF', '#0A1F44', '#00D4FF', '#0A1F44']
+            backgroundColor: ['#00D4FF','#0A1F44','#00D4FF','#0A1F44','#00D4FF','#0A1F44']
           }]
         },
         options: {
           responsive: true,
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true, max: 40 }
-          }
+          scales: { y: { beginAtZero: true, max: 40 } }
         }
       });
     }
   }
 
-  // ===== Shared Coach Signup Handler (profiles table) =====
+  // ===== Shared Coach Signup (profiles) =====
   async function handleCoachSignup(formPrefix, messageElement) {
     const firstName = document.getElementById(`${formPrefix}FirstName`)?.value.trim();
     const lastName  = document.getElementById(`${formPrefix}LastName`)?.value.trim();
@@ -2418,17 +2418,14 @@ window.supabaseClient = supabaseClient;
 
   // ===== MAIN INIT =====
   document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, init script running');
-
+    console.log('DOM loaded – MSR main app init');
     showPage('home');
 
-    // PLAYER SIGNUP (main form on signup page)
-    const playerForm = document.getElementById('playerForm');
+    // PLAYER SIGNUP
+    const playerForm          = document.getElementById('playerForm');
     const playerSignupMessage = document.getElementById('playerSignupMessage');
 
-    if (playerForm) {
-      console.log('playerForm found, wiring submit handler');
-
+    if (playerForm && playerSignupMessage) {
       playerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         console.log('PLAYER SIGNUP HANDLER FIRED');
@@ -2479,12 +2476,10 @@ window.supabaseClient = supabaseClient;
           displayMessage(playerSignupMessage, err.message || 'Signup failed. See console.', true);
         }
       });
-    } else {
-      console.warn('playerForm not found – check id="playerForm" on your player form.');
     }
 
-    // COACH SIGNUP TOGGLE FORM
-    const coachForm = document.getElementById('coachForm');
+    // COACH SIGNUP (toggle form)
+    const coachForm          = document.getElementById('coachForm');
     const coachSignupMessage = document.getElementById('coachSignupMessage');
     if (coachForm && coachSignupMessage) {
       coachForm.addEventListener('submit', async (event) => {
@@ -2493,8 +2488,8 @@ window.supabaseClient = supabaseClient;
       });
     }
 
-    // COACH SIGNUP PAGE FORM
-    const coachSignupPageForm = document.getElementById('coachSignupPageForm');
+    // COACH SIGNUP (separate page)
+    const coachSignupPageForm    = document.getElementById('coachSignupPageForm');
     const coachSignupPageMessage = document.getElementById('coachSignupPageMessage');
     if (coachSignupPageForm && coachSignupPageMessage) {
       coachSignupPageForm.addEventListener('submit', async (event) => {
@@ -2504,13 +2499,13 @@ window.supabaseClient = supabaseClient;
     }
 
     // PLAYER LOGIN
-    const playerLoginForm = document.getElementById('playerLoginForm');
+    const playerLoginForm    = document.getElementById('playerLoginForm');
     const playerLoginMessage = document.getElementById('playerLoginMessage');
     if (playerLoginForm && playerLoginMessage) {
       playerLoginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const email = document.getElementById('playerLoginEmail')?.value.trim();
+        const email    = document.getElementById('playerLoginEmail')?.value.trim();
         const password = document.getElementById('playerLoginPassword')?.value;
 
         try {
@@ -2549,13 +2544,13 @@ window.supabaseClient = supabaseClient;
     }
 
     // COACH LOGIN
-    const coachLoginForm = document.getElementById('coachLoginForm');
+    const coachLoginForm    = document.getElementById('coachLoginForm');
     const coachLoginMessage = document.getElementById('coachLoginMessage');
     if (coachLoginForm && coachLoginMessage) {
       coachLoginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const email = document.getElementById('coachLoginEmail')?.value.trim();
+        const email    = document.getElementById('coachLoginEmail')?.value.trim();
         const password = document.getElementById('coachLoginPassword')?.value;
 
         try {
@@ -2594,5 +2589,3 @@ window.supabaseClient = supabaseClient;
     }
   });
 </script>
-</body>
-</html>
