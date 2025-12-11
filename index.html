@@ -3230,48 +3230,49 @@
     }
 
     /* -------------------------------------------------------------
-   SHOW PAGE (SIMPLIFIED)
+/* -------------------------------------------------------------
+   SHOW PAGE (EXPLICIT MAP)
 ------------------------------------------------------------- */
 function showPage(pageName) {
-    // 1) Hide all pages
+    // Hide all "pages"
     const pages = document.querySelectorAll('.page-content');
     pages.forEach(page => page.classList.add('hidden'));
 
-    // 2) Build expected id, e.g. "pricing" -> "pricingPage"
-    const targetId = pageName + "Page";
-    const targetPage = document.getElementById(targetId);
+    // Map friendly names -> actual DOM ids
+    const pageMap = {
+        home: 'homePage',
+        howitworks: 'howitworksPage',
+        marketplace: 'marketplacePage',
+        pricing: 'pricingPage',
+        database: 'databasePage',
 
+        coachportal: 'coachportalPage',
+        coachService: 'coachServicePage',
+        coachsignup: 'coachsignupPage',
+        coachlogin: 'loginPage',          // your coach login reuses loginPage
+
+        login: 'loginPage',
+        signup: 'signupPage',
+
+        playerdashboard: 'playerdashboardPage',
+        coachdashboard: 'coachdashboardPage'
+    };
+
+    const targetId = pageMap[pageName];
+
+    if (!targetId) {
+        console.warn('showPage: unknown pageName:', pageName);
+        return;
+    }
+
+    const targetPage = document.getElementById(targetId);
     if (targetPage) {
         targetPage.classList.remove('hidden');
         window.scrollTo(0, 0);
     } else {
-        console.warn("No page found for:", pageName, "(expected id:", targetId + ")");
+        console.warn('showPage: element not found for id:', targetId);
     }
 }
-
-    /* -------------------------------------------------------------
-       UPDATE NAV WHEN USER LOGS IN / LOGS OUT
-    ------------------------------------------------------------- */
-    function updateNavForAuthState(user) {
-        const loggedOutNav = document.getElementById("navAuthLoggedOut");
-        const loggedInNav  = document.getElementById("navAuthLoggedIn");
-
-        if (!loggedOutNav || !loggedInNav) {
-            console.warn("⚠️ Nav elements not found. Check nav IDs.");
-            return;
-        }
-
-        if (user) {
-            console.log("🔄 Nav: showing LOGGED IN state");
-            loggedOutNav.classList.add("hidden");
-            loggedInNav.classList.remove("hidden");
-        } else {
-            console.log("🔄 Nav: showing LOGGED OUT state");
-            loggedInNav.classList.add("hidden");
-            loggedOutNav.classList.remove("hidden");
-        }
-    }
-
 
     /* -------------------------------------------------------------
        LOGIN FUNCTION
