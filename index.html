@@ -65,20 +65,34 @@
                 </div>
             </div>
 
+            <!-- 🔹 AUTH-AWARE NAVIGATION -->
             <div class="flex items-center space-x-4">
-                <!-- 🔹 Updated: Log In now routes correctly depending on login state -->
-                <a href="javascript:void(0)" onclick="goToDashboard()" class="text-navy hover:text-electric transition cursor-pointer">
-                    Log In
-                </a>
 
-                <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">
-                    Get Started
-                </a>
+                <!-- LOGGED OUT STATE (visible by default) -->
+                <div id="navAuthLoggedOut" class="flex items-center space-x-4">
+                    <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">
+                        Log In
+                    </a>
+                    <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- LOGGED IN STATE (hidden until user logs in) -->
+                <div id="navAuthLoggedIn" class="flex items-center space-x-4 hidden">
+                    <a href="javascript:void(0)" onclick="goToDashboard()" class="text-navy hover:text-electric transition cursor-pointer">
+                        Dashboard
+                    </a>
+                    <a href="javascript:void(0)" onclick="handleLogout()" class="bg-gray-100 text-navy px-6 py-2 rounded-lg hover:bg-gray-200 transition cursor-pointer">
+                        Sign Out
+                    </a>
+                </div>
+
             </div>
+            <!-- END AUTH NAV -->
         </div>
     </div>
 </nav>
-
     <!-- HOME PAGE -->
     <div id="homePage" class="page-content">
         <!-- Hero Section -->
@@ -2932,10 +2946,16 @@
 
     <!-- App Script -->
 <script>
-    // Track logged-in role
+
+    /* -------------------------------------------------------------
+       GLOBAL STATE
+    ------------------------------------------------------------- */
     let currentRole = null; // 'player' or 'coach'
 
-    // PAGE NAVIGATION
+
+    /* -------------------------------------------------------------
+       SHOW PAGE
+    ------------------------------------------------------------- */
     function showPage(pageName) {
         const pages = document.querySelectorAll('.page-content');
         pages.forEach(page => page.classList.add('hidden'));
@@ -2959,22 +2979,37 @@
         if (targetPage) {
             targetPage.classList.remove('hidden');
             window.scrollTo(0, 0);
-
-            if (pageName === 'howitworks') {
-                setTimeout(initPreviewCharts, 100);
-            }
-
-            if (pageName === 'database') {
-                const previewMessage = document.getElementById('previewMessage');
-                if (previewMessage) previewMessage.classList.add('hidden');
-            }
         }
     }
 
-    // LOGIN FUNCTION
+
+    /* -------------------------------------------------------------
+       UPDATE NAV WHEN USER LOGS IN / LOGS OUT
+    ------------------------------------------------------------- */
+    function updateNavForAuthState(user) {
+        const loggedOutNav = document.getElementById("navAuthLoggedOut");
+        const loggedInNav  = document.getElementById("navAuthLoggedIn");
+
+        if (!loggedOutNav || !loggedInNav) {
+            console.warn("⚠️ Nav elements not found.");
+            return;
+        }
+
+        if (user) {
+            loggedOutNav.classList.add("hidden");
+            loggedInNav.classList.remove("hidden");
+        } else {
+            loggedInNav.classList.add("hidden");
+            loggedOutNav.classList.remove("hidden");
+        }
+    }
+
+
+    /* -------------------------------------------------------------
+       LOGIN FUNCTION
+    ------------------------------------------------------------- */
     async function handleLogin(event) {
         event.preventDefault();
-        console.log("🔹 handleLogin fired");
 
         const email = document.getElementById('loginEmail')?.value.trim();
         const password = document.getElementById('loginPassword')?.value.trim();
@@ -2990,18 +3025,20 @@
         });
 
         if (error) {
-            console.error("❌ Login error:", error);
             alert(error.message);
+            console.error(error);
             return;
         }
 
         const user = data.user;
         const role = user?.user_metadata?.role || "player";
 
-        console.log("✅ Logged in:", user.email, "role:", role);
+        currentRole = role;
 
-        currentRole = role; // store role for session navigation
+        // update nav state
+        updateNavForAuthState(user);
 
+        // go to correct dashboard
         if (role === "coach") {
             showPage("coachdashboard");
         } else {
@@ -3009,7 +3046,10 @@
         }
     }
 
-    // DASHBOARD ROUTER
+
+    /* -------------------------------------------------------------
+       DASHBOARD ROUTER
+    ------------------------------------------------------------- */
     function goToDashboard() {
         if (currentRole === "coach") {
             showPage("coachdashboard");
@@ -3020,120 +3060,23 @@
         }
     }
 
-    // OTHER EXISTING FUNCTIONS BELOW (from your original code)
-    function showCoachServices(coachId) {
-        showPage('coachservice');
+
+    /* -------------------------------------------------------------
+       LOGOUT FUNCTION
+    ------------------------------------------------------------- */
+    async function handleLogout() {
+        await supabaseClient.auth.signOut();
+
+        currentRole = null;
+        updateNavForAuthState(null);
+
+        showPage("home");
     }
 
-    function filterSportAndNavigate(sport) {
-        const sportFilter = document.getElementById('sportFilter');
-        const resultCount = document.getElementById('resultCount');
-        const previewMessage = document.getElementById('previewMessage');
 
-        if (sportFilter) sportFilter.value = sport;
-
-        const sportCounts = {
-            'soccer': '342',
-            'football': '289',
-            'baseball': '267',
-            'basketball': '198',
-            'softball': '156',
-            'volleyball': '195'
-        };
-
-        if (resultCount && sportCounts[sport]) {
-            resultCount.textContent = sportCounts[sport];
-        }
-
-        showPage('database');
-
-        if (previewMessage) previewMessage.classList.remove('hidden');
-
-        setTimeout(() => {
-            const previewCoaches = document.getElementById('previewCoaches');
-            if (previewCoaches) previewCoaches.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-    }
-
-    function showSignupPrompt() {
-        showPage('signup');
-    }
-
-    function toggleAccountType(type) {
-        const playerToggle = document.getElementById('playerToggle');
-        const coachToggle = document.getElementById('coachToggle');
-        const playerForm = document.getElementById('playerForm');
-        const coachForm = document.getElementById('coachForm');
-
-        if (type === 'player') {
-            playerToggle.classList.add('bg-electric', 'text-white');
-            playerToggle.classList.remove('text-navy');
-            coachToggle.classList.remove('bg-electric', 'text-white');
-            coachToggle.classList.add('text-navy');
-            playerForm.classList.remove('hidden');
-            coachForm.classList.add('hidden');
-        } else {
-            coachToggle.classList.add('bg-electric', 'text-white');
-            coachToggle.classList.remove('text-navy');
-            playerToggle.classList.remove('bg-electric', 'text-white');
-            playerToggle.classList.add('text-navy');
-            coachForm.classList.remove('hidden');
-            playerForm.classList.add('hidden');
-        }
-    }
-
-    // Modal + Charts (same as your version)
-    function openPurchaseModal(serviceTitle, coachName, price, deliveryHours) {
-        document.getElementById('modalServiceTitle').textContent = serviceTitle;
-        document.getElementById('modalCoachName').textContent = coachName;
-        document.getElementById('modalPrice').textContent = price;
-        document.getElementById('modalDeliveryTime').textContent = deliveryHours + ' hours';
-        document.getElementById('purchaseModal').classList.add('active');
-    }
-
-    function closePurchaseModal() {
-        document.getElementById('purchaseModal').classList.remove('active');
-    }
-
-    function proceedToPayment() {
-        const serviceTitle = document.getElementById('modalServiceTitle').textContent;
-        const coachName = document.getElementById('modalCoachName').textContent;
-        const price = parseFloat(document.getElementById('modalPrice').textContent);
-        const platformFee = Math.round(price * 0.2);
-        const total = price + platformFee;
-
-        document.getElementById('paymentServiceTitle').textContent = serviceTitle;
-        document.getElementById('paymentCoachName').textContent = coachName;
-        document.getElementById('paymentServicePrice').textContent = price;
-        document.getElementById('paymentPlatformFee').textContent = platformFee;
-        document.getElementById('paymentTotal').textContent = total;
-        document.getElementById('paymentButtonTotal').textContent = total;
-
-        closePurchaseModal();
-        document.getElementById('paymentModal').classList.add('active');
-    }
-
-    function closePaymentModal() {
-        document.getElementById('paymentModal').classList.remove('active');
-    }
-
-    function completePayment() {
-        closePaymentModal();
-        document.getElementById('successModal').classList.add('active');
-    }
-
-    function closeSuccessModal() {
-        document.getElementById('successModal').classList.remove('active');
-    }
-
-    function openCreateServiceModal() {
-        document.getElementById('createServiceModal').classList.add('active');
-    }
-
-    function closeCreateServiceModal() {
-        document.getElementById('createServiceModal').classList.remove('active');
-    }
-
+    /* -------------------------------------------------------------
+       CHARTS (existing UXMagic logic)
+    ------------------------------------------------------------- */
     function initPreviewCharts() {
         const opensCtx = document.getElementById('previewOpensChart');
         if (opensCtx && !opensCtx.chart) {
@@ -3141,9 +3084,14 @@
                 type: 'line',
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    datasets: [{ label: 'Email Opens', data: [45, 52, 61, 58, 72, 68], borderWidth: 2, tension: 0.4 }]
+                    datasets: [{
+                        label: 'Email Opens',
+                        data: [45, 52, 61, 58, 72, 68],
+                        borderWidth: 2,
+                        tension: 0.4
+                    }]
                 },
-                options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                options: { plugins: { legend: { display: false } } }
             });
         }
 
@@ -3153,16 +3101,60 @@
                 type: 'bar',
                 data: {
                     labels: ['Intro', 'Follow-Up', 'Thank You', 'Update'],
-                    datasets: [{ label: 'Response Rate', data: [22, 35, 41, 29], borderWidth: 2 }]
+                    datasets: [{
+                        label: 'Response Rate',
+                        data: [22, 35, 41, 29],
+                        borderWidth: 2
+                    }]
                 },
-                options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 50 } } }
+                options: { plugins: { legend: { display: false } } }
             });
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+
+    /* -------------------------------------------------------------
+       SPORT FILTER ROUTER
+    ------------------------------------------------------------- */
+    function filterSportAndNavigate(sport) {
+        const sportFilter = document.getElementById('sportFilter');
+        const resultCount = document.getElementById('resultCount');
+        const previewMessage = document.getElementById('previewMessage');
+
+        if (sportFilter) sportFilter.value = sport;
+
+        const counts = {
+            soccer: '342',
+            football: '289',
+            baseball: '267',
+            basketball: '198',
+            softball: '156',
+            volleyball: '195'
+        };
+
+        if (resultCount) resultCount.textContent = counts[sport] || "0";
+
+        showPage("database");
+
+        if (previewMessage) previewMessage.classList.remove("hidden");
+    }
+
+    /* -------------------------------------------------------------
+       INITIAL PAGE LOAD — CHECK IF USER IS LOGGED IN
+    ------------------------------------------------------------- */
+    document.addEventListener("DOMContentLoaded", async function () {
         showPage("home");
+
+        // check session
+        const { data } = await supabaseClient.auth.getUser();
+        const user = data?.user || null;
+
+        if (user) {
+            currentRole = user.user_metadata?.role || "player";
+            updateNavForAuthState(user);
+        } else {
+            updateNavForAuthState(null);
+        }
     });
+
 </script>
-</body>
-</html>
