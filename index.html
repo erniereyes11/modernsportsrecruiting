@@ -3245,6 +3245,15 @@
        GLOBAL STATE
     ------------------------------------------------------------- */
     let currentRole = null; // 'player' or 'coach'
+
+    // ✅ Emails that should be treated as COACH accounts (no metadata needed)
+const COACH_EMAILS = [
+    "coach@example.com"
+    // add more if you want:
+    // "assistantcoach@school.edu",
+    // "anothercoach@test.com"
+];
+
     /* -------------------------------------------------------------
        ACCOUNT TYPE TOGGLE ON SIGNUP
     ------------------------------------------------------------- */
@@ -3344,45 +3353,50 @@
        LOGIN FUNCTION
     ------------------------------------------------------------- */
     async function handleLogin(event) {
-        event.preventDefault();
-        console.log("🔹 handleLogin fired");
+    event.preventDefault();
+    console.log("🔹 handleLogin fired");
 
-        const email = document.getElementById('loginEmail')?.value.trim();
-        const password = document.getElementById('loginPassword')?.value.trim();
+    const email = document.getElementById('loginEmail')?.value.trim();
+    const password = document.getElementById('loginPassword')?.value.trim();
 
-        if (!email || !password) {
-            alert("Enter email and password.");
-            return;
-        }
-
-        const { data, error } = await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-        });
-
-        if (error) {
-            alert(error.message);
-            console.error("❌ Supabase login error:", error);
-            return;
-        }
-
-        const user = data.user;
-        const role = user?.user_metadata?.role || "player";
-
-        console.log("✅ Logged in:", user.email, "role:", role);
-
-        currentRole = role;
-
-        // update nav state
-        updateNavForAuthState(user);
-
-        // go to correct dashboard
-        if (role === "coach") {
-            showPage("coachdashboard");
-        } else {
-            showPage("playerdashboard");
-        }
+    if (!email || !password) {
+        alert("Enter email and password.");
+        return;
     }
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    if (error) {
+        alert(error.message);
+        console.error("❌ Supabase login error:", error);
+        return;
+    }
+
+    const user = data.user;
+
+    // 🔽 NEW ROLE LOGIC: ignore metadata, use email list
+    let role = "player";
+    if (COACH_EMAILS.includes(user.email)) {
+        role = "coach";
+    }
+
+    console.log("✅ Logged in:", user.email, "role:", role);
+
+    currentRole = role;
+
+    // update nav state
+    updateNavForAuthState(user);
+
+    // go to correct dashboard
+    if (role === "coach") {
+        showPage("coachdashboard");
+    } else {
+        showPage("playerdashboard");
+    }
+}
 /* -------------------------------------------------------------
    PLAYER SIGNUP FUNCTION
 ------------------------------------------------------------- */
