@@ -50,31 +50,28 @@
 </head>
 <body class="bg-white" style="height: auto; min-height: 100%;">
     <!-- Navigation -->
-  <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <div class="flex items-center space-x-8">
-        <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">
-          Modern Sports Recruiting
-        </a>
-        <div class="hidden md:flex space-x-6">
-          <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
-          <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
-          <!-- 👇 NEW MARKETPLACE LINK -->
-          <a href="javascript:void(0)" onclick="showPage('marketplace')" class="text-gray-700 hover:text-navy transition cursor-pointer">Marketplace</a>
-          <!-- 👆 -->
-          <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
-          <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
-          <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Modern Sports Recruiting</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
+                        <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
+                        <a href="javascript:void(0)" onclick="showPage('marketplace')" class="text-gray-700 hover:text-navy transition cursor-pointer">Marketplace</a>
+                        <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
+                        <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
+                        <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">Log In</a>
+                    <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">Get Started</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="flex items-center space-x-4">
-        <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">Log In</a>
-        <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">Get Started</a>
-      </div>
-    </div>
-  </div>
-</nav>
+    </nav>
+
     <!-- HOME PAGE -->
     <div id="homePage" class="page-content">
         <!-- Hero Section -->
@@ -169,181 +166,6 @@
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">A complete platform designed to streamline your college recruiting process with powerful tools and verified coach contacts</p>
             </div>
         </section>
-<!-- MARKETPLACE PAGE -->
-<div <div id="marketplacePage" class="page-content hidden">
-        <!-- Hero Section -->
-        <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-20">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl sm:text-5xl font-bold mb-6">Coach Marketplace</h1>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Get personalized recruiting services from verified college coaches. Film reviews, recruiting evaluations, and expert guidance to elevate your game.</p>
-            </div>
-        </section>
-
-        <!-- Filters -->
-        <section class="py-8 bg-white border-b border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid md:grid-cols-5 gap-4">
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                            <option>All Sports</option>
-                            <option>Soccer</option>
-                            <option>Football</option>
-                            <option>Baseball</option>
-                            <option>Basketball</option>
-                            <option>Softball</option>
-                            <option>Volleyball</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Division</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                            <option>All Divisions</option>
-                            <option>NCAA D1</option>
-                            <option>NCAA D2</option>
-                            <option>NCAA D3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Price Range</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                            <option>Any Price</option>
-                            <option>Under $50</option>
-                            <option>$50 - $100</option>
-                            <option>$100 - $200</option>
-                            <option>$200+</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">School Name</label>
-                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Search schools...">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Service Type</label>
-                        <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                            <option>All Services</option>
-                            <option>Film Review</option>
-                            <option>Email Feedback</option>
-                            <option>Recruiting Evaluation</option>
-                            <option>Call Session</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </section>
-  <!-- Filters -->
-  <section class="py-8 bg-white border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-5 gap-4">
-        <div>
-          <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
-          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-            <option>All Sports</option>
-            <option>Soccer</option>
-            <option>Football</option>
-            <option>Baseball</option>
-            <option>Basketball</option>
-            <option>Softball</option>
-            <option>Volleyball</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-semibold text-navy mb-2">Division</label>
-          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-            <option>All Levels</option>
-            <option>NCAA D1</option>
-            <option>NCAA D2</option>
-            <option>NCAA D3</option>
-            <option>NAIA</option>
-            <option>JUCO</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-semibold text-navy mb-2">Service Type</label>
-          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-            <option>All Services</option>
-            <option>Film Review</option>
-            <option>Recruiting Evaluation</option>
-            <option>Email Review</option>
-            <option>Q&A Session</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-semibold text-navy mb-2">Price</label>
-          <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-            <option>Any Price</option>
-            <option>Under $50</option>
-            <option>$50 - $100</option>
-            <option>$100 - $200</option>
-            <option>$200+</option>
-          </select>
-        </div>
-        <div class="flex items-end">
-          <button class="w-full bg-electric text-white py-2 rounded-lg font-semibold hover:bg-blue-500 transition">
-            Apply Filters
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Coach Cards -->
-  <section class="py-12 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <h2 class="text-2xl font-bold text-navy mb-2">Featured Coach Services</h2>
-          <p class="text-gray-600">Book 1-on-1 services directly with college coaches. Limited spots per month.</p>
-        </div>
-        <div class="text-sm text-gray-600">
-          <span class="font-semibold">24</span> coaches currently offering services
-        </div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Example Coach Card -->
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
-          <div class="p-6">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full bg-navy text-white flex items-center justify-center font-semibold text-lg mr-4">
-                CA
-              </div>
-              <div>
-                <div class="font-bold text-navy">Coach Anderson</div>
-                <div class="text-sm text-gray-500">Head Coach - University of California</div>
-                <div class="text-xs text-gray-400">NCAA Division I - Soccer</div>
-              </div>
-            </div>
-
-            <div class="space-y-3 mb-4">
-              <div class="flex items-center justify-between text-sm">
-                <span class="text-gray-600">Film Review + Evaluation</span>
-                <span class="font-semibold text-navy">$75</span>
-              </div>
-              <div class="flex items-center text-xs text-gray-500 space-x-2">
-                <i class="fas fa-clock text-electric"></i>
-                <span>7 day turnaround</span>
-              </div>
-              <div class="flex items-center text-xs text-gray-500 space-x-2">
-                <i class="fas fa-users text-electric"></i>
-                <span>12/20 spots left this month</span>
-              </div>
-            </div>
-
-            <div class="border-t border-gray-200 pt-4">
-              <button class="w-full bg-electric text-white py-2 rounded-lg text-sm font-semibold hover:bg-blue-500 transition">
-                View Details & Book
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- You can duplicate/change these cards for more sample coaches -->
-        <!-- ... -->
-      </div>
-    </div>
-  </section>
-</div>
 
         <!-- Three Steps -->
         <section class="py-20 bg-white">
@@ -3055,20 +2877,21 @@
             const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => page.classList.add('hidden'));
             
-              const pageMap = {
-    'home': 'homePage',
-    'howitworks': 'howitworksPage',
-    'marketplace': 'marketplacePage',   // 👈 NEW
-    'pricing': 'pricingPage',
-    'database': 'databasePage',
-    'coachportal': 'coachportalPage',
-    'coachsignup': 'coachsignupPage',
-    'coachlogin': 'coachloginPage',
-    'coachdashboard': 'coachdashboardPage',
-    'playerdashboard': 'playerdashboardPage',
-    'login': 'loginPage',
-    'signup': 'signupPage'
-  };      
+            const pageMap = {
+                'home': 'homePage',
+                'howitworks': 'howitworksPage',
+                'marketplace': 'marketplacePage',
+                'pricing': 'pricingPage',
+                'database': 'databasePage',
+                'coachportal': 'coachportalPage',
+                'coachsignup': 'coachsignupPage',
+                'coachlogin': 'coachloginPage',
+                'coachdashboard': 'coachdashboardPage',
+                'playerdashboard': 'playerdashboardPage',
+                'login': 'loginPage',
+                'signup': 'signupPage'
+            };
+            
             const targetPage = document.getElementById(pageMap[pageName]);
             if (targetPage) {
                 targetPage.classList.remove('hidden');
