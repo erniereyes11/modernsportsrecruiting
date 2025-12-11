@@ -1155,76 +1155,122 @@
         <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8">
             
             <!-- FIXED COACH SIGNUP FORM -->
-            <form id="coachSignupForm" class="space-y-6" onsubmit="handleCoachSignup(event)">
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Full Name *</label>
-                        <input
-                            type="text"
-                            id="coachName"
-                            required
-                            class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                            placeholder="e.g., John Anderson"
-                        />
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">School *</label>
-                        <input
-                            type="text"
-                            id="coachSchool"
-                            required
-                            class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                            placeholder="e.g., University of California"
-                        />
-                    </div>
-                </div>
+<form id="coachSignupForm" class="space-y-6" onsubmit="handleCoachSignup(event)">
+    <div class="grid md:grid-cols-2 gap-6">
+        <div>
+            <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+            <input
+                id="coachFirstName"
+                type="text"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                placeholder="John"
+                required
+            >
+        </div>
+        <div>
+            <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+            <input
+                id="coachLastName"
+                type="text"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                placeholder="Smith"
+                required
+            >
+        </div>
+    </div>
 
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Sport *</label>
-                        <select
-                            id="coachSport"
-                            required
-                            class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                        >
-                            <option value="">Select sport...</option>
-                            <option>Soccer</option>
-                            <option>Football</option>
-                            <option>Baseball</option>
-                            <option>Basketball</option>
-                            <option>Softball</option>
-                            <option>Volleyball</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Role *</label>
-                        <select
-                            id="coachRole"
-                            required
-                            class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                        >
-                            <option value="">Select role...</option>
-                            <option>Head Coach</option>
-                            <option>Associate Head Coach</option>
-                            <option>Assistant Coach</option>
-                            <option>Recruiting Coordinator</option>
-                            <option>Director of Operations</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-navy mb-2">Division *</label>
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
+        <input
+            id="coachSchool"
+            type="text"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            placeholder="University of California"
+            required
+        >
+    </div>
 
-        // TEMPORARY HANDLER – replace with real Supabase / backend integration later
-        function handleCoachApplication() {
-            const msg = document.getElementById('coachSignupMessage');
-            if (msg) {
-                msg.textContent = 'Thanks for applying! This is a placeholder confirmation. Next step: connect this form to Supabase or your intake workflow.';
-                msg.classList.remove('text-gray-500');
-                msg.classList.add('text-green-600', 'font-semibold');
-            }
-        }
-    </script>
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">Position</label>
+        <select
+            id="coachPosition"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            required
+        >
+            <option value="">Select your position</option>
+            <option value="head">Head Coach</option>
+            <option value="assistant">Assistant Coach</option>
+            <option value="recruiting">Recruiting Coordinator</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
+        <select
+            id="coachSport"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            required
+        >
+            <option value="">Select your sport</option>
+            <option value="soccer">Soccer</option>
+            <option value="football">Football</option>
+            <option value="baseball">Baseball</option>
+            <option value="basketball">Basketball</option>
+            <option value="softball">Softball</option>
+            <option value="volleyball">Volleyball</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+        <input
+            id="coachEmail"
+            type="email"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            placeholder="coach@university.edu"
+            required
+        >
+    </div>
+
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+        <input
+            id="coachPassword"
+            type="password"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            placeholder="Create a strong password"
+            required
+        >
+    </div>
+
+    <div>
+        <label class="flex items-start space-x-2">
+            <input
+                id="coachAgree"
+                type="checkbox"
+                class="w-4 h-4 text-electric border-gray-300 rounded mt-1"
+            >
+            <span class="text-sm text-gray-600">
+                I agree to the Terms of Service and Privacy Policy
+            </span>
+        </label>
+    </div>
+
+    <button
+        type="submit"
+        class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
+    >
+        Create Coach Account
+    </button>
+
+    <p
+        id="coachSignupMessage"
+        class="mt-2 text-xs text-gray-500 text-center"
+    >
+        Free for all college coaches - start recruiting today.
+    </p>
+</form>
+
 
     <!-- COACH SERVICE PROFILE PAGE -->
     <div id="coachServicePage" class="page-content hidden">
