@@ -3194,35 +3194,25 @@
     }
 
     /* -------------------------------------------------------------
-       SHOW PAGE
-    ------------------------------------------------------------- */
-    function showPage(pageName) {
-        const pages = document.querySelectorAll('.page-content');
-        pages.forEach(page => page.classList.add('hidden'));
+       /* -------------------------------------------------------------
+   SHOW PAGE (SIMPLIFIED)
+------------------------------------------------------------- */
+function showPage(pageName) {
+    // 1) Hide all pages
+    const pages = document.querySelectorAll('.page-content');
+    pages.forEach(page => page.classList.add('hidden'));
 
-        const pageMap = {
-            'home': 'homePage',
-            'howitworks': 'howitworksPage',
-            'marketplace': 'marketplacePage',
-            'pricing': 'pricingPage',
-            'database': 'databasePage',
-            'coachportal': 'coachportalPage',
-            'coachsignup': 'coachsignupPage',
-            'coachlogin': 'coachloginPage',
-            'coachdashboard': 'coachdashboardPage',
-            'playerdashboard': 'playerdashboardPage',
-            'login': 'loginPage',
-            'signup': 'signupPage'
-        };
+    // 2) Build expected id, e.g. "pricing" -> "pricingPage"
+    const targetId = pageName + "Page";
+    const targetPage = document.getElementById(targetId);
 
-        const targetPage = document.getElementById(pageMap[pageName]);
-        if (targetPage) {
-            targetPage.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
+    if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    } else {
+        console.warn("No page found for:", pageName, "(expected id:", targetId + ")");
     }
-
-
+}
     /* -------------------------------------------------------------
        UPDATE NAV WHEN USER LOGS IN / LOGS OUT
     ------------------------------------------------------------- */
