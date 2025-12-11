@@ -1608,9 +1608,106 @@
         <p class="text-xl text-gray-600">Choose the plan that fits your recruiting needs</p>
       </div>
       <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Starter Plan -->
-        ...
+  <!-- Starter -->
+  <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-bold text-navy mb-2">Starter</h3>
+      <p class="text-gray-600 mb-4">Perfect for getting started</p>
+      <div class="mb-4">
+        <span class="text-5xl font-bold text-navy">$19</span>
+        <span class="text-gray-600">/month</span>
       </div>
+    </div>
+    <ul class="space-y-3 mb-8 text-sm text-gray-700">
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check text-electric mt-1"></i>
+        <span>Access to your primary sport database</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check text-electric mt-1"></i>
+        <span>Up to 50 coach contacts per month</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check text-electric mt-1"></i>
+        <span>Basic email tracking</span>
+      </li>
+    </ul>
+    <button
+      onclick="showPage('signup')"
+      class="w-full bg-navy text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition"
+    >
+      Start with Starter
+    </button>
+  </div>
+
+  <!-- Growth (Most Popular) -->
+  <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-2xl p-8 shadow-2xl transform md:scale-105">
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-bold mb-2">Growth</h3>
+      <p class="text-blue-50 mb-4">Best for active recruits</p>
+      <div class="mb-4">
+        <span class="text-5xl font-bold">$39</span>
+        <span class="text-blue-100">/month</span>
+      </div>
+    </div>
+    <ul class="space-y-3 mb-8 text-sm">
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check mt-1"></i>
+        <span>Access to all supported sports</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check mt-1"></i>
+        <span>Advanced filters (division, conference, role)</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check mt-1"></i>
+        <span>AI email writer + reply helper</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check mt-1"></i>
+        <span>Email tracking (opens, replies, clicks)</span>
+      </li>
+    </ul>
+    <button
+      onclick="showPage('signup')"
+      class="w-full bg-white text-navy py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
+    >
+      Start with Growth
+    </button>
+  </div>
+
+  <!-- Elite -->
+  <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-bold text-navy mb-2">Elite</h3>
+      <p class="text-gray-600 mb-4">For high-volume recruiting</p>
+      <div class="mb-4">
+        <span class="text-5xl font-bold text-navy">$79</span>
+        <span class="text-gray-600">/month</span>
+      </div>
+    </div>
+    <ul class="space-y-3 mb-8 text-sm text-gray-700">
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check text-electric mt-1"></i>
+        <span>Everything in Growth</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check text-electric mt-1"></i>
+        <span>Higher usage limits and campaigns</span>
+      </li>
+      <li class="flex items-start space-x-3">
+        <i class="fas fa-check text-electric mt-1"></i>
+        <span>Priority support</span>
+      </li>
+    </ul>
+    <button
+      onclick="showPage('signup')"
+      class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
+    >
+      Talk to Our Team
+    </button>
+  </div>
+</div>
 
       <!-- Money Back Guarantee -->
       ...
@@ -3194,7 +3291,6 @@
     }
 
     /* -------------------------------------------------------------
-       /* -------------------------------------------------------------
    SHOW PAGE (SIMPLIFIED)
 ------------------------------------------------------------- */
 function showPage(pageName) {
@@ -3213,6 +3309,7 @@ function showPage(pageName) {
         console.warn("No page found for:", pageName, "(expected id:", targetId + ")");
     }
 }
+
     /* -------------------------------------------------------------
        UPDATE NAV WHEN USER LOGS IN / LOGS OUT
     ------------------------------------------------------------- */
