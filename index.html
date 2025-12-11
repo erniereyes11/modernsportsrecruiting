@@ -2946,7 +2946,6 @@
 
     <!-- App Script -->
 <script>
-
     /* -------------------------------------------------------------
        GLOBAL STATE
     ------------------------------------------------------------- */
@@ -2991,14 +2990,16 @@
         const loggedInNav  = document.getElementById("navAuthLoggedIn");
 
         if (!loggedOutNav || !loggedInNav) {
-            console.warn("⚠️ Nav elements not found.");
+            console.warn("⚠️ Nav elements not found. Check nav IDs.");
             return;
         }
 
         if (user) {
+            console.log("🔄 Nav: showing LOGGED IN state");
             loggedOutNav.classList.add("hidden");
             loggedInNav.classList.remove("hidden");
         } else {
+            console.log("🔄 Nav: showing LOGGED OUT state");
             loggedInNav.classList.add("hidden");
             loggedOutNav.classList.remove("hidden");
         }
@@ -3010,6 +3011,7 @@
     ------------------------------------------------------------- */
     async function handleLogin(event) {
         event.preventDefault();
+        console.log("🔹 handleLogin fired");
 
         const email = document.getElementById('loginEmail')?.value.trim();
         const password = document.getElementById('loginPassword')?.value.trim();
@@ -3026,12 +3028,14 @@
 
         if (error) {
             alert(error.message);
-            console.error(error);
+            console.error("❌ Supabase login error:", error);
             return;
         }
 
         const user = data.user;
         const role = user?.user_metadata?.role || "player";
+
+        console.log("✅ Logged in:", user.email, "role:", role);
 
         currentRole = role;
 
@@ -3051,6 +3055,7 @@
        DASHBOARD ROUTER
     ------------------------------------------------------------- */
     function goToDashboard() {
+        console.log("➡️ goToDashboard called, currentRole =", currentRole);
         if (currentRole === "coach") {
             showPage("coachdashboard");
         } else if (currentRole === "player") {
@@ -3065,6 +3070,7 @@
        LOGOUT FUNCTION
     ------------------------------------------------------------- */
     async function handleLogout() {
+        console.log("🔚 handleLogout fired");
         await supabaseClient.auth.signOut();
 
         currentRole = null;
@@ -3139,20 +3145,33 @@
         if (previewMessage) previewMessage.classList.remove("hidden");
     }
 
+
     /* -------------------------------------------------------------
        INITIAL PAGE LOAD — CHECK IF USER IS LOGGED IN
     ------------------------------------------------------------- */
     document.addEventListener("DOMContentLoaded", async function () {
         showPage("home");
 
-        // check session
-        const { data } = await supabaseClient.auth.getUser();
-        const user = data?.user || null;
+        try {
+            const { data, error } = await supabaseClient.auth.getUser();
+            if (error) {
+                console.warn("⚠️ Error fetching current user:", error);
+                updateNavForAuthState(null);
+                return;
+            }
 
-        if (user) {
-            currentRole = user.user_metadata?.role || "player";
-            updateNavForAuthState(user);
-        } else {
+            const user = data?.user || null;
+
+            if (user) {
+                console.log("🌐 Session found on load:", user.email);
+                currentRole = user.user_metadata?.role || "player";
+                updateNavForAuthState(user);
+            } else {
+                console.log("🌐 No active session on load");
+                updateNavForAuthState(null);
+            }
+        } catch (err) {
+            console.error("⚠️ Unexpected error in DOMContentLoaded auth check:", err);
             updateNavForAuthState(null);
         }
     });
