@@ -1302,23 +1302,76 @@
     </div>
 
     <script>
-        function scrollToCoachSignup() {
-            const el = document.getElementById('coachSignupFormSection');
-            if (el) {
-                el.scrollIntoView({ behavior: 'smooth' });
-            }
+    function scrollToCoachSignup() {
+        const el = document.getElementById('coachSignupFormSection');
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    // REAL Supabase handler for coach applications
+    async function handleCoachApplication() {
+        const form = document.getElementById('coachSignupForm');
+        const msg  = document.getElementById('coachSignupMessage');
+
+        if (!form) {
+            console.error("⚠️ coachSignupForm not found");
+            return;
         }
 
-        // TEMPORARY HANDLER – replace with real Supabase / backend integration later
-        function handleCoachApplication() {
-            const msg = document.getElementById('coachSignupMessage');
+        const formData = new FormData(form);
+
+        const payload = {
+            full_name: (formData.get('coachName') || '').toString().trim() || null,
+            school:    (formData.get('school') || '').toString().trim() || null,
+            sport:     (formData.get('sport') || '').toString() || null,
+            level:     (formData.get('level') || '').toString() || null,
+            email:     (formData.get('email') || '').toString().trim().toLowerCase() || null,
+            bio_link:  (formData.get('bioLink') || '').toString().trim() || null,
+            notes:     (formData.get('notes') || '').toString().trim() || null,
+            status:    'pending'
+        };
+
+        try {
             if (msg) {
-                msg.textContent = 'Thanks for applying! This is a placeholder confirmation. Next step: connect this form to Supabase or your intake workflow.';
-                msg.classList.remove('text-gray-500');
+                msg.textContent = 'Submitting your application...';
+                msg.classList.remove('text-gray-500', 'text-green-600', 'text-red-600');
+                msg.classList.add('text-blue-600');
+            }
+
+            const { data, error } = await supabaseClient
+                .from('coach_applications')
+                .insert(payload);
+
+            if (error) {
+                console.error('❌ Supabase insert error:', error);
+                if (msg) {
+                    msg.textContent = 'Something went wrong submitting your application. Please try again.';
+                    msg.classList.remove('text-blue-600');
+                    msg.classList.add('text-red-600');
+                }
+                return;
+            }
+
+            // Success
+            form.reset();
+            if (msg) {
+                msg.textContent = 'Application received! We’ll review and follow up by email.';
+                msg.classList.remove('text-blue-600', 'text-gray-500', 'text-red-600');
                 msg.classList.add('text-green-600', 'font-semibold');
             }
+
+            console.log('✅ Coach application saved:', data);
+        } catch (err) {
+            console.error('❌ Unexpected error submitting coach application:', err);
+            if (msg) {
+                msg.textContent = 'Unexpected error. Please try again later.';
+                msg.classList.remove('text-blue-600');
+                msg.classList.add('text-red-600');
+            }
         }
-    </script>
+    }
+</script>
 
     <!-- COACH SERVICE PROFILE PAGE -->
     <div id="coachServicePage" class="page-content hidden">
