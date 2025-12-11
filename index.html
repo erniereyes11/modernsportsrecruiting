@@ -2883,34 +2883,198 @@
   console.log("✅ Supabase Connected:", supabaseClient);
 </script>
 
-<!-- Your UXMagic / App Script (ALREADY IN YOUR FILE — DO NOT REMOVE) -->
+<!-- App Script -->
 <script>
-    // Page Navigation System
-    function showPage(pageName) {
-        const pages = document.querySelectorAll('.page-content');
-        pages.forEach(page => page.classList.add('hidden'));
-        
-        const pageMap = {
-            'home': 'homePage',
-            'howitworks': 'howitworksPage',
-            'marketplace': 'marketplacePage',
-            'pricing': 'pricingPage',
-            'database': 'databasePage',
-            'coachportal': 'coachportalPage',
-            'coachsignup': 'coachsignupPage',
-            'coachlogin': 'coachloginPage',
-            'coachdashboard': 'coachdashboardPage',
-            'playerdashboard': 'playerdashboardPage',
-            'login': 'loginPage',
-            'signup': 'signupPage'
-        };
+  // 🔹 Page Navigation System
+  function showPage(pageName) {
+    const pages = document.querySelectorAll('.page-content');
+    pages.forEach(page => page.classList.add('hidden'));
+
+    const pageMap = {
+      home: 'homePage',
+      howitworks: 'howitworksPage',
+      marketplace: 'marketplacePage',
+      pricing: 'pricingPage',
+      database: 'databasePage',
+      coachportal: 'coachportalPage',
+      coachsignup: 'coachsignupPage',
+      coachlogin: 'coachloginPage',
+      coachdashboard: 'coachdashboardPage',
+      playerdashboard: 'playerdashboardPage',
+      login: 'loginPage',
+      signup: 'signupPage'
+    };
+
+    const targetId = pageMap[pageName];
+    const targetPage = targetId ? document.getElementById(targetId) : null;
+
+    if (targetPage) {
+      targetPage.classList.remove('hidden');
+      window.scrollTo(0, 0);
+
+      // If How It Works page: initialize charts
+      if (pageName === 'howitworks') {
+        setTimeout(initPreviewCharts, 100);
+      }
+
+      // If Database page: hide preview message initially
+      if (pageName === 'database') {
+        const previewMessage = document.getElementById('previewMessage');
+        if (previewMessage) {
+          previewMessage.classList.add('hidden');
+        }
+      }
+    } else {
+      console.warn('No page found for', pageName);
+    }
+  }
+
+  // 🔹 Example: Show coach services (adjust page if needed)
+  function showCoachServices(coachId) {
+    console.log('Show services for coach:', coachId);
+    // Change 'coachportal' to another key if you have a dedicated service page
+    showPage('coachportal');
+  }
+
+  // 🔹 Filter sport and navigate to database preview
+  function filterSportAndNavigate(sport) {
+    const sportFilter = document.getElementById('sportFilter');
+    const resultCount = document.getElementById('resultCount');
+    const previewMessage = document.getElementById('previewMessage');
+
+    if (sportFilter) {
+      sportFilter.value = sport;
     }
 
-    // ... your remaining functions stay EXACTLY the same ...
+    const sportCounts = {
+      soccer: '342',
+      football: '289',
+      baseball: '267',
+      basketball: '198',
+      softball: '156',
+      volleyball: '195'
+    };
 
-    document.addEventListener('DOMContentLoaded', function() {
-        showPage('home');
+    if (resultCount && sportCounts[sport]) {
+      resultCount.textContent = sportCounts[sport];
+    }
+
+    showPage('database');
+
+    if (previewMessage) {
+      previewMessage.classList.remove('hidden');
+    }
+
+    setTimeout(() => {
+      const previewCoaches = document.getElementById('previewCoaches');
+      if (previewCoaches) {
+        previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  }
+
+  // 🔹 Signup prompt helper
+  function showSignupPrompt() {
+    showPage('signup');
+  }
+
+  // 🔹 Toggle between Player and Coach signup forms
+  function toggleAccountType(type) {
+    const playerToggle = document.getElementById('playerToggle');
+    const coachToggle = document.getElementById('coachToggle');
+    const playerForm = document.getElementById('playerForm');
+    const coachForm = document.getElementById('coachForm');
+
+    if (!playerToggle || !coachToggle || !playerForm || !coachForm) return;
+
+    if (type === 'player') {
+      playerToggle.classList.add('bg-electric', 'text-white');
+      playerToggle.classList.remove('text-navy');
+      coachToggle.classList.remove('bg-electric', 'text-white');
+      coachToggle.classList.add('text-navy');
+      playerForm.classList.remove('hidden');
+      coachForm.classList.add('hidden');
+    } else {
+      coachToggle.classList.add('bg-electric', 'text-white');
+      coachToggle.classList.remove('text-navy');
+      playerToggle.classList.remove('bg-electric', 'text-white');
+      playerToggle.classList.add('text-navy');
+      coachForm.classList.remove('hidden');
+      playerForm.classList.add('hidden');
+    }
+  }
+
+  // 🔹 Purchase Modal Logic (for pricing/marketplace)
+  let selectedPlanName = null;
+
+  function openPurchaseModal(planName) {
+    selectedPlanName = planName || null;
+
+    const modal = document.getElementById('purchaseModal');
+    const planSpan = document.getElementById('selectedPlanName');
+
+    if (planSpan && planName) {
+      planSpan.textContent = planName;
+    }
+
+    if (modal) {
+      modal.classList.remove('hidden');
+    }
+  }
+
+  function closePurchaseModal() {
+    const modal = document.getElementById('purchaseModal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+  }
+
+  function proceedToPayment() {
+    // This is placeholder logic — later we connect Stripe or Supabase functions
+    console.log('Proceed to payment for plan:', selectedPlanName);
+    alert('Payment flow not connected yet. This is just a preview.');
+    closePurchaseModal();
+  }
+
+  // 🔹 Chart.js Preview (safe no-op if elements don’t exist)
+  function initPreviewCharts() {
+    const ctx = document.getElementById('emailChart');
+
+    if (!ctx || typeof Chart === 'undefined') {
+      // Either no canvas on this page or Chart.js not loaded correctly
+      return;
+    }
+
+    // Simple dummy chart; you can customize later
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [
+          {
+            label: 'Emails Sent',
+            data: [50, 75, 120, 160]
+          },
+          {
+            label: 'Open Rate (%)',
+            data: [40, 52, 58, 63]
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: true }
+        }
+      }
     });
+  }
+
+  // 🔹 On load, show Home page
+  document.addEventListener('DOMContentLoaded', function () {
+    showPage('home');
+  });
 </script>
+
 </body>
 </html>
