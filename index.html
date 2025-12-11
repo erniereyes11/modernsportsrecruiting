@@ -3292,32 +3292,30 @@
        SHOW PAGE
     ------------------------------------------------------------- */
     function showPage(pageName) {
-        const pages = document.querySelectorAll('.page-content');
-        pages.forEach(page => page.classList.add('hidden'));
+    const pages = document.querySelectorAll('.page-content');
+    pages.forEach(page => page.classList.add('hidden'));
 
-        const pageMap = {
-            'home': 'homePage',
-            'howitworks': 'howitworksPage',
-            'marketplace': 'marketplacePage',
-            'pricing': 'pricingPage',
-            'database': 'databasePage',
-            'coachportal': 'coachportalPage',
-            'coachsignup': 'coachsignupPage',
-            'coachlogin': 'loginPage',
-            'coachdashboard': 'coachdashboardPage',
-            'playerdashboard': 'playerdashboardPage',
-            'login': 'loginPage',
-            'signup': 'signupPage'
-        };
+    const pageMap = {
+        'home': 'homePage',
+        'howitworks': 'howitworksPage',
+        'marketplace': 'marketplacePage',
+        'pricing': 'pricingPage',
+        'database': 'databasePage',
+        'coachportal': 'coachportalPage',
+        'coachsignup': 'coachsignupPage',
+        'coachlogin': 'loginPage',          // ✅ reuse the same login form
+        'coachdashboard': 'coachdashboardPage',
+        'playerdashboard': 'playerdashboardPage',
+        'login': 'loginPage',
+        'signup': 'signupPage'
+    };
 
-        const targetPage = document.getElementById(pageMap[pageName]);
-        if (targetPage) {
-            targetPage.classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
+    const targetPage = document.getElementById(pageMap[pageName]);
+    if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo(0, 0);
     }
-
-
+}
     /* -------------------------------------------------------------
        UPDATE NAV WHEN USER LOGS IN / LOGS OUT
     ------------------------------------------------------------- */
