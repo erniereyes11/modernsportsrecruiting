@@ -2707,24 +2707,41 @@
                 <div class="bg-white rounded-2xl shadow-xl p-8">
                     <h2 class="text-3xl font-bold text-navy mb-2 text-center">Welcome Back</h2>
                     <p class="text-gray-600 text-center mb-8">Log in to access your dashboard</p>
-                    <form class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Enter your password">
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <label class="flex items-center space-x-2">
-                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
-                                <span class="text-sm text-gray-600">Remember me</span>
-                            </label>
-                            <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
-                        </div>
-                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Log In</button>
-                    </form>
+                    <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+        <input
+            id="loginEmail"
+            type="email"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            placeholder="you@example.com"
+            required
+        >
+    </div>
+    <div>
+        <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+        <input
+            id="loginPassword"
+            type="password"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+            placeholder="Enter your password"
+            required
+        >
+    </div>
+    <div class="flex items-center justify-between">
+        <label class="flex items-center space-x-2">
+            <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded">
+            <span class="text-sm text-gray-600">Remember me</span>
+        </label>
+        <a href="javascript:void(0)" class="text-sm text-electric hover:underline cursor-pointer">Forgot password?</a>
+    </div>
+    <button
+        type="submit"
+        class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
+    >
+        Log In
+    </button>
+</form>
                     <div class="mt-6 text-center">
                         <p class="text-gray-600">Don't have an account? <a href="javascript:void(0)" onclick="showPage('signup')" class="text-electric font-semibold hover:underline cursor-pointer">Sign up now</a></p>
                     </div>
@@ -2869,7 +2886,7 @@
         </section>
     </div>
 
-        <!-- Chart.js -->
+           <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Supabase Client -->
@@ -2920,6 +2937,41 @@
                     }
                 }
             }
+        }
+
+        // 🔹 LOGIN (uses Supabase auth and then routes by role)
+        async function handleLogin(event) {
+          event.preventDefault();
+
+          const email = document.getElementById('loginEmail')?.value.trim();
+          const password = document.getElementById('loginPassword')?.value.trim();
+
+          if (!email || !password) {
+            alert('Please enter email and password.');
+            return;
+          }
+
+          const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
+          });
+
+          if (error) {
+            console.error('Login error:', error);
+            alert(error.message);
+            return;
+          }
+
+          const user = data.user;
+          const role = user?.user_metadata?.role;
+
+          console.log('✅ Logged in as:', user.email, 'role:', role);
+
+          if (role === 'coach') {
+            showPage('coachdashboard');
+          } else {
+            showPage('playerdashboard');
+          }
         }
 
         function showCoachServices(coachId) {
