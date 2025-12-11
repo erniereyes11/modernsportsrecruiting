@@ -2119,14 +2119,14 @@
 
 <script>
   // ===== Supabase init (same keys as your working test file) =====
-  const SUPABASE_URL = 'https://qgqihyhhfyicbxdsemku.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFncWloeWhoZnlpY2J4ZHNlbWt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMTgwMzcsImV4cCI6MjA4MDg5NDAzN30.o-4J-sIvcvK5WQ7iP4ugp56jDxq4sHwFNOm-vLF50N0';
+const SUPABASE_URL = 'https://qgqihyhhfyicbxdsemku.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....';
 
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  window.supabaseClient = supabaseClient;
+// 🔁 Backwards-compat: make sure old code that uses `supabaseAnonKey` doesn't break
+var supabaseAnonKey = SUPABASE_ANON_KEY;
 
-  let currentUserRole = null;
-
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+window.supabaseClient = supabaseClient;
   // ===== Helper: messages =====
   function displayMessage(element, message, isError = false) {
     if (!element) return;
