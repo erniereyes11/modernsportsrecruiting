@@ -2819,56 +2819,100 @@
                     </div>
 
                     <!-- Player Form -->
-                    <form id="playerForm" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="John">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-                                <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Smith">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="you@example.com">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-                            <input type="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric" placeholder="Create a strong password">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Primary Sport</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option value="">Select your sport</option>
-                                <option value="soccer">Soccer</option>
-                                <option value="football">Football</option>
-                                <option value="baseball">Baseball</option>
-                                <option value="basketball">Basketball</option>
-                                <option value="softball">Softball</option>
-                                <option value="volleyball">Volleyball</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-navy mb-2">Graduation Year</label>
-                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric">
-                                <option>Select year</option>
-                                <option>2024</option>
-                                <option>2025</option>
-                                <option>2026</option>
-                                <option>2027</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="flex items-start space-x-2">
-                                <input type="checkbox" class="w-4 h-4 text-electric border-gray-300 rounded mt-1">
-                                <span class="text-sm text-gray-600">I agree to the Terms of Service and Privacy Policy</span>
-                            </label>
-                        </div>
-                        <button type="submit" class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition">Create Account</button>
-                    </form>
+<form id="playerForm" class="space-y-6" onsubmit="handlePlayerSignup(event)">
+  <div class="grid md:grid-cols-2 gap-6">
+    <div>
+      <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
+      <input
+        id="playerFirstName"
+        type="text"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+        placeholder="John"
+      >
+    </div>
+    <div>
+      <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
+      <input
+        id="playerLastName"
+        type="text"
+        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+        placeholder="Smith"
+      >
+    </div>
+  </div>
 
+  <div>
+    <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
+    <input
+      id="playerEmail"
+      type="email"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+      placeholder="you@example.com"
+      required
+    >
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-navy mb-2">Password</label>
+    <input
+      id="playerPassword"
+      type="password"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+      placeholder="Create a strong password"
+      required
+    >
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-navy mb-2">Primary Sport</label>
+    <select
+      id="playerSport"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+    >
+      <option value="">Select your sport</option>
+      <option value="soccer">Soccer</option>
+      <option value="football">Football</option>
+      <option value="baseball">Baseball</option>
+      <option value="basketball">Basketball</option>
+      <option value="softball">Softball</option>
+      <option value="volleyball">Volleyball</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold text-navy mb-2">Graduation Year</label>
+    <select
+      id="playerGradYear"
+      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+    >
+      <option value="">Select year</option>
+      <option>2024</option>
+      <option>2025</option>
+      <option>2026</option>
+      <option>2027</option>
+    </select>
+  </div>
+
+  <div>
+    <label class="flex items-start space-x-2">
+      <input
+        id="playerAgree"
+        type="checkbox"
+        class="w-4 h-4 text-electric border-gray-300 rounded mt-1"
+      >
+      <span class="text-sm text-gray-600">
+        I agree to the Terms of Service and Privacy Policy
+      </span>
+    </label>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
+  >
+    Create Account
+  </button>
+</form>
                     <!-- Coach Form (Hidden by default) -->
                     <form id="coachForm" class="space-y-6 hidden">
                         <div class="grid md:grid-cols-2 gap-6">
@@ -2950,7 +2994,48 @@
        GLOBAL STATE
     ------------------------------------------------------------- */
     let currentRole = null; // 'player' or 'coach'
+    /* -------------------------------------------------------------
+       ACCOUNT TYPE TOGGLE ON SIGNUP
+    ------------------------------------------------------------- */
+    function toggleAccountType(type) {
+        const playerForm   = document.getElementById('playerForm');
+        const coachForm    = document.getElementById('coachForm');
+        const playerToggle = document.getElementById('playerToggle');
+        const coachToggle  = document.getElementById('coachToggle');
 
+        if (!playerForm || !coachForm || !playerToggle || !coachToggle) {
+            console.warn("⚠️ toggleAccountType: elements not found");
+            return;
+        }
+
+        if (type === 'coach') {
+            // Show coach form
+            playerForm.classList.add('hidden');
+            coachForm.classList.remove('hidden');
+
+            // Toggle button styles
+            playerToggle.classList.remove('bg-electric', 'text-white');
+            playerToggle.classList.add('text-navy');
+
+            coachToggle.classList.add('bg-electric', 'text-white');
+            coachToggle.classList.remove('text-navy');
+
+            currentRole = 'coach';
+        } else {
+            // Show player form
+            coachForm.classList.add('hidden');
+            playerForm.classList.remove('hidden');
+
+            // Toggle button styles
+            coachToggle.classList.remove('bg-electric', 'text-white');
+            coachToggle.classList.add('text-navy');
+
+            playerToggle.classList.add('bg-electric', 'text-white');
+            playerToggle.classList.remove('text-navy');
+
+            currentRole = 'player';
+        }
+    }
 
     /* -------------------------------------------------------------
        SHOW PAGE
@@ -3049,7 +3134,74 @@
             showPage("playerdashboard");
         }
     }
+/* -------------------------------------------------------------
+   PLAYER SIGNUP FUNCTION
+------------------------------------------------------------- */
+async function handlePlayerSignup(event) {
+    event.preventDefault();
+    console.log("🔹 handlePlayerSignup fired");
 
+    const firstName = document.getElementById('playerFirstName')?.value.trim();
+    const lastName  = document.getElementById('playerLastName')?.value.trim();
+    const email     = document.getElementById('playerEmail')?.value.trim();
+    const password  = document.getElementById('playerPassword')?.value.trim();
+    const sport     = document.getElementById('playerSport')?.value;
+    const gradYear  = document.getElementById('playerGradYear')?.value;
+    const agreeTos  = document.getElementById('playerAgree')?.checked;
+
+    if (!email || !password) {
+        alert("Email and password are required.");
+        return;
+    }
+
+    if (!agreeTos) {
+        alert("Please agree to the Terms of Service and Privacy Policy.");
+        return;
+    }
+
+    try {
+        const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    role: "player",
+                    first_name: firstName,
+                    last_name: lastName,
+                    sport,
+                    grad_year: gradYear
+                }
+            }
+        });
+
+        if (error) {
+            console.error("❌ Supabase signup error:", error);
+            alert(error.message);
+            return;
+        }
+
+        console.log("✅ Player signed up:", data);
+
+        const user = data.user;
+
+        // IF your Supabase project does NOT require email confirmation:
+        if (user) {
+            currentRole = "player";
+            updateNavForAuthState(user);
+            showPage("playerdashboard");
+            alert("Account created! Welcome to Modern Sports Recruiting.");
+            return;
+        }
+
+        // OTHERWISE (email confirmation ON):
+        alert("Account created! Check your email to confirm, then log in.");
+        showPage("login");
+
+    } catch (err) {
+        console.error("❌ Unexpected signup error:", err);
+        alert("Something went wrong creating your account.");
+    }
+}
 
     /* -------------------------------------------------------------
        DASHBOARD ROUTER
