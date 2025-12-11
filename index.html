@@ -1068,6 +1068,257 @@
             </div>
         </section>
     </div>
+    <!-- COACH PORTAL / SIGNUP PAGE -->
+    <div id="coachportalPage" class="page-content hidden">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-navy via-blue-900 to-navy text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h1 class="text-4xl sm:text-5xl font-bold mb-4">
+                            For College Coaches
+                        </h1>
+                        <p class="text-lg text-gray-200 mb-6">
+                            Join the Modern Sports Recruiting marketplace to monetize your expertise, help serious
+                            student-athletes, and get only the players who are truly interested in your program.
+                        </p>
+                        <ul class="space-y-3 text-gray-200 text-sm sm:text-base">
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle mt-1 text-electric"></i>
+                                <span>Set your own prices for film reviews, recruiting evaluations, and calls.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle mt-1 text-electric"></i>
+                                <span>Get pre-qualified athletes with profiles, academics, and highlight links.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <i class="fas fa-check-circle mt-1 text-electric"></i>
+                                <span>Full control — accept, decline, or limit requests based on your schedule.</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8 flex flex-wrap gap-4">
+                            <button
+                                onclick="scrollToCoachSignup()"
+                                class="bg-electric text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
+                            >
+                                Apply to Join the Marketplace
+                            </button>
+                            <button
+                                onclick="showPage('login')"
+                                class="bg-white/10 border border-white/30 text-white px-6 py-3 rounded-lg text-sm font-semibold hover:bg-white/20 transition"
+                            >
+                                Already a coach? Log In
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 p-6 sm:p-8">
+                        <h2 class="text-2xl font-bold mb-4">What You Get</h2>
+                        <div class="space-y-4 text-sm text-blue-100">
+                            <div class="flex space-x-3">
+                                <i class="fas fa-users-gear mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">Verified Athlete Requests</div>
+                                    <p>See key info up front: grad year, position, GPA, highlight link, and target major.</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-3">
+                                <i class="fas fa-wallet mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">Extra Income on Your Terms</div>
+                                    <p>Choose your services, set your prices, and limit the number of orders per week.</p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-3">
+                                <i class="fas fa-shield-halved mt-1"></i>
+                                <div>
+                                    <div class="font-semibold">Coach-First Experience</div>
+                                    <p>No spam. No cold DMs. Only structured, organized requests from serious players.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coach Signup Form -->
+        <section id="coachSignupFormSection" class="py-16 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 text-center">
+                    <h2 class="text-3xl font-bold text-navy mb-3">Coach Marketplace Application</h2>
+                    <p class="text-gray-600">
+                        Tell us a bit about you so we can verify your role and get you set up with a marketplace profile.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8">
+                    <form id="coachSignupForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Full Name <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="coachName"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., John Anderson"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    School <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="school"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., University of California"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Sport <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="sport"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                >
+                                    <option value="">Select sport...</option>
+                                    <option>Soccer</option>
+                                    <option>Football</option>
+                                    <option>Baseball</option>
+                                    <option>Basketball</option>
+                                    <option>Softball</option>
+                                    <option>Volleyball</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Role <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="role"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                >
+                                    <option value="">Select role...</option>
+                                    <option>Head Coach</option>
+                                    <option>Associate Head Coach</option>
+                                    <option>Assistant Coach</option>
+                                    <option>Recruiting Coordinator</option>
+                                    <option>Director of Operations</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Division / Level <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="division"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                >
+                                    <option value="">Select level...</option>
+                                    <option>NCAA Division I</option>
+                                    <option>NCAA Division II</option>
+                                    <option>NCAA Division III</option>
+                                    <option>NAIA</option>
+                                    <option>NJCAA</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Work Email (.edu preferred) <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., coach@school.edu"
+                                />
+                                <p class="mt-1 text-xs text-gray-500">
+                                    We’ll use this to verify you’re an active college coach.
+                                </p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Link to Official Bio (optional)
+                                </label>
+                                <input
+                                    type="url"
+                                    name="bioLink"
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., schoolathletics.com/sports/..."
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">
+                                How do you want to use the marketplace?
+                            </label>
+                            <textarea
+                                name="notes"
+                                rows="4"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                placeholder="e.g., Film reviews in the offseason, recruiting evaluations for serious prospects, Q&A calls for families..."
+                            ></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-gray-200">
+                            <button
+                                type="button"
+                                onclick="handleCoachApplication()"
+                                class="w-full sm:w-auto bg-electric text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-500 transition flex items-center justify-center space-x-2"
+                            >
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Submit Application</span>
+                            </button>
+                            <p id="coachSignupMessage" class="text-xs text-gray-500 sm:text-right">
+                                Your application will be reviewed. We’ll reach out with next steps and onboarding.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="mt-6 text-center text-xs text-gray-500">
+                    By applying, you confirm you are an active college coach or staff member and agree to provide accurate information.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function scrollToCoachSignup() {
+            const el = document.getElementById('coachSignupFormSection');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // TEMPORARY HANDLER – replace with real Supabase / backend integration later
+        function handleCoachApplication() {
+            const msg = document.getElementById('coachSignupMessage');
+            if (msg) {
+                msg.textContent = 'Thanks for applying! This is a placeholder confirmation. Next step: connect this form to Supabase or your intake workflow.';
+                msg.classList.remove('text-gray-500');
+                msg.classList.add('text-green-600', 'font-semibold');
+            }
+        }
+    </script>
 
     <!-- COACH SERVICE PROFILE PAGE -->
     <div id="coachServicePage" class="page-content hidden">
