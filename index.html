@@ -54,61 +54,16 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center space-x-8">
-  <!-- Logo / Brand -->
-  <a
-    href="javascript:void(0)"
-    onclick="showPage('home')"
-    class="text-2xl font-bold text-navy cursor-pointer"
-  >
-    Modern Sports Recruiting
-  </a>
-
-  <!-- Main nav links (desktop) -->
-  <div class="hidden md:flex space-x-6">
-    <a
-      href="javascript:void(0)"
-      onclick="showPage('home')"
-      class="text-gray-700 hover:text-navy transition cursor-pointer"
-    >
-      Home
-    </a>
-    <a
-      href="javascript:void(0)"
-      onclick="showPage('howitworks')"
-      class="text-gray-700 hover:text-navy transition cursor-pointer"
-    >
-      How It Works
-    </a>
-    <a
-      href="javascript:void(0)"
-      onclick="showPage('marketplace')"
-      class="text-gray-700 hover:text-navy transition cursor-pointer"
-    >
-      Marketplace
-    </a>
-    <a
-      href="javascript:void(0)"
-      onclick="showPage('pricing')"
-      class="text-gray-700 hover:text-navy transition cursor-pointer"
-    >
-      Pricing
-    </a>
-    <a
-      href="javascript:void(0)"
-      onclick="showPage('database')"
-      class="text-gray-700 hover:text-navy transition cursor-pointer"
-    >
-      Coach Database
-    </a>
-    <a
-      href="javascript:void(0)"
-      onclick="showPage('coachportal')"
-      class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer"
-    >
-      For College Coaches
-    </a>
-  </div>
-</div>
+                <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Modern Sports Recruiting</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
+                    <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
+                    <a href="javascript:void(0)" onclick="showPage('marketplace')" class="text-gray-700 hover:text-navy transition cursor-pointer">Marketplace</a>
+                    <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
+                    <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
+                    <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
+                </div>
+            </div>
 
             <!-- 🔹 AUTH-AWARE NAVIGATION -->
             <div class="flex items-center space-x-4">
@@ -1188,134 +1143,182 @@
         </section>
 
         <!-- Coach Signup Form -->
-<section id="coachSignupFormSection" class="py-16 bg-gray-50">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-10 text-center">
-            <h2 class="text-3xl font-bold text-navy mb-3">Coach Marketplace Application</h2>
-            <p class="text-gray-600">
-                Tell us a bit about you so we can verify your role and get you set up with a marketplace profile.
-            </p>
-        </div>
+        <section id="coachSignupFormSection" class="py-16 bg-gray-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-10 text-center">
+                    <h2 class="text-3xl font-bold text-navy mb-3">Coach Marketplace Application</h2>
+                    <p class="text-gray-600">
+                        Tell us a bit about you so we can verify your role and get you set up with a marketplace profile.
+                    </p>
+                </div>
 
-        <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8">
-            
-            <!-- FIXED COACH SIGNUP FORM -->
-<form id="coachSignupForm" class="space-y-6" onsubmit="handleCoachSignup(event)">
-    <div class="grid md:grid-cols-2 gap-6">
-        <div>
-            <label class="block text-sm font-semibold text-navy mb-2">First Name</label>
-            <input
-                id="coachFirstName"
-                type="text"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                placeholder="John"
-                required
-            >
-        </div>
-        <div>
-            <label class="block text-sm font-semibold text-navy mb-2">Last Name</label>
-            <input
-                id="coachLastName"
-                type="text"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-                placeholder="Smith"
-                required
-            >
-        </div>
+                <div class="bg-white rounded-2xl shadow-2xl border border-gray-200 p-6 sm:p-8">
+                    <form id="coachSignupForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Full Name <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="coachName"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., John Anderson"
+                                />
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    School <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="school"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., University of California"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Sport <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="sport"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                >
+                                    <option value="">Select sport...</option>
+                                    <option>Soccer</option>
+                                    <option>Football</option>
+                                    <option>Baseball</option>
+                                    <option>Basketball</option>
+                                    <option>Softball</option>
+                                    <option>Volleyball</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Role <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="role"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                >
+                                    <option value="">Select role...</option>
+                                    <option>Head Coach</option>
+                                    <option>Associate Head Coach</option>
+                                    <option>Assistant Coach</option>
+                                    <option>Recruiting Coordinator</option>
+                                    <option>Director of Operations</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Division / Level <span class="text-red-500">*</span>
+                                </label>
+                                <select
+                                    name="division"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                >
+                                    <option value="">Select level...</option>
+                                    <option>NCAA Division I</option>
+                                    <option>NCAA Division II</option>
+                                    <option>NCAA Division III</option>
+                                    <option>NAIA</option>
+                                    <option>NJCAA</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Work Email (.edu preferred) <span class="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., coach@school.edu"
+                                />
+                                <p class="mt-1 text-xs text-gray-500">
+                                    We’ll use this to verify you’re an active college coach.
+                                </p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-navy mb-2">
+                                    Link to Official Bio (optional)
+                                </label>
+                                <input
+                                    type="url"
+                                    name="bioLink"
+                                    class="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                    placeholder="e.g., schoolathletics.com/sports/..."
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-navy mb-2">
+                                How do you want to use the marketplace?
+                            </label>
+                            <textarea
+                                name="notes"
+                                rows="4"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
+                                placeholder="e.g., Film reviews in the offseason, recruiting evaluations for serious prospects, Q&A calls for families..."
+                            ></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-gray-200">
+                            <button
+                                type="button"
+                                onclick="handleCoachApplication()"
+                                class="w-full sm:w-auto bg-electric text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-500 transition flex items-center justify-center space-x-2"
+                            >
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Submit Application</span>
+                            </button>
+                            <p id="coachSignupMessage" class="text-xs text-gray-500 sm:text-right">
+                                Your application will be reviewed. We’ll reach out with next steps and onboarding.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="mt-6 text-center text-xs text-gray-500">
+                    By applying, you confirm you are an active college coach or staff member and agree to provide accurate information.
+                </div>
+            </div>
+        </section>
     </div>
 
-    <div>
-        <label class="block text-sm font-semibold text-navy mb-2">School/University</label>
-        <input
-            id="coachSchool"
-            type="text"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-            placeholder="University of California"
-            required
-        >
-    </div>
+    <script>
+        function scrollToCoachSignup() {
+            const el = document.getElementById('coachSignupFormSection');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
 
-    <div>
-        <label class="block text-sm font-semibold text-navy mb-2">Position</label>
-        <select
-            id="coachPosition"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-            required
-        >
-            <option value="">Select your position</option>
-            <option value="head">Head Coach</option>
-            <option value="assistant">Assistant Coach</option>
-            <option value="recruiting">Recruiting Coordinator</option>
-        </select>
-    </div>
-
-    <div>
-        <label class="block text-sm font-semibold text-navy mb-2">Sport</label>
-        <select
-            id="coachSport"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-            required
-        >
-            <option value="">Select your sport</option>
-            <option value="soccer">Soccer</option>
-            <option value="football">Football</option>
-            <option value="baseball">Baseball</option>
-            <option value="basketball">Basketball</option>
-            <option value="softball">Softball</option>
-            <option value="volleyball">Volleyball</option>
-        </select>
-    </div>
-
-    <div>
-        <label class="block text-sm font-semibold text-navy mb-2">Email Address</label>
-        <input
-            id="coachEmail"
-            type="email"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-            placeholder="coach@university.edu"
-            required
-        >
-    </div>
-
-    <div>
-        <label class="block text-sm font-semibold text-navy mb-2">Password</label>
-        <input
-            id="coachPassword"
-            type="password"
-            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-electric"
-            placeholder="Create a strong password"
-            required
-        >
-    </div>
-
-    <div>
-        <label class="flex items-start space-x-2">
-            <input
-                id="coachAgree"
-                type="checkbox"
-                class="w-4 h-4 text-electric border-gray-300 rounded mt-1"
-            >
-            <span class="text-sm text-gray-600">
-                I agree to the Terms of Service and Privacy Policy
-            </span>
-        </label>
-    </div>
-
-    <button
-        type="submit"
-        class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
-    >
-        Create Coach Account
-    </button>
-
-    <p
-        id="coachSignupMessage"
-        class="mt-2 text-xs text-gray-500 text-center"
-    >
-        Free for all college coaches - start recruiting today.
-    </p>
-</form>
-
+        // TEMPORARY HANDLER – replace with real Supabase / backend integration later
+        function handleCoachApplication() {
+            const msg = document.getElementById('coachSignupMessage');
+            if (msg) {
+                msg.textContent = 'Thanks for applying! This is a placeholder confirmation. Next step: connect this form to Supabase or your intake workflow.';
+                msg.classList.remove('text-gray-500');
+                msg.classList.add('text-green-600', 'font-semibold');
+            }
+        }
+    </script>
 
     <!-- COACH SERVICE PROFILE PAGE -->
     <div id="coachServicePage" class="page-content hidden">
@@ -1643,134 +1646,181 @@
             </div>
         </div>
     </div>
-<!-- PRICING PAGE -->
-<div id="pricingPage" class="page-content hidden">
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">
-          Simple, Transparent Pricing
-        </h2>
-        <p class="text-xl text-gray-600">
-          Choose the plan that fits your recruiting needs.
-        </p>
-      </div>
 
-      <!-- Pricing cards -->
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Starter -->
-        <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
-          <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold text-navy mb-2">Starter</h3>
-            <p class="text-gray-600 mb-4">Perfect for getting started</p>
-            <div class="mb-4">
-              <span class="text-5xl font-bold text-navy">$19</span>
-              <span class="text-gray-600">/month</span>
+    <!-- PRICING PAGE -->
+    <div id="pricingPage" class="page-content hidden">
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-navy mb-4">Simple, Transparent Pricing</h2>
+                    <p class="text-xl text-gray-600">Choose the plan that fits your recruiting needs</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Starter Plan -->
+                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-navy mb-2">Starter</h3>
+                            <p class="text-gray-600 mb-4">Perfect for getting started</p>
+                            <div class="mb-4">
+                                <span class="text-5xl font-bold text-navy">$19</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Access to your primary sport database</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Up to 50 coach contacts per month</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Basic email tracking</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">AI email writer (10 emails/month)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Save up to 25 favorite schools</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Player profile page</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Export contact lists</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Priority support</span>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0)" onclick="showPage('signup')" class="block w-full bg-gray-200 text-navy text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition cursor-pointer">Get Started</a>
+                    </div>
+
+                    <!-- Pro Plan (Most Popular) -->
+                    <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-2xl p-8 transform scale-105 shadow-2xl relative">
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-navy text-white px-4 py-1 rounded-full text-sm font-semibold">Most Popular</div>
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                            <p class="text-blue-100 mb-4">For serious recruits</p>
+                            <div class="mb-4">
+                                <span class="text-5xl font-bold">$39</span>
+                                <span class="text-blue-100">/month</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Access to your primary sport database</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Unlimited coach contacts</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Advanced email analytics & tracking</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>AI email writer + reply assistant (unlimited)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Bulk email campaigns</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Unlimited saved schools</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Export contact lists (CSV/Excel)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Priority email support</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-white text-xl mt-1"></i>
+                                <span>Enhanced player profile</span>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0)" onclick="showPage('signup')" class="block w-full bg-white text-electric text-center py-3 rounded-lg font-semibold hover:bg-gray-100 transition cursor-pointer">Get Started</a>
+                    </div>
+
+                    <!-- Premium Plan -->
+                    <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-navy mb-2">Premium</h3>
+                            <p class="text-gray-600 mb-4">Maximum recruiting power</p>
+                            <div class="mb-4">
+                                <span class="text-5xl font-bold text-navy">$69</span>
+                                <span class="text-gray-600">/month</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Access to ALL sports databases</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Unlimited coach contacts</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Advanced email analytics & tracking</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Full AI suite (unlimited)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Advanced bulk campaigns</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Unlimited saved schools</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Export contact lists (CSV/Excel)</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Priority phone & email support</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Dedicated recruiting strategist</span>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <i class="fas fa-check text-electric text-xl mt-1"></i>
+                                <span class="text-gray-700">Premium player profile</span>
+                            </li>
+                        </ul>
+                        <a href="javascript:void(0)" onclick="showPage('signup')" class="block w-full bg-gray-200 text-navy text-center py-3 rounded-lg font-semibold hover:bg-gray-300 transition cursor-pointer">Get Started</a>
+                    </div>
+                </div>
+
+                <!-- Money Back Guarantee -->
+                <div class="mt-16 text-center">
+                    <div class="inline-flex items-center space-x-3 bg-green-50 border-2 border-green-200 rounded-full px-6 py-3">
+                        <i class="fas fa-shield-check text-green-600 text-2xl"></i>
+                        <span class="text-green-800 font-semibold">30-Day Money-Back Guarantee</span>
+                    </div>
+                </div>
             </div>
-          </div>
-          <ul class="space-y-3 mb-8 text-sm text-gray-700">
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check text-electric mt-1"></i>
-              <span>Access to your primary sport database</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check text-electric mt-1"></i>
-              <span>Up to 50 coach contacts per month</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check text-electric mt-1"></i>
-              <span>Basic email tracking</span>
-            </li>
-          </ul>
-          <button
-            onclick="showPage('signup')"
-            class="w-full bg-navy text-white py-3 rounded-lg font-semibold hover:bg-blue-900 transition"
-          >
-            Start with Starter
-          </button>
-        </div>
-
-        <!-- Growth (Most Popular) -->
-        <div class="bg-gradient-to-br from-electric to-blue-500 text-white rounded-2xl p-8 shadow-2xl transform md:scale-105">
-          <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold mb-2">Growth</h3>
-            <p class="text-blue-50 mb-4">Best for active recruits</p>
-            <div class="mb-4">
-              <span class="text-5xl font-bold">$39</span>
-              <span class="text-blue-100">/month</span>
-            </div>
-          </div>
-          <ul class="space-y-3 mb-8 text-sm">
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check mt-1"></i>
-              <span>Access to all supported sports</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check mt-1"></i>
-              <span>Advanced filters (division, conference, role)</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check mt-1"></i>
-              <span>AI email writer + reply helper</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check mt-1"></i>
-              <span>Email tracking (opens, replies, clicks)</span>
-            </li>
-          </ul>
-          <button
-            onclick="showPage('signup')"
-            class="w-full bg-white text-navy py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
-          >
-            Start with Growth
-          </button>
-        </div>
-
-        <!-- Elite -->
-        <div class="bg-white border-2 border-gray-200 rounded-2xl p-8 hover:shadow-xl transition">
-          <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold text-navy mb-2">Elite</h3>
-            <p class="text-gray-600 mb-4">For high-volume recruiting</p>
-            <div class="mb-4">
-              <span class="text-5xl font-bold text-navy">$79</span>
-              <span class="text-gray-600">/month</span>
-            </div>
-          </div>
-          <ul class="space-y-3 mb-8 text-sm text-gray-700">
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check text-electric mt-1"></i>
-              <span>Everything in Growth</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check text-electric mt-1"></i>
-              <span>Higher usage limits and campaigns</span>
-            </li>
-            <li class="flex items-start space-x-3">
-              <i class="fas fa-check text-electric mt-1"></i>
-              <span>Priority support</span>
-            </li>
-          </ul>
-          <button
-            onclick="showPage('signup')"
-            class="w-full bg-electric text-white py-3 rounded-lg font-semibold hover:bg-blue-500 transition"
-          >
-            Talk to Our Team
-          </button>
-        </div>
-      </div>
-
-      <!-- Guarantee -->
-      <div class="mt-16 text-center">
-        <div class="inline-flex items-center space-x-3 bg-green-50 border-2 border-green-200 rounded-full px-6 py-3">
-          <i class="fas fa-shield-check text-green-600 text-2xl"></i>
-          <span class="text-green-800 font-semibold">
-            30-Day Money-Back Guarantee
-          </span>
-        </div>
-      </div>
+        </section>
     </div>
-  </section>
-</div>
 
     <!-- DATABASE PAGE -->
     <div id="databasePage" class="page-content hidden">
@@ -2347,6 +2397,15 @@
             </div>
         </section>
     </div>
+
+    <!-- COACH <!-- LOGIN PAGE -->
+<div id="loginPage" class="page-content hidden">
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-2xl shadow-xl p-8">
+        <h2 class="text-3xl font-bold text-navy mb-2 text-center">Welcome Back</h2>
+        <p class="text-gray-600 text-center mb-8">Log in to access your dashboard</p>
+
         <!-- IMPORTANT: onsubmit + IDs -->
         <form id="loginForm" class="space-y-6" onsubmit="handleLogin(event)">
           <div>
@@ -3230,24 +3289,34 @@
     }
 
     /* -------------------------------------------------------------
-   SHOW PAGE (SIMPLIFIED)
-------------------------------------------------------------- */
-function showPage(pageName) {
-    // 1) Hide all pages
-    const pages = document.querySelectorAll('.page-content');
-    pages.forEach(page => page.classList.add('hidden'));
+       SHOW PAGE
+    ------------------------------------------------------------- */
+    function showPage(pageName) {
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => page.classList.add('hidden'));
 
-    // 2) Build expected id, e.g. "pricing" -> "pricingPage"
-    const targetId = pageName + "Page";
-    const targetPage = document.getElementById(targetId);
+        const pageMap = {
+            'home': 'homePage',
+            'howitworks': 'howitworksPage',
+            'marketplace': 'marketplacePage',
+            'pricing': 'pricingPage',
+            'database': 'databasePage',
+            'coachportal': 'coachportalPage',
+            'coachsignup': 'coachsignupPage',
+            'coachlogin': 'coachloginPage',
+            'coachdashboard': 'coachdashboardPage',
+            'playerdashboard': 'playerdashboardPage',
+            'login': 'loginPage',
+            'signup': 'signupPage'
+        };
 
-    if (targetPage) {
-        targetPage.classList.remove('hidden');
-        window.scrollTo(0, 0);
-    } else {
-        console.warn("No page found for:", pageName, "(expected id:", targetId + ")");
+        const targetPage = document.getElementById(pageMap[pageName]);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
     }
-}
+
 
     /* -------------------------------------------------------------
        UPDATE NAV WHEN USER LOGS IN / LOGS OUT
