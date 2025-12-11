@@ -50,27 +50,34 @@
 </head>
 <body class="bg-white" style="height: auto; min-height: 100%;">
     <!-- Navigation -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-8">
-                    <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Modern Sports Recruiting</a>
-                    <div class="hidden md:flex space-x-6">
-                        <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
-                        <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
-                        <a href="javascript:void(0)" onclick="showPage('marketplace')" class="text-gray-700 hover:text-navy transition cursor-pointer">Marketplace</a>
-                        <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
-                        <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
-                        <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="javascript:void(0)" onclick="showPage('login')" class="text-navy hover:text-electric transition cursor-pointer">Log In</a>
-                    <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">Get Started</a>
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center space-x-8">
+                <a href="javascript:void(0)" onclick="showPage('home')" class="text-2xl font-bold text-navy cursor-pointer">Modern Sports Recruiting</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="javascript:void(0)" onclick="showPage('home')" class="text-gray-700 hover:text-navy transition cursor-pointer">Home</a>
+                    <a href="javascript:void(0)" onclick="showPage('howitworks')" class="text-gray-700 hover:text-navy transition cursor-pointer">How It Works</a>
+                    <a href="javascript:void(0)" onclick="showPage('marketplace')" class="text-gray-700 hover:text-navy transition cursor-pointer">Marketplace</a>
+                    <a href="javascript:void(0)" onclick="showPage('pricing')" class="text-gray-700 hover:text-navy transition cursor-pointer">Pricing</a>
+                    <a href="javascript:void(0)" onclick="showPage('database')" class="text-gray-700 hover:text-navy transition cursor-pointer">Coach Database</a>
+                    <a href="javascript:void(0)" onclick="showPage('coachportal')" class="text-electric hover:text-blue-500 transition font-semibold cursor-pointer">For College Coaches</a>
                 </div>
             </div>
+
+            <div class="flex items-center space-x-4">
+                <!-- 🔹 Updated: Log In now routes correctly depending on login state -->
+                <a href="javascript:void(0)" onclick="goToDashboard()" class="text-navy hover:text-electric transition cursor-pointer">
+                    Log In
+                </a>
+
+                <a href="javascript:void(0)" onclick="showPage('signup')" class="bg-electric text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition cursor-pointer">
+                    Get Started
+                </a>
+            </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- HOME PAGE -->
     <div id="homePage" class="page-content">
@@ -2924,252 +2931,238 @@
     </script>
 
     <!-- App Script -->
-    <script>
-        // Page Navigation System
-        function showPage(pageName) {
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => page.classList.add('hidden'));
+<script>
+    // Track logged-in role
+    let currentRole = null; // 'player' or 'coach'
 
-            const pageMap = {
-                'home': 'homePage',
-                'howitworks': 'howitworksPage',
-                'marketplace': 'marketplacePage',
-                'pricing': 'pricingPage',
-                'database': 'databasePage',
-                'coachportal': 'coachportalPage',
-                'coachsignup': 'coachsignupPage',
-                'coachlogin': 'coachloginPage',
-                'coachdashboard': 'coachdashboardPage',
-                'playerdashboard': 'playerdashboardPage',
-                'login': 'loginPage',
-                'signup': 'signupPage'
-            };
+    // PAGE NAVIGATION
+    function showPage(pageName) {
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => page.classList.add('hidden'));
 
-            const targetPage = document.getElementById(pageMap[pageName]);
-            if (targetPage) {
-                targetPage.classList.remove('hidden');
-                window.scrollTo(0, 0);
+        const pageMap = {
+            'home': 'homePage',
+            'howitworks': 'howitworksPage',
+            'marketplace': 'marketplacePage',
+            'pricing': 'pricingPage',
+            'database': 'databasePage',
+            'coachportal': 'coachportalPage',
+            'coachsignup': 'coachsignupPage',
+            'coachlogin': 'coachloginPage',
+            'coachdashboard': 'coachdashboardPage',
+            'playerdashboard': 'playerdashboardPage',
+            'login': 'loginPage',
+            'signup': 'signupPage'
+        };
 
-                if (pageName === 'howitworks') {
-                    setTimeout(initPreviewCharts, 100);
-                }
+        const targetPage = document.getElementById(pageMap[pageName]);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
 
-                if (pageName === 'database') {
-                    const previewMessage = document.getElementById('previewMessage');
-                    if (previewMessage) {
-                        previewMessage.classList.add('hidden');
-                    }
-                }
-            }
-        }
-
-        // 🔹 LOGIN (uses Supabase auth and then routes by role)
-async function handleLogin(event) {
-  event.preventDefault();
-  console.log('🔹 handleLogin fired');
-
-  const emailInput = document.getElementById('loginEmail');
-  const passwordInput = document.getElementById('loginPassword');
-
-  const email = emailInput ? emailInput.value.trim() : '';
-  const password = passwordInput ? passwordInput.value.trim() : '';
-
-  if (!email || !password) {
-    alert('Please enter email and password.');
-    return;
-  }
-
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if (error) {
-    console.error('Login error:', error);
-    alert(error.message);
-    return;
-  }
-
-  const user = data.user;
-  const role = user?.user_metadata?.role;
-
-  console.log('✅ Logged in as:', user.email, 'role:', role);
-
-  if (role === 'coach') {
-    showPage('coachdashboard');
-  } else {
-    showPage('playerdashboard');
-  }
-}
-        function showCoachServices(coachId) {
-            showPage('coachservice');
-        }
-
-        function filterSportAndNavigate(sport) {
-            const sportFilter = document.getElementById('sportFilter');
-            const resultCount = document.getElementById('resultCount');
-            const previewMessage = document.getElementById('previewMessage');
-
-            if (sportFilter) {
-                sportFilter.value = sport;
+            if (pageName === 'howitworks') {
+                setTimeout(initPreviewCharts, 100);
             }
 
-            const sportCounts = {
-                'soccer': '342',
-                'football': '289',
-                'baseball': '267',
-                'basketball': '198',
-                'softball': '156',
-                'volleyball': '195'
-            };
-
-            if (resultCount && sportCounts[sport]) {
-                resultCount.textContent = sportCounts[sport];
-            }
-
-            showPage('database');
-
-            if (previewMessage) {
-                previewMessage.classList.remove('hidden');
-            }
-
-            setTimeout(() => {
-                const previewCoaches = document.getElementById('previewCoaches');
-                if (previewCoaches) {
-                    previewCoaches.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 100);
-        }
-
-        function showSignupPrompt() {
-            showPage('signup');
-        }
-
-        function toggleAccountType(type) {
-            const playerToggle = document.getElementById('playerToggle');
-            const coachToggle = document.getElementById('coachToggle');
-            const playerForm = document.getElementById('playerForm');
-            const coachForm = document.getElementById('coachForm');
-
-            if (type === 'player') {
-                playerToggle.classList.add('bg-electric', 'text-white');
-                playerToggle.classList.remove('text-navy');
-                coachToggle.classList.remove('bg-electric', 'text-white');
-                coachToggle.classList.add('text-navy');
-                playerForm.classList.remove('hidden');
-                coachForm.classList.add('hidden');
-            } else {
-                coachToggle.classList.add('bg-electric', 'text-white');
-                coachToggle.classList.remove('text-navy');
-                playerToggle.classList.remove('bg-electric', 'text-white');
-                playerToggle.classList.add('text-navy');
-                coachForm.classList.remove('hidden');
-                playerForm.classList.add('hidden');
+            if (pageName === 'database') {
+                const previewMessage = document.getElementById('previewMessage');
+                if (previewMessage) previewMessage.classList.add('hidden');
             }
         }
+    }
 
-        // Modal Functions
-        function openPurchaseModal(serviceTitle, coachName, price, deliveryHours) {
-            document.getElementById('modalServiceTitle').textContent = serviceTitle;
-            document.getElementById('modalCoachName').textContent = coachName;
-            document.getElementById('modalPrice').textContent = price;
-            document.getElementById('modalDeliveryTime').textContent = deliveryHours + ' hours';
-            document.getElementById('purchaseModal').classList.add('active');
+    // LOGIN FUNCTION
+    async function handleLogin(event) {
+        event.preventDefault();
+        console.log("🔹 handleLogin fired");
+
+        const email = document.getElementById('loginEmail')?.value.trim();
+        const password = document.getElementById('loginPassword')?.value.trim();
+
+        if (!email || !password) {
+            alert("Enter email and password.");
+            return;
         }
 
-        function closePurchaseModal() {
-            document.getElementById('purchaseModal').classList.remove('active');
-        }
-
-        function proceedToPayment() {
-            const serviceTitle = document.getElementById('modalServiceTitle').textContent;
-            const coachName = document.getElementById('modalCoachName').textContent;
-            const price = parseFloat(document.getElementById('modalPrice').textContent);
-            const platformFee = Math.round(price * 0.2);
-            const total = price + platformFee;
-
-            document.getElementById('paymentServiceTitle').textContent = serviceTitle;
-            document.getElementById('paymentCoachName').textContent = coachName;
-            document.getElementById('paymentServicePrice').textContent = price;
-            document.getElementById('paymentPlatformFee').textContent = platformFee;
-            document.getElementById('paymentTotal').textContent = total;
-            document.getElementById('paymentButtonTotal').textContent = total;
-
-            closePurchaseModal();
-            document.getElementById('paymentModal').classList.add('active');
-        }
-
-        function closePaymentModal() {
-            document.getElementById('paymentModal').classList.remove('active');
-        }
-
-        function completePayment() {
-            closePaymentModal();
-            document.getElementById('successModal').classList.add('active');
-        }
-
-        function closeSuccessModal() {
-            document.getElementById('successModal').classList.remove('active');
-        }
-
-        function openCreateServiceModal() {
-            document.getElementById('createServiceModal').classList.add('active');
-        }
-
-        function closeCreateServiceModal() {
-            document.getElementById('createServiceModal').classList.remove('active');
-        }
-
-        function initPreviewCharts() {
-            const opensCtx = document.getElementById('previewOpensChart');
-            if (opensCtx && !opensCtx.chart) {
-                opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{
-                            label: 'Email Opens',
-                            data: [45, 52, 61, 58, 72, 68],
-                            borderWidth: 2,
-                            tension: 0.4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { beginAtZero: true }
-                        }
-                    }
-                });
-            }
-
-            const responseCtx = document.getElementById('previewResponseChart');
-            if (responseCtx && !responseCtx.chart) {
-                responseCtx.chart = new Chart(responseCtx.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Intro', 'Follow-Up', 'Thank You', 'Update'],
-                        datasets: [{
-                            label: 'Response Rate',
-                            data: [22, 35, 41, 29],
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { beginAtZero: true, max: 50 }
-                        }
-                    }
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            showPage('home');
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email,
+            password
         });
-    </script>
+
+        if (error) {
+            console.error("❌ Login error:", error);
+            alert(error.message);
+            return;
+        }
+
+        const user = data.user;
+        const role = user?.user_metadata?.role || "player";
+
+        console.log("✅ Logged in:", user.email, "role:", role);
+
+        currentRole = role; // store role for session navigation
+
+        if (role === "coach") {
+            showPage("coachdashboard");
+        } else {
+            showPage("playerdashboard");
+        }
+    }
+
+    // DASHBOARD ROUTER
+    function goToDashboard() {
+        if (currentRole === "coach") {
+            showPage("coachdashboard");
+        } else if (currentRole === "player") {
+            showPage("playerdashboard");
+        } else {
+            showPage("login");
+        }
+    }
+
+    // OTHER EXISTING FUNCTIONS BELOW (from your original code)
+    function showCoachServices(coachId) {
+        showPage('coachservice');
+    }
+
+    function filterSportAndNavigate(sport) {
+        const sportFilter = document.getElementById('sportFilter');
+        const resultCount = document.getElementById('resultCount');
+        const previewMessage = document.getElementById('previewMessage');
+
+        if (sportFilter) sportFilter.value = sport;
+
+        const sportCounts = {
+            'soccer': '342',
+            'football': '289',
+            'baseball': '267',
+            'basketball': '198',
+            'softball': '156',
+            'volleyball': '195'
+        };
+
+        if (resultCount && sportCounts[sport]) {
+            resultCount.textContent = sportCounts[sport];
+        }
+
+        showPage('database');
+
+        if (previewMessage) previewMessage.classList.remove('hidden');
+
+        setTimeout(() => {
+            const previewCoaches = document.getElementById('previewCoaches');
+            if (previewCoaches) previewCoaches.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+    }
+
+    function showSignupPrompt() {
+        showPage('signup');
+    }
+
+    function toggleAccountType(type) {
+        const playerToggle = document.getElementById('playerToggle');
+        const coachToggle = document.getElementById('coachToggle');
+        const playerForm = document.getElementById('playerForm');
+        const coachForm = document.getElementById('coachForm');
+
+        if (type === 'player') {
+            playerToggle.classList.add('bg-electric', 'text-white');
+            playerToggle.classList.remove('text-navy');
+            coachToggle.classList.remove('bg-electric', 'text-white');
+            coachToggle.classList.add('text-navy');
+            playerForm.classList.remove('hidden');
+            coachForm.classList.add('hidden');
+        } else {
+            coachToggle.classList.add('bg-electric', 'text-white');
+            coachToggle.classList.remove('text-navy');
+            playerToggle.classList.remove('bg-electric', 'text-white');
+            playerToggle.classList.add('text-navy');
+            coachForm.classList.remove('hidden');
+            playerForm.classList.add('hidden');
+        }
+    }
+
+    // Modal + Charts (same as your version)
+    function openPurchaseModal(serviceTitle, coachName, price, deliveryHours) {
+        document.getElementById('modalServiceTitle').textContent = serviceTitle;
+        document.getElementById('modalCoachName').textContent = coachName;
+        document.getElementById('modalPrice').textContent = price;
+        document.getElementById('modalDeliveryTime').textContent = deliveryHours + ' hours';
+        document.getElementById('purchaseModal').classList.add('active');
+    }
+
+    function closePurchaseModal() {
+        document.getElementById('purchaseModal').classList.remove('active');
+    }
+
+    function proceedToPayment() {
+        const serviceTitle = document.getElementById('modalServiceTitle').textContent;
+        const coachName = document.getElementById('modalCoachName').textContent;
+        const price = parseFloat(document.getElementById('modalPrice').textContent);
+        const platformFee = Math.round(price * 0.2);
+        const total = price + platformFee;
+
+        document.getElementById('paymentServiceTitle').textContent = serviceTitle;
+        document.getElementById('paymentCoachName').textContent = coachName;
+        document.getElementById('paymentServicePrice').textContent = price;
+        document.getElementById('paymentPlatformFee').textContent = platformFee;
+        document.getElementById('paymentTotal').textContent = total;
+        document.getElementById('paymentButtonTotal').textContent = total;
+
+        closePurchaseModal();
+        document.getElementById('paymentModal').classList.add('active');
+    }
+
+    function closePaymentModal() {
+        document.getElementById('paymentModal').classList.remove('active');
+    }
+
+    function completePayment() {
+        closePaymentModal();
+        document.getElementById('successModal').classList.add('active');
+    }
+
+    function closeSuccessModal() {
+        document.getElementById('successModal').classList.remove('active');
+    }
+
+    function openCreateServiceModal() {
+        document.getElementById('createServiceModal').classList.add('active');
+    }
+
+    function closeCreateServiceModal() {
+        document.getElementById('createServiceModal').classList.remove('active');
+    }
+
+    function initPreviewCharts() {
+        const opensCtx = document.getElementById('previewOpensChart');
+        if (opensCtx && !opensCtx.chart) {
+            opensCtx.chart = new Chart(opensCtx.getContext('2d'), {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{ label: 'Email Opens', data: [45, 52, 61, 58, 72, 68], borderWidth: 2, tension: 0.4 }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+            });
+        }
+
+        const responseCtx = document.getElementById('previewResponseChart');
+        if (responseCtx && !responseCtx.chart) {
+            responseCtx.chart = new Chart(responseCtx.getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['Intro', 'Follow-Up', 'Thank You', 'Update'],
+                    datasets: [{ label: 'Response Rate', data: [22, 35, 41, 29], borderWidth: 2 }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 50 } } }
+            });
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        showPage("home");
+    });
+</script>
 </body>
 </html>
