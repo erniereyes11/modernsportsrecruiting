@@ -3342,156 +3342,148 @@ async function handleCoachApplication() {
     </script>
 
         <!-- App Script -->
-    <script>
-      /* -------------------------------------------------------------
-         GLOBAL STATE
-      ------------------------------------------------------------- */
-      let currentRole = null; // "player" or "coach"
+<script>
+    /* -------------------------------------------------------------
+       GLOBAL STATE
+    ------------------------------------------------------------- */
+    let currentRole = null; // 'player' or 'coach'
 
-      // ✅ TEMP: emails that should be treated as COACH accounts
-      //    Put any coach login emails here so they see the coach dashboard.
-      const COACH_EMAILS = [
-        "coach@example.com"
-        // "your-real-coach-email@school.edu",
-        // "anothercoach@school.edu"
-      ];
+    // TEMP: treat these emails as COACH accounts if metadata isn't set
+    const COACH_EMAILS = [
+        "coach@example.com" // 👈 CHANGE THIS TO YOUR TEST COACH EMAIL
+    ];
 
-      /* -------------------------------------------------------------
-         PAGE ROUTER
-      ------------------------------------------------------------- */
-      const PAGE_MAP = {
-        home: "homePage",
-        howitworks: "howitworksPage",
-        marketplace: "marketplacePage",
-        pricing: "pricingPage",
-        database: "databasePage",
-        coachportal: "coachportalPage",
-        coachsignup: "coachsignupPage",
-        coachlogin: "coachloginPage",
-        coachdashboard: "coachdashboardPage",
-        playerdashboard: "playerdashboardPage",
-        login: "loginPage",
-        signup: "signupPage"
-      };
-
-      function showPage(pageName) {
-        const pages = document.querySelectorAll(".page-content");
-        pages.forEach((page) => page.classList.add("hidden"));
-
-        const targetId = PAGE_MAP[pageName];
-        const targetPage = targetId ? document.getElementById(targetId) : null;
-
-        if (!targetPage) {
-          console.warn("⚠️ showPage: unknown pageName", pageName);
-          return;
-        }
-
-        targetPage.classList.remove("hidden");
-        window.scrollTo(0, 0);
-      }
-
-      /* -------------------------------------------------------------
-         SIGNUP ACCOUNT TYPE TOGGLE (player vs coach)
-      ------------------------------------------------------------- */
-      function toggleAccountType(type) {
-        const playerForm = document.getElementById("playerForm");
-        const coachForm = document.getElementById("coachForm");
-        const playerToggle = document.getElementById("playerToggle");
-        const coachToggle = document.getElementById("coachToggle");
+    /* -------------------------------------------------------------
+       ACCOUNT TYPE TOGGLE ON SIGNUP
+    ------------------------------------------------------------- */
+    function toggleAccountType(type) {
+        const playerForm   = document.getElementById('playerForm');
+        const coachForm    = document.getElementById('coachForm');
+        const playerToggle = document.getElementById('playerToggle');
+        const coachToggle  = document.getElementById('coachToggle');
 
         if (!playerForm || !coachForm || !playerToggle || !coachToggle) {
-          console.warn("⚠️ toggleAccountType: elements not found");
-          return;
+            console.warn("⚠️ toggleAccountType: elements not found");
+            return;
         }
 
-        if (type === "coach") {
-          // Show coach form
-          playerForm.classList.add("hidden");
-          coachForm.classList.remove("hidden");
+        if (type === 'coach') {
+            // Show coach form
+            playerForm.classList.add('hidden');
+            coachForm.classList.remove('hidden');
 
-          // Toggle button styles
-          playerToggle.classList.remove("bg-electric", "text-white");
-          playerToggle.classList.add("text-navy");
+            // Toggle button styles
+            playerToggle.classList.remove('bg-electric', 'text-white');
+            playerToggle.classList.add('text-navy');
 
-          coachToggle.classList.add("bg-electric", "text-white");
-          coachToggle.classList.remove("text-navy");
+            coachToggle.classList.add('bg-electric', 'text-white');
+            coachToggle.classList.remove('text-navy');
 
-          currentRole = "coach";
+            currentRole = 'coach';
         } else {
-          // Show player form
-          coachForm.classList.add("hidden");
-          playerForm.classList.remove("hidden");
+            // Show player form
+            coachForm.classList.add('hidden');
+            playerForm.classList.remove('hidden');
 
-          // Toggle button styles
-          coachToggle.classList.remove("bg-electric", "text-white");
-          coachToggle.classList.add("text-navy");
+            // Toggle button styles
+            coachToggle.classList.remove('bg-electric', 'text-white');
+            coachToggle.classList.add('text-navy');
 
-          playerToggle.classList.add("bg-electric", "text-white");
-          playerToggle.classList.remove("text-navy");
+            playerToggle.classList.add('bg-electric', 'text-white');
+            playerToggle.classList.remove('text-navy');
 
-          currentRole = "player";
+            currentRole = 'player';
         }
-      }
+    }
 
-      /* -------------------------------------------------------------
-         NAV: LOGGED IN vs LOGGED OUT
-      ------------------------------------------------------------- */
-      function updateNavForAuthState(user) {
+    /* -------------------------------------------------------------
+       SHOW PAGE / ROUTER
+    ------------------------------------------------------------- */
+    function showPage(pageName) {
+        const pages = document.querySelectorAll('.page-content');
+        pages.forEach(page => page.classList.add('hidden'));
+
+        const pageMap = {
+            home:            'homePage',
+            howitworks:      'howitworksPage',
+            marketplace:     'marketplacePage',
+            pricing:         'pricingPage',
+            database:        'databasePage',
+            coachportal:     'coachportalPage',
+            coachsignup:     'coachportalPage',   // ✅ same section
+            coachlogin:      'loginPage',         // ✅ reuse login form
+            coachdashboard:  'coachdashboardPage',
+            playerdashboard: 'playerdashboardPage',
+            login:           'loginPage',
+            signup:          'signupPage'
+        };
+
+        const targetId = pageMap[pageName] || 'homePage';
+        const targetPage = document.getElementById(targetId);
+
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+            window.scrollTo(0, 0);
+        } else {
+            console.warn("⚠️ showPage: unknown pageName", pageName);
+        }
+    }
+
+    /* -------------------------------------------------------------
+       UPDATE NAV WHEN USER LOGS IN / LOGS OUT
+    ------------------------------------------------------------- */
+    function updateNavForAuthState(user) {
         const loggedOutNav = document.getElementById("navAuthLoggedOut");
-        const loggedInNav = document.getElementById("navAuthLoggedIn");
+        const loggedInNav  = document.getElementById("navAuthLoggedIn");
 
         if (!loggedOutNav || !loggedInNav) {
-          console.warn("⚠️ Nav elements not found. Check nav IDs.");
-          return;
+            console.warn("⚠️ Nav elements not found. Check nav IDs.");
+            return;
         }
 
         if (user) {
-          console.log("🔄 Nav: showing LOGGED IN state");
-          loggedOutNav.classList.add("hidden");
-          loggedInNav.classList.remove("hidden");
+            console.log("🔄 Nav: showing LOGGED IN state");
+            loggedOutNav.classList.add("hidden");
+            loggedInNav.classList.remove("hidden");
         } else {
-          console.log("🔄 Nav: showing LOGGED OUT state");
-          loggedInNav.classList.add("hidden");
-          loggedOutNav.classList.remove("hidden");
+            console.log("🔄 Nav: showing LOGGED OUT state");
+            loggedInNav.classList.add("hidden");
+            loggedOutNav.classList.remove("hidden");
         }
-      }
+    }
 
-      /* -------------------------------------------------------------
-         LOGIN (Supabase auth)
-      ------------------------------------------------------------- */
-      async function handleLogin(event) {
+    /* -------------------------------------------------------------
+       LOGIN FUNCTION (PLAYERS + COACHES)
+    ------------------------------------------------------------- */
+    async function handleLogin(event) {
         event.preventDefault();
         console.log("🔹 handleLogin fired");
 
-        const email = document.getElementById("loginEmail")?.value.trim();
-        const password = document.getElementById("loginPassword")?.value.trim();
+        const email = document.getElementById('loginEmail')?.value.trim();
+        const password = document.getElementById('loginPassword')?.value.trim();
 
         if (!email || !password) {
-          alert("Enter email and password.");
-          return;
+            alert("Enter email and password.");
+            return;
         }
 
         const { data, error } = await supabaseClient.auth.signInWithPassword({
-          email,
-          password,
+            email,
+            password
         });
 
         if (error) {
-          alert(error.message);
-          console.error("❌ Supabase login error:", error);
-          return;
+            alert(error.message);
+            console.error("❌ Supabase login error:", error);
+            return;
         }
 
         const user = data.user;
+        let role = user?.user_metadata?.role || "player";
 
-        // Role logic:
-        //  1) If email is in COACH_EMAILS -> coach
-        //  2) Else, fall back to metadata.role if you ever set it in Supabase
-        let role = "player";
+        // 👇 Fallback: if metadata isn't set, treat certain emails as COACH
         if (COACH_EMAILS.includes(user.email)) {
-          role = "coach";
-        } else if (user.user_metadata && user.user_metadata.role) {
-          role = user.user_metadata.role;
+            role = "coach";
         }
 
         console.log("✅ Logged in:", user.email, "role:", role);
@@ -3500,217 +3492,224 @@ async function handleCoachApplication() {
         updateNavForAuthState(user);
 
         if (role === "coach") {
-          showPage("coachdashboard");
+            showPage('coachdashboard');
         } else {
-          showPage("playerdashboard");
+            showPage('playerdashboard');
         }
-      }
+    }
 
-      /* -------------------------------------------------------------
-         PLAYER SIGNUP (Supabase auth)
-      ------------------------------------------------------------- */
-      async function handlePlayerSignup(event) {
+    /* -------------------------------------------------------------
+       PLAYER SIGNUP → SUPABASE AUTH
+    ------------------------------------------------------------- */
+    async function handlePlayerSignup(event) {
         event.preventDefault();
-        console.log("🔹 handlePlayerSignup fired");
+        console.log("📝 handlePlayerSignup fired");
 
-        const firstName =
-          document.getElementById("playerFirstName")?.value.trim();
-        const lastName =
-          document.getElementById("playerLastName")?.value.trim();
-        const email = document.getElementById("playerEmail")?.value.trim();
-        const password =
-          document.getElementById("playerPassword")?.value.trim();
-        const sport = document.getElementById("playerSport")?.value;
-        const gradYear = document.getElementById("playerGradYear")?.value;
-        const agreeTos = document.getElementById("playerAgree")?.checked;
+        const firstName = document.getElementById('playerFirstName')?.value.trim();
+        const lastName  = document.getElementById('playerLastName')?.value.trim();
+        const email     = document.getElementById('playerEmail')?.value.trim();
+        const password  = document.getElementById('playerPassword')?.value.trim();
 
-        if (!email || !password) {
-          alert("Email and password are required.");
-          return;
+        if (!firstName || !lastName || !email || !password) {
+            alert("Please fill in all required fields.");
+            return;
         }
 
-        if (!agreeTos) {
-          alert("Please agree to the Terms of Service and Privacy Policy.");
-          return;
-        }
-
-        try {
-          const { data, error } = await supabaseClient.auth.signUp({
+        const { data, error } = await supabaseClient.auth.signUp({
             email,
             password,
             options: {
-              data: {
-                role: "player",
-                first_name: firstName,
-                last_name: lastName,
-                sport,
-                grad_year: gradYear,
-              },
-            },
-          });
+                data: {
+                    role: "player",
+                    first_name: firstName,
+                    last_name: lastName
+                }
+            }
+        });
 
-          if (error) {
+        if (error) {
             console.error("❌ Supabase signup error:", error);
-            alert(error.message);
+            alert(error.message || "Error creating account. Please try again.");
             return;
-          }
-
-          console.log("✅ Player signed up:", data);
-
-          const user = data.user;
-
-          // If your project does NOT require email confirmation:
-          if (user) {
-            currentRole = "player";
-            updateNavForAuthState(user);
-            showPage("playerdashboard");
-            alert("Account created! Welcome to Modern Sports Recruiting.");
-            return;
-          }
-
-          // If email confirmation IS required:
-          alert("Account created! Check your email to confirm, then log in.");
-          showPage("login");
-        } catch (err) {
-          console.error("❌ Unexpected signup error:", err);
-          alert("Something went wrong creating your account.");
         }
-      }
 
-      /* -------------------------------------------------------------
-         DASHBOARD ROUTER
-      ------------------------------------------------------------- */
-      function goToDashboard() {
+        console.log("✅ Player signup created:", data);
+
+        // Show success modal if you have it, else go straight to login
+        const successModal = document.getElementById("signupSuccessModal");
+        if (successModal) {
+            successModal.classList.remove("hidden");
+        } else {
+            showPage("login");
+        }
+    }
+
+    /* -------------------------------------------------------------
+       COACH APPLICATION FORM → SUPABASE TABLE
+    ------------------------------------------------------------- */
+    async function handleCoachApplication(event) {
+        if (event) event.preventDefault();
+        console.log("📝 handleCoachApplication fired");
+
+        const form = document.getElementById("coachSignupForm");
+        if (!form) {
+            console.error("❌ coachSignupForm not found");
+            return;
+        }
+
+        const formData = new FormData(form);
+
+        const payload = {
+            coach_name: formData.get("coachName") || "",
+            school: formData.get("school") || "",
+            email: formData.get("coachEmail") || "",
+            phone: formData.get("coachPhone") || "",
+            sport: formData.get("sport") || "",
+            division: formData.get("division") || "",
+            role: formData.get("role") || "",
+            experience: formData.get("experience") || "",
+            services: formData.getAll("services[]") || [],
+            rate_notes: formData.get("rateNotes") || "",
+            additional_notes: formData.get("additionalNotes") || ""
+        };
+
+        console.log("📤 Submitting coach application:", payload);
+
+        const { data, error } = await supabaseClient
+            .from("coach_applications")
+            .insert({
+                coach_name: payload.coach_name,
+                school: payload.school,
+                email: payload.email,
+                phone: payload.phone,
+                sport: payload.sport,
+                division: payload.division,
+                role: payload.role,
+                experience: payload.experience,
+                services: payload.services,
+                rate_notes: payload.rate_notes,
+                additional_notes: payload.additional_notes
+            })
+            .select();
+
+        if (error) {
+            console.error("❌ Error inserting coach application:", error);
+            alert("Something went wrong submitting your application. Please try again.");
+            return;
+        }
+
+        console.log("✅ Coach application inserted:", data);
+        alert("Application submitted! We'll review and follow up.");
+        form.reset();
+    }
+
+    /* -------------------------------------------------------------
+       DASHBOARD ROUTER
+    ------------------------------------------------------------- */
+    function goToDashboard() {
         console.log("➡️ goToDashboard called, currentRole =", currentRole);
         if (currentRole === "coach") {
-          showPage("coachdashboard");
+            showPage("coachdashboard");
         } else if (currentRole === "player") {
-          showPage("playerdashboard");
+            showPage("playerdashboard");
         } else {
-          showPage("login");
+            showPage("login");
         }
-      }
+    }
 
-      /* -------------------------------------------------------------
-         LOGOUT
-      ------------------------------------------------------------- */
-      async function handleLogout() {
-        console.log("🔚 handleLogout fired");
-        await supabaseClient.auth.signOut();
+    /* -------------------------------------------------------------
+       LOGOUT
+    ------------------------------------------------------------- */
+    async function handleLogout() {
+        const { error } = await supabaseClient.auth.signOut();
+        if (error) {
+            console.error("❌ Error during logout:", error);
+        }
 
         currentRole = null;
         updateNavForAuthState(null);
         showPage("home");
-      }
+    }
 
-      /* -------------------------------------------------------------
-         CHARTS (existing UX logic)
-      ------------------------------------------------------------- */
-      function initPreviewCharts() {
-        const opensCtx = document.getElementById("previewOpensChart");
-        if (opensCtx && !opensCtx.chart) {
-          opensCtx.chart = new Chart(opensCtx.getContext("2d"), {
-            type: "line",
-            data: {
-              labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-              datasets: [
-                {
-                  label: "Email Opens",
-                  data: [45, 52, 61, 58, 72, 68],
-                  borderWidth: 2,
-                  tension: 0.4,
+    /* -------------------------------------------------------------
+       CHART PREVIEW (MARKETPLACE / DATABASE)
+    ------------------------------------------------------------- */
+    let marketplaceChartInstance = null;
+    let databaseChartInstance   = null;
+
+    function initPreviewCharts() {
+        if (marketplaceChartInstance || databaseChartInstance) return;
+
+        const marketplaceCanvas = document.getElementById("marketplacePreviewChart");
+        const databaseCanvas    = document.getElementById("databasePreviewChart");
+
+        if (marketplaceCanvas) {
+            const ctx = marketplaceCanvas.getContext("2d");
+            marketplaceChartInstance = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: ["Soccer", "Football", "Baseball", "Basketball", "Softball", "Volleyball"],
+                    datasets: [{
+                        label: "Coaches in Marketplace",
+                        data: [42, 28, 19, 34, 22, 17]
+                    }]
                 },
-              ],
-            },
-            options: { plugins: { legend: { display: false } } },
-          });
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
         }
 
-        const responseCtx = document.getElementById("previewResponseChart");
-        if (responseCtx && !responseCtx.chart) {
-          responseCtx.chart = new Chart(responseCtx.getContext("2d"), {
-            type: "bar",
-            data: {
-              labels: ["Intro", "Follow-Up", "Thank You", "Update"],
-              datasets: [
-                {
-                  label: "Response Rate",
-                  data: [22, 35, 41, 29],
-                  borderWidth: 2,
+        if (databaseCanvas) {
+            const ctx = databaseCanvas.getContext("2d");
+            databaseChartInstance = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: ["D1", "D2", "D3", "NAIA", "NJCAA"],
+                    datasets: [{
+                        label: "Programs in Database",
+                        data: [343, 312, 410, 196, 520]
+                    }]
                 },
-              ],
-            },
-            options: { plugins: { legend: { display: false } } },
-          });
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
         }
-      }
+    }
 
-      /* -------------------------------------------------------------
-         SPORT FILTER ROUTER (database preview buttons)
-      ------------------------------------------------------------- */
-      function filterSportAndNavigate(sport) {
-        const sportFilter = document.getElementById("sportFilter");
-        const resultCount = document.getElementById("resultCount");
-        const previewMessage = document.getElementById("previewMessage");
-
-        if (sportFilter) sportFilter.value = sport;
-
-        const counts = {
-          soccer: "342",
-          football: "289",
-          baseball: "267",
-          basketball: "198",
-          softball: "156",
-          volleyball: "195",
-        };
-
-        if (resultCount) resultCount.textContent = counts[sport] || "0";
-
+    /* -------------------------------------------------------------
+       SPORT FILTER FROM HERO CTA
+    ------------------------------------------------------------- */
+    function filterSportAndNavigate(sport) {
+        console.log("🎯 filterSportAndNavigate:", sport);
+        const select = document.getElementById("databaseSportFilter");
+        if (select) {
+            select.value = sport;
+        }
         showPage("database");
+    }
 
-        if (previewMessage) previewMessage.classList.remove("hidden");
-      }
-
-      /* -------------------------------------------------------------
-         INITIAL LOAD: CHECK IF USER IS LOGGED IN
-      ------------------------------------------------------------- */
-      document.addEventListener("DOMContentLoaded", async function () {
-        // Default page
+    /* -------------------------------------------------------------
+       ON PAGE LOAD
+    ------------------------------------------------------------- */
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("✅ DOMContentLoaded");
         showPage("home");
 
-        try {
-          const { data, error } = await supabaseClient.auth.getUser();
-          if (error) {
-            console.warn("⚠️ Error fetching current user:", error);
-            updateNavForAuthState(null);
-            return;
-          }
+        // Default signup view = player
+        toggleAccountType("player");
 
-          const user = data?.user || null;
-
-          if (!user) {
-            console.log("ℹ️ No active session");
-            updateNavForAuthState(null);
-            return;
-          }
-
-          // Determine role same way as in login:
-          let role = "player";
-          if (COACH_EMAILS.includes(user.email)) {
-            role = "coach";
-          } else if (user.user_metadata && user.user_metadata.role) {
-            role = user.user_metadata.role;
-          }
-
-          currentRole = role;
-          updateNavForAuthState(user);
-          goToDashboard();
-        } catch (err) {
-          console.warn("⚠️ auth.getUser threw an error:", err);
-          updateNavForAuthState(null);
+        // Attach coach application handler
+        const coachForm = document.getElementById("coachSignupForm");
+        if (coachForm) {
+            coachForm.addEventListener("submit", handleCoachApplication);
         }
 
-        // Initialize charts if those canvases exist
         initPreviewCharts();
-      });
-    </script>
+    });
+</script>
